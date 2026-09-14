@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AffiliateCard from '../../components/AffiliateCard.astro';
+import equipmentCatalog from '../../data/equipment-catalog.json';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Solar Equipment Price Index Nigeria",
+  "itemListElement": equipmentCatalog.map((item, idx) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "name": item.name,
+    "url": `https://ibadansolarhub.com.ng/equipment/${item.slug}`
+  }))
+};
+---
+
+<BaseLayout
+  title="Solar Equipment Price Index Nigeria 2026 - Batteries, Inverters & Panels"
+  description="Compare authentic prices of Felicity lithium batteries, Growatt inverters, Canadian Solar panels, and Luminous tubular batteries across Nigerian retailers."
+  schema={schema}
+>
+  <div class="bg-slate-900 text-white py-12 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs font-bold text-solar-400 uppercase tracking-wider">Market Price Index</span>
+      <h1 class="text-3xl sm:text-5xl font-black mt-2 tracking-tight">
+        Solar Equipment & Price Guide Nigeria
+      </h1>
+      <p class="mt-4 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
+        Unbiased technical reviews, specifications, and live pricing for top-performing solar batteries, inverters, and panels in Nigeria.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {equipmentCatalog.map((item) => (
+        <AffiliateCard
+          title={item.name}
+          category={item.category}
+          brand={item.brand}
+          priceRange={item.priceRange}
+          verdict={item.verdict}
+          pros={item.pros}
+          cons={item.cons}
+          affiliateLinks={item.affiliateLinks}
+          slug={item.slug}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

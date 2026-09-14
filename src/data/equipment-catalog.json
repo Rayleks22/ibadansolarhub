@@ -1,0 +1,114 @@
+[
+  {
+    "slug": "felicity-solar-5kwh-lithium-battery",
+    "name": "Felicity Solar 5kWh 48V 100Ah LiFePO4 Lithium Battery (LPBF48100)",
+    "category": "Batteries",
+    "brand": "Felicity Solar",
+    "priceRange": "₦1,350,000 – ₦1,600,000",
+    "specifications": {
+      "voltage": "48V DC nominal (51.2V)",
+      "capacity": "100Ah (5.12 kWh)",
+      "cycleLife": "6,000+ Cycles at 80% Depth of Discharge",
+      "bms": "Built-in intelligent Battery Management System with CAN/RS485",
+      "warranty": "5 Years Manufacturer Warranty"
+    },
+    "verdict": "The most popular and dependable lithium battery across Nigerian households. Proven resilience against tropical heat and rapid charging capability.",
+    "pros": [
+      "Charges to 100% in under 2.5 hours with adequate solar array",
+      "Lightweight wall-mounted design saves floor space",
+      "Over 10-15 years operating lifespan with zero maintenance",
+      "Seamless communication with Felicity, Growatt, and Deye inverters"
+    ],
+    "cons": [
+      "Requires professional BMS configuration to prevent communication faults"
+    ],
+    "affiliateLinks": [
+      { "name": "Check Price on Jumia Nigeria", "url": "https://kol.jumia.com/s/solar-felicity-5kwh", "retailer": "Jumia" },
+      { "name": "Check Price on Konga", "url": "https://www.konga.com/search?search=felicity+lithium+battery", "retailer": "Konga" },
+      { "name": "Order from Verified Solar Hub Vendor", "url": "/quote", "retailer": "Direct Verified Vendor" }
+    ]
+  },
+  {
+    "slug": "growatt-5000es-solar-inverter",
+    "name": "Growatt SPF 5000ES 5kVA 48V Hybrid Solar Inverter",
+    "category": "Inverters",
+    "brand": "Growatt",
+    "priceRange": "₦850,000 – ₦1,050,000",
+    "specifications": {
+      "powerRating": "5000VA / 5000W Pure Sine Wave",
+      "batteryVoltage": "48V DC",
+      "mpptVoltageRange": "120V – 430V DC",
+      "maxPvArrayPower": "6000W",
+      "parallelCapability": "Up to 6 units (30kW total)"
+    },
+    "verdict": "An industry benchmark in Nigeria. High solar input voltage allows connecting panels in series, dramatically reducing copper cable costs and line losses.",
+    "pros": [
+      "High MPPT efficiency with up to 450V DC input",
+      "Can operate without a battery during daytime solar peak",
+      "Integrated Wi-Fi dongle for smartphone monitoring via ShinePhone app",
+      "Parallelable for easy future expansion"
+    ],
+    "cons": [
+      "Requires caution with grid surge voltages on poor DISCO lines"
+    ],
+    "affiliateLinks": [
+      { "name": "Check Price on Jumia Nigeria", "url": "https://kol.jumia.com/s/growatt-5000es", "retailer": "Jumia" },
+      { "name": "Check Price on Konga", "url": "https://www.konga.com/search?search=growatt+5000es", "retailer": "Konga" },
+      { "name": "Order from Verified Solar Hub Vendor", "url": "/quote", "retailer": "Direct Verified Vendor" }
+    ]
+  },
+  {
+    "slug": "canadian-solar-550w-mono-perc-panel",
+    "name": "Canadian Solar 550W HiKu6 Monocrystalline PERC Solar Panel",
+    "category": "Solar Panels",
+    "brand": "Canadian Solar",
+    "priceRange": "₦110,000 – ₦135,000 per panel",
+    "specifications": {
+      "powerOutput": "550W Peak Power",
+      "cellType": "Monocrystalline Half-cut PERC",
+      "efficiency": "21.3%",
+      "frame": "Anodized aluminum alloy with IP68 junction box",
+      "warranty": "12-Year Product Warranty, 25-Year Linear Power Warranty"
+    },
+    "verdict": "Tier-1 global panel engineered to extract maximum watts during cloudy Nigerian harmattan and rainy seasons.",
+    "pros": [
+      "Exceptional low-light performance during overcast days",
+      "High module efficiency reduces roof space required",
+      "Heavy load durability against high winds and storms"
+    ],
+    "cons": [
+      "Large dimensions (approx 2.27m x 1.13m) require sturdy roof mounting rails"
+    ],
+    "affiliateLinks": [
+      { "name": "Check Price on Jumia Nigeria", "url": "https://kol.jumia.com/s/canadian-solar-550w", "retailer": "Jumia" },
+      { "name": "Order Bundle from Local Solar Hub", "url": "/quote", "retailer": "Direct Verified Vendor" }
+    ]
+  },
+  {
+    "slug": "luminous-220ah-tubular-battery",
+    "name": "Luminous 220Ah / 12V Inverlast Deep Cycle Tubular Battery",
+    "category": "Batteries",
+    "brand": "Luminous",
+    "priceRange": "₦280,000 – ₦340,000",
+    "specifications": {
+      "voltage": "12V DC",
+      "capacity": "220Ah C20 rating",
+      "technology": "Tall Tubular Lead-Acid Deep Cycle",
+      "warranty": "18 to 24 Months"
+    },
+    "verdict": "The most dependable budget lead-acid tubular battery in Nigeria for entry-level setups.",
+    "pros": [
+      "Significantly cheaper initial cost compared to lithium",
+      "Handles deep discharge cycles better than conventional car or AGM batteries",
+      "Wide availability of replacement electrolyte and maintenance parts"
+    ],
+    "cons": [
+      "Heavy weight (~65kg) and requires distilled water top-ups every 4-6 months",
+      "Takes 8-10 hours to recharge to 100% capacity"
+    ],
+    "affiliateLinks": [
+      { "name": "Check Price on Jumia Nigeria", "url": "https://kol.jumia.com/s/luminous-220ah", "retailer": "Jumia" },
+      { "name": "Check Price on Konga", "url": "https://www.konga.com/search?search=luminous+220ah", "retailer": "Konga" }
+    ]
+  }
+]

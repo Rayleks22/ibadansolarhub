@@ -1,0 +1,157 @@
+[
+  {
+    "slug": "mini-remote-worker-1kva",
+    "name": "1.2kVA Starter & Remote Worker Solar Kit",
+    "capacity": "1.2kVA / 12V",
+    "idealFor": "Students, Remote Tech Workers, Freelancers, 1-Room Self-contain",
+    "estimatedCost": "₦480,000 – ₦780,000",
+    "dailyOutputKwh": "2.2 – 3.0 kWh",
+    "appliancesSupported": [
+      "2x Laptops (Continuous charging)",
+      "Starlink or 5G Wi-Fi Router (24/7)",
+      "32-inch LED TV & Decoder (4-6 hrs)",
+      "2x Standing or Rechargeable Fans",
+      "4x LED Energy-saving Bulbs",
+      "Smartphones and Gadgets"
+    ],
+    "components": {
+      "inverter": "1.2kVA 12V Pure Sine Wave Inverter",
+      "battery": "1.28kWh 100Ah LiFePO4 Lithium Battery (or 200Ah Tubular)",
+      "panels": "2x 350W - 450W Monocrystalline Panels",
+      "controller": "30A - 40A MPPT Charge Controller",
+      "accessories": "Surge protector, 16mm battery cables, aluminum roof racks"
+    },
+    "pros": [
+      "Extremely affordable entry point",
+      "Zero noise, zero fuel, 100% portable when moving apartments",
+      "Powers remote work workstations non-stop"
+    ],
+    "cons": [
+      "Cannot run electric irons, hotplates, or pumping machines",
+      "Cannot run refrigerators or air conditioners"
+    ]
+  },
+  {
+    "slug": "essential-home-2-5kva",
+    "name": "2.5kVA Essential Home Solar Package",
+    "capacity": "2.5kVA / 24V",
+    "idealFor": "2-Bedroom Flats, Small Families, POS & Pharmacy Shops",
+    "estimatedCost": "₦1,250,000 – ₦1,850,000",
+    "dailyOutputKwh": "4.5 – 6.5 kWh",
+    "appliancesSupported": [
+      "Medium Inverter Refrigerator (150L - 250L)",
+      "43 to 55-inch Smart TV + Soundbar + Decoder",
+      "3x Standing/Ceiling Fans (Continuous)",
+      "All LED lighting points in the flat",
+      "Laptops, Wi-Fi, CCTV Cameras",
+      "Phones and Tablet chargers"
+    ],
+    "components": {
+      "inverter": "2.5kVA / 2400W 24V Pure Sine Wave Hybrid Inverter",
+      "battery": "2.56kWh LiFePO4 Lithium (or 2x 220Ah Tubular Gel)",
+      "panels": "4x 450W - 550W Monocrystalline PERC Panels",
+      "controller": "Integrated 60A MPPT Controller",
+      "accessories": "DC disconnect switch, AC changeover, battery rack"
+    },
+    "pros": [
+      "Runs food preservation (inverter fridge) without blackout stress",
+      "Fast 2.5-hour lithium solar recharge rate",
+      "Handles standard family entertainment and lighting seamlessly"
+    ],
+    "cons": [
+      "Cannot power air conditioners or microwave ovens",
+      "Borehole pumping machine must be operated on grid or generator"
+    ]
+  },
+  {
+    "slug": "standard-comfort-3-5kva",
+    "name": "3.5kVA Standard Comfort Solar System",
+    "capacity": "3.5kVA / 24V or 48V",
+    "idealFor": "3-Bedroom Apartments, Semi-detached Duplexes, Boutiques",
+    "estimatedCost": "₦1,950,000 – ₦2,950,000",
+    "dailyOutputKwh": "7.0 – 9.5 kWh",
+    "appliancesSupported": [
+      "Double-door Inverter Refrigerator + Mini Deep Freezer",
+      "Up to 2x 55-inch Smart TVs & Home Theater",
+      "4-5x Ceiling Fans & All Lighting points",
+      "Water Dispenser, Blender (daytime), CCTV Security",
+      "Laptops, Monitors, and Home Office equipment"
+    ],
+    "components": {
+      "inverter": "3.5kVA 24V or 48V Hybrid Solar Inverter with Wi-Fi",
+      "battery": "5.12kWh 48V 100Ah LiFePO4 Lithium Battery",
+      "panels": "6x 550W Tier-1 Mono PERC Solar Panels",
+      "controller": "80A MPPT built-in",
+      "accessories": "Complete DB combiner box, DC breakers, thunder arrestor"
+    },
+    "pros": [
+      "Sufficient capacity for deep freezers and heavy kitchen appliances during peak sun",
+      "Over 12 hours continuous nighttime battery autonomy",
+      "Smartphone app to monitor solar production in real time"
+    ],
+    "cons": [
+      "Can only support 1HP inverter AC under managed scheduling"
+    ]
+  },
+  {
+    "slug": "premium-inverter-ac-5kva",
+    "name": "5kVA Premium Whole-Home & Inverter AC Setup",
+    "capacity": "5kVA / 48V (5000W)",
+    "idealFor": "3-4 Bedroom Duplexes, Mansions, Clinics, Law Chambers",
+    "estimatedCost": "₦3,200,000 – ₦4,800,000",
+    "dailyOutputKwh": "12.0 – 16.0 kWh",
+    "appliancesSupported": [
+      "1x or 2x 1HP / 1.5HP Inverter Air Conditioners",
+      "Large Double-Door Refrigerator + Chest Deep Freezer",
+      "1HP Submersible Borehole Pumping Machine (intermittent)",
+      "Microwave, Washing Machine (daytime wash cycle)",
+      "All LED lighting, 5+ Fans, 65-inch 4K TV, Gaming Console",
+      "Whole-home CCTV, Starlink, Electric Gate, Security Lights"
+    ],
+    "components": {
+      "inverter": "5kVA / 5kW 48V High-Voltage MPPT Hybrid Inverter (Growatt / Felicity / Deye)",
+      "battery": "5.12kWh – 10.24kWh LiFePO4 Lithium Battery Bank",
+      "panels": "8x to 10x 550W Tier-1 Monocrystalline Solar Panels",
+      "controller": "100A MPPT with 500V DC input",
+      "accessories": "Heavy duty switchgear, lightning arrester, surge protection device (SPD)"
+    },
+    "pros": [
+      "The gold standard for total grid independence in Nigeria",
+      "Effortlessly runs air conditioning through hot afternoons and humid nights",
+      "Completely replaces petrol and diesel generators for 95% of households"
+    ],
+    "cons": [
+      "Higher initial capital expenditure (though payback is ~18 months vs generator fuel)"
+    ]
+  },
+  {
+    "slug": "heavy-duty-commercial-10kva",
+    "name": "10kVA - 15kVA Commercial & Luxury Estate Solar Plant",
+    "capacity": "10kVA / 48V or 3-Phase",
+    "idealFor": "Plazas, Supermarkets, Hospitals, Hotels, Large Mansions",
+    "estimatedCost": "₦6,500,000 – ₦12,500,000",
+    "dailyOutputKwh": "24.0 – 40.0 kWh",
+    "appliancesSupported": [
+      "Multiple 1.5HP & 2HP Inverter Air Conditioners",
+      "Commercial Beverage Coolers, Freezers & Cold Displays",
+      "Heavy Borehole Pumping, Pressurization Systems",
+      "Elevators / Hoists (with soft-starters), Server Racks",
+      "Complete 24/7 commercial operations without generator roar"
+    ],
+    "components": {
+      "inverter": "10kVA / 10kW or Parallel 2x 5kW Hybrid Inverters",
+      "battery": "15kWh to 20kWh High-Capacity Lithium LiFePO4 Racks",
+      "panels": "16x to 24x 550W - 650W Bifacial Solar Panels",
+      "controller": "Dual MPPT High-Efficiency trackers",
+      "accessories": "Industrial distribution panel, automatic transfer switch (ATS)"
+    },
+    "pros": [
+      "Saves commercial entities millions of Naira monthly in fuel",
+      "Scalable modular architecture—add more batteries anytime",
+      "10-year battery warranty and 25-year panel performance guarantee"
+    ],
+    "cons": [
+      "Requires substantial roof space (at least 60-90 square meters)"
+    ]
+  }
+]

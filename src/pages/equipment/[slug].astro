@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import equipmentCatalog from '../../data/equipment-catalog.json';
+
+export async function getStaticPaths() {
+  return equipmentCatalog.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": item.name,
+  "brand": {
+    "@type": "Brand",
+    "name": item.brand
+  },
+  "description": item.verdict,
+  "category": item.category,
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "NGN",
+    "lowPrice": item.priceRange.split('–')[0].replace(/[^\d]/g, ''),
+    "highPrice": item.priceRange.split('–')[1]?.replace(/[^\d]/g, '') || item.priceRange.replace(/[^\d]/g, ''),
+    "offerCount": item.affiliateLinks.length
+  }
+};
+---
+
+<BaseLayout
+  title={`${item.name} Price in Nigeria & Review (2026)`}
+  description={`Authentic review, technical specifications, and current Nigerian market prices for ${item.name}. Compare prices on Jumia, Konga, and verified distributors.`}
+  schema={schema}
+>
+  <div class="bg-slate-900 text-white py-12 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-2 text-xs text-slate-400 mb-4">
+        <a href="/" class="hover:text-solar-400">Home</a>
+        <span>/</span>
+        <a href="/equipment" class="hover:text-solar-400">Equipment</a>
+        <span>/</span>
+        <span class="text-white">{item.brand}</span>
+      </div>
+
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="px-3 py-1 bg-solar-500/20 text-solar-400 border border-solar-500/30 text-xs font-bold rounded-full">
+            {item.category}
+          </span>
+          <span class="text-xs text-slate-400">
+            Brand: <strong class="text-white">{item.brand}</strong>
+          </span>
+        </div>
+
+        <h1 class="text-2xl sm:text-4xl font-black tracking-tight text-white leading-tight">
+          {item.name}
+        </h1>
+
+        <div class="mt-6 flex flex-wrap items-center gap-4">
+          <div class="p-3.5 bg-slate-800 rounded-xl border border-slate-700">
+            <span class="text-[10px] uppercase font-semibold text-slate-400 block">Nigerian Market Price</span>
+            <span class="text-xl font-black text-solar-400">{item.priceRange}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      
+      {/* Left / Main Details */}
+      <div class="lg:col-span-8 space-y-10">
+        
+        {/* Verdict Box */}
+        <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+          <h2 class="text-2xl font-black text-slate-900">Engineering Verdict & Overview</h2>
+          <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+            {item.verdict}
+          </p>
+        </div>
+
+        {/* Technical Specifications */}
+        <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">Technical Specifications</h3>
+          <div class="divide-y divide-slate-100 text-sm">
+            {Object.entries(item.specifications).map(([key, val]) => (
+              <div class="py-3 flex flex-col sm:flex-row justify-between sm:items-center">
+                <span class="text-slate-500 font-medium capitalize">{key.replace(/([A-Z])/g, ' $1')}:</span>
+                <span class="font-bold text-slate-900 text-right">{val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Pros & Cons */}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="p-6 bg-emerald-50/60 rounded-2xl border border-emerald-200">
+            <h4 class="text-sm font-bold text-emerald-900 uppercase tracking-wider">Pros</h4>
+            <ul class="mt-3 space-y-2 text-xs text-emerald-800">
+              {item.pros.map(pro => (
+                <li class="flex items-start gap-2">
+                  <span class="font-black text-emerald-600">✓</span>
+                  <span>{pro}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="p-6 bg-amber-50/60 rounded-2xl border border-amber-200">
+            <h4 class="text-sm font-bold text-amber-900 uppercase tracking-wider">Cons</h4>
+            <ul class="mt-3 space-y-2 text-xs text-amber-800">
+              {item.cons.map(con => (
+                <li class="flex items-start gap-2">
+                  <span class="font-black text-amber-600">!</span>
+                  <span>{con}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <AdSlot slotType="in-article" sponsorName={`Wholesale ${item.brand} Equipment`} />
+      </div>
+
+      {/* Sidebar: Affiliate Purchase Buttons */}
+      <div class="lg:col-span-4 space-y-6">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm sticky top-24 space-y-4">
+          <span class="px-2.5 py-0.5 bg-solar-100 text-solar-800 text-[10px] font-bold rounded uppercase">
+            Live Retailer Links
+          </span>
+          <h3 class="text-lg font-bold text-slate-900">Check Price & Buy Online</h3>
+          <p class="text-xs text-slate-500">
+            Compare prices across major Nigerian e-commerce stores and local verified equipment vendors:
+          </p>
+
+          <div class="space-y-2.5 pt-2">
+            {item.affiliateLinks.map((link) => (
+              <a
+                href={link.url}
+                target={link.url.startsWith('http') ? '_blank' : '_self'}
+                rel={link.url.startsWith('http') ? 'sponsored nofollow noopener' : ''}
+                class="w-full inline-flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-solar-500 bg-slate-50 hover:bg-solar-50 transition group"
+              >
+                <div class="text-left">
+                  <span class="text-xs font-bold text-slate-900 block group-hover:text-solar-800 transition">
+                    {link.retailer}
+                  </span>
+                  <span class="text-[10px] text-slate-500">Check Current Stock</span>
+                </div>
+                <svg class="w-4 h-4 text-slate-400 group-hover:text-solar-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            ))}
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 text-[11px] text-slate-400">
+            🛡️ Always buy from official brand stores or verified diamond sellers on Jumia & Konga to guarantee original warranty.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>

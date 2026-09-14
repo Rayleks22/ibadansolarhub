@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import solarPackages from '../../data/solar-packages.json';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Standard Solar Power Packages in Nigeria",
+  "itemListElement": solarPackages.map((pkg, idx) => ({
+    "@type": "ListItem",
+    "position": idx + 1,
+    "name": pkg.name,
+    "url": `https://ibadansolarhub.com.ng/packages/${pkg.slug}`
+  }))
+};
+---
+
+<BaseLayout
+  title="Complete Solar Power Packages & Turnkey Pricing in Nigeria (1kVA to 15kVA)"
+  description="Explore standard turnkey solar power packages in Nigeria. Complete with inverters, lithium batteries, solar panels, and estimated costs in Naira (₦)."
+  schema={schema}
+>
+  <div class="bg-slate-900 text-white py-12 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs font-bold text-solar-400 uppercase tracking-wider">Turnkey Solutions</span>
+      <h1 class="text-3xl sm:text-5xl font-black mt-2 tracking-tight">
+        Standard Solar Packages & Turnkey Costs
+      </h1>
+      <p class="mt-4 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
+        Carefully engineered solar bundles tested for Nigerian conditions. Includes full hardware specifications, appliance capacity, and turnkey pricing.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {solarPackages.map((pkg) => (
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-solar-500 hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs mb-2">
+              <span class="px-2.5 py-1 bg-amber-50 text-solar-700 font-extrabold rounded-md">
+                {pkg.capacity}
+              </span>
+              <span class="text-slate-500 font-medium">
+                {pkg.dailyOutputKwh} / day
+              </span>
+            </div>
+
+            <h2 class="text-xl font-bold text-slate-900 mt-2">
+              <a href={`/packages/${pkg.slug}`} class="hover:text-solar-600 transition">
+                {pkg.name}
+              </a>
+            </h2>
+
+            <p class="text-xs text-slate-500 mt-1">{pkg.idealFor}</p>
+
+            <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <span class="text-[10px] text-slate-400 uppercase font-semibold">Estimated Turnkey Cost</span>
+              <div class="text-xl font-black text-slate-900">{pkg.estimatedCost}</div>
+            </div>
+
+            <div class="mt-5">
+              <div class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Supported Appliances:</div>
+              <ul class="space-y-1.5 text-xs text-slate-600">
+                {pkg.appliancesSupported.slice(0, 4).map((app) => (
+                  <li class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-solar-500"></span>
+                    <span>{app}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100">
+            <a
+              href={`/packages/${pkg.slug}`}
+              class="w-full inline-flex items-center justify-center py-2.5 px-4 bg-slate-900 hover:bg-solar-500 hover:text-slate-950 text-white font-bold text-xs rounded-xl transition"
+            >
+              View Full Specs & BOQ &rarr;
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

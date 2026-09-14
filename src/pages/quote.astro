@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import locations from '../data/locations.json';
+---
+
+<BaseLayout
+  title="Request Free Quotes from Verified Solar Installers in Nigeria"
+  description="Connect with top-rated, certified solar engineers in Ibadan, Lagos, Ogun, Abuja, or Port Harcourt. Compare 3 quotes with zero obligations."
+>
+  <div class="bg-slate-900 text-white py-12 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs font-bold text-solar-400 uppercase tracking-wider">Zero Obligation Service</span>
+      <h1 class="text-3xl sm:text-5xl font-black mt-2 tracking-tight">
+        Connect With Vetted Solar Installers
+      </h1>
+      <p class="mt-4 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
+        Tell us your property location and power requirements. We match you with certified local engineers for site inspection, load audit, and transparent quotes.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+      
+      {/* Form Container */}
+      <div class="md:col-span-8 bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+        <h2 class="text-2xl font-black text-slate-900">Tell Us About Your Project</h2>
+        <p class="text-xs text-slate-500 mt-1">Takes less than 60 seconds. Our partner installers respond within 24 hours.</p>
+
+        <form id="quote-form" class="mt-6 space-y-4 text-xs sm:text-sm">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Your Full Name</label>
+            <input
+              type="text"
+              id="q-name"
+              required
+              placeholder="e.g. Adebayo Adeleke"
+              class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">WhatsApp / Phone Number</label>
+              <input
+                type="tel"
+                id="q-phone"
+                required
+                placeholder="e.g. 0801 234 5678"
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">City / Neighborhood</label>
+              <select
+                id="q-location"
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
+              >
+                {locations.map(loc => (
+                  <option value={`${loc.name}, ${loc.city}`}>{loc.name}, {loc.city} ({loc.state})</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Property Type</label>
+              <select
+                id="q-property"
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
+              >
+                <option value="Self-contain / 1-Bed Flat">Self-contain / 1-Bed Flat</option>
+                <option value="2-3 Bedroom Apartment">2-3 Bedroom Apartment</option>
+                <option value="Duplex / Mansion">Duplex / Mansion</option>
+                <option value="Commercial Office / Store">Commercial Office / Store</option>
+                <option value="Hospital / School / Church">Hospital / School / Church</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Target Solar System</label>
+              <select
+                id="q-system"
+                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
+              >
+                <option value="1.2kVA Starter & Remote Work">1.2kVA Starter & Remote Work</option>
+                <option value="2.5kVA Essential Home">2.5kVA Essential Home</option>
+                <option value="3.5kVA Comfort System">3.5kVA Comfort System</option>
+                <option value="5kVA Whole-Home with AC">5kVA Whole-Home with AC</option>
+                <option value="10kVA+ Heavy Duty / Commercial">10kVA+ Heavy Duty / Commercial</option>
+                <option value="Not sure - need recommendation">Not sure - need recommendation</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Key Appliances to Power</label>
+            <textarea
+              id="q-notes"
+              rows="3"
+              placeholder="e.g. 1 inverter AC, 1 fridge, 4 fans, 2 laptops, TV, and lights"
+              class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
+            ></textarea>
+          </div>
+
+          <button
+            type="button"
+            id="submit-whatsapp-btn"
+            class="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition text-sm"
+          >
+            <span>Send Request via WhatsApp Instantly</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      {/* Trust & Installer Network Side */}
+      <div class="md:col-span-4 space-y-6">
+        <div class="bg-slate-900 text-white rounded-2xl p-6 border border-slate-800 shadow-sm space-y-4">
+          <h3 class="text-base font-bold text-white">Why Use IbadanSolarHub?</h3>
+          <ul class="space-y-3 text-xs text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-solar-400 font-bold">✓</span>
+              <span><strong>Vetted Engineers:</strong> Certified technicians with proven portfolio and authentic warranty handling.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-solar-400 font-bold">✓</span>
+              <span><strong>Anti-Counterfeit:</strong> Guaranteed genuine Tier-1 lithium batteries and pure sine wave inverters.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-solar-400 font-bold">✓</span>
+              <span><strong>100% Free:</strong> No brokerage markups or hidden fees charged to homeowners.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-amber-50 rounded-2xl p-6 border border-amber-200 space-y-3">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-solar-800">For Solar Engineers</span>
+          <h3 class="text-sm font-bold text-slate-900">Are You an Installer?</h3>
+          <p class="text-xs text-slate-600">
+            Join our verified installer directory in Ibadan, Lagos, Ogun, Abuja, or Port Harcourt and receive steady high-intent installation leads.
+          </p>
+          <a
+            href="https://wa.me/2348000000000?text=Hello%20IbadanSolarHub!%20I%20am%20a%20solar%20installer%20and%20would%20like%20to%20join%20your%20verified%20network."
+            target="_blank"
+            class="inline-block text-xs font-bold text-solar-800 hover:underline"
+          >
+            Apply to Join Verified Network &rarr;
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script is:inline>
+    const btn = document.getElementById('submit-whatsapp-btn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const name = document.getElementById('q-name').value || 'Customer';
+        const phone = document.getElementById('q-phone').value || 'Not provided';
+        const loc = document.getElementById('q-location').value;
+        const prop = document.getElementById('q-property').value;
+        const sys = document.getElementById('q-system').value;
+        const notes = document.getElementById('q-notes').value || 'Standard household load';
+
+        const text = encodeURIComponent(
+          `Hello IbadanSolarHub! I would like to request solar quotes from verified installers.\n\n` +
+          `👤 Name: ${name}\n` +
+          `📞 Phone/WhatsApp: ${phone}\n` +
+          `📍 Location: ${loc}\n` +
+          `🏠 Property: ${prop}\n` +
+          `⚙️ Target System: ${sys}\n` +
+          `💡 Appliances/Notes: ${notes}\n\n` +
+          `Please connect me with certified installers in my area.`
+        );
+
+        window.open(`https://wa.me/2348000000000?text=${text}`, '_blank');
+      });
+    }
+  </script>
+</BaseLayout>

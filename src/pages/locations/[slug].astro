@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import locations from '../../data/locations.json';
+import solarPackages from '../../data/solar-packages.json';
+
+export async function getStaticPaths() {
+  return locations.map((loc) => ({
+    params: { slug: loc.slug },
+    props: { loc },
+  }));
+}
+
+const { loc } = Astro.props;
+
+// Schema Markup for LocalBusiness and FAQPage
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "name": `Solar Installation Services in ${loc.name}, ${loc.city}`,
+      "description": loc.description,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": loc.name,
+        "addressRegion": loc.state,
+        "addressCountry": "NG"
+      },
+      "areaServed": loc.name,
+      "priceRange": loc.avgInstallationCost
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": loc.frequentlyAsked.map((faq) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    }
+  ]
+};
+
+const whatsappUrl = `https://wa.me/2348000000000?text=${encodeURIComponent(
+  `Hello IbadanSolarHub! I am inquiring about solar installation services and installer recommendations for my property in ${loc.name}, ${loc.city}. Please connect me with vetted installers.`
+)}`;
+---
+
+<BaseLayout
+  title={`Solar Installation & Inverter Prices in ${loc.name}, ${loc.city} (${loc.state})`}
+  description={`Complete guide to solar power systems, battery storage, and verified solar installers in ${loc.name}, ${loc.city}. Grid reliability rating: ${loc.powerReliabilityScore}/10.`}
+  schema={schema}
+>
+  {/* Hero Section */}
+  <section class="bg-slate-900 text-white py-12 lg:py-16 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-2 text-xs text-slate-400 mb-4">
+        <a href="/" class="hover:text-solar-400">Home</a>
+        <span>/</span>
+        <a href="/locations" class="hover:text-solar-400">Locations</a>
+        <span>/</span>
+        <span class="text-solar-400 font-semibold">{loc.city}</span>
+        <span>/</span>
+        <span class="text-white">{loc.name}</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-solar-500/20 text-solar-400 border border-solar-500/30 rounded-full text-xs font-semibold mb-3">
+            📍 Local Energy Guide: {loc.name}, {loc.city}
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+            Solar Panel & Inverter Installation in <span class="text-solar-400">{loc.name}</span>
+          </h1>
+          <p class="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl">
+            {loc.heroSubtitle}
+          </p>
+
+          <div class="mt-6 flex flex-wrap items-center gap-4">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-md transition"
+            >
+              <span>Get Quotes from {loc.name} Installers</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+
+            <a
+              href="/calculator"
+              class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 px-5 rounded-xl text-sm border border-slate-700 transition"
+            >
+              Calculate Your Sizing &rarr;
+            </a>
+          </div>
+        </div>
+
+        {/* Local Metric Summary Card */}
+        <div class="lg:col-span-4 bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-solar-400">
+            {loc.name} Energy Profile
+          </h3>
+
+          <div class="space-y-3 text-xs">
+            <div class="flex justify-between py-1.5 border-b border-slate-700">
+              <span class="text-slate-400">DISCO Provider</span>
+              <span class="font-bold text-white text-right">{loc.disco.split('(')[0]}</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-slate-700">
+              <span class="text-slate-400">Average Daily Grid Power</span>
+              <span class="font-bold text-amber-400">{loc.avgDailyGridHours}</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-slate-700">
+              <span class="text-slate-400">Peak Sun Hours</span>
+              <span class="font-bold text-white">{loc.peakSunHours}</span>
+            </div>
+            <div class="flex justify-between py-1.5 border-b border-slate-700">
+              <span class="text-slate-400">Certified Installers Active</span>
+              <span class="font-bold text-emerald-400">{loc.topInstallersCount} Verified</span>
+            </div>
+            <div class="flex justify-between py-1.5">
+              <span class="text-slate-400">Turnkey Cost Range</span>
+              <span class="font-bold text-white">{loc.avgInstallationCost}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* In-depth Local Context & Sizing Analysis */}
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      
+      <div class="lg:col-span-8 space-y-12">
+        {/* Neighborhood Energy Overview */}
+        <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+          <h2 class="text-2xl font-black text-slate-900">
+            Why Solar is Essential in {loc.name}, {loc.city}
+          </h2>
+          <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+            {loc.description}
+          </p>
+
+          <div class="mt-8 p-5 bg-solar-50 border border-solar-200/80 rounded-xl">
+            <div class="text-xs font-bold uppercase tracking-wider text-solar-900">Recommended Baseline Setup</div>
+            <div class="text-xl font-black text-slate-900 mt-1">{loc.recommendedSystem}</div>
+            <p class="text-xs text-slate-600 mt-1">
+              Provides seamless 24/7 transition during DISCO load-shedding and minimizes noisy generator operations.
+            </p>
+          </div>
+        </div>
+
+        {/* Popular Installations */}
+        <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">
+            Most Popular Solar Setups in {loc.name}
+          </h3>
+          <div class="space-y-3">
+            {loc.popularInstallations.map((item, idx) => (
+              <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-100">
+                <span class="w-6 h-6 rounded-full bg-solar-500 text-slate-950 font-black text-xs flex items-center justify-center shrink-0 mt-0.5">
+                  {idx + 1}
+                </span>
+                <span class="text-xs sm:text-sm font-semibold text-slate-800">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <AdSlot slotType="in-article" sponsorName={`Certified Solar Installers in ${loc.city}`} />
+
+        {/* Hyper-Local FAQs */}
+        <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
+          <h3 class="text-xl font-bold text-slate-900 mb-6">
+            Frequently Asked Questions in {loc.name}
+          </h3>
+          <div class="space-y-6">
+            {loc.frequentlyAsked.map((faq) => (
+              <div class="border-b border-slate-100 pb-4">
+                <h4 class="text-sm font-bold text-slate-900">{faq.question}</h4>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Sidebar (Lead Capture & Recommended Packages) */}
+      <div class="lg:col-span-4 space-y-6">
+        {/* Instant Lead Capture Box */}
+        <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-6 border border-slate-700 shadow-lg sticky top-24">
+          <span class="px-2.5 py-1 bg-solar-500/20 text-solar-400 border border-solar-500/30 text-[10px] font-bold rounded uppercase">
+            Fast Response
+          </span>
+          <h3 class="text-lg font-bold text-white mt-2">
+            Get 3 Free Quotes in {loc.name}
+          </h3>
+          <p class="text-xs text-slate-300 mt-1">
+            We will match your energy requirements with certified, top-rated solar installers in {loc.name}, {loc.city}.
+          </p>
+
+          <form action="/quote" method="get" class="mt-5 space-y-3 text-xs">
+            <input type="hidden" name="location" value={`${loc.name}, ${loc.city}`} />
+            
+            <div>
+              <label class="block text-slate-300 mb-1">Your Property Type:</label>
+              <select name="property" class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2.5 focus:ring-1 focus:ring-solar-500">
+                <option>3-Bedroom Flat</option>
+                <option>Duplex / Mansion</option>
+                <option>Commercial Office / Shop</option>
+                <option>Hospital / School</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-slate-300 mb-1">Desired Capacity:</label>
+              <select name="systemSize" class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2.5 focus:ring-1 focus:ring-solar-500">
+                <option>2.5kVA Inverter System</option>
+                <option>3.5kVA Inverter System</option>
+                <option>5kVA Inverter + AC System</option>
+                <option>10kVA+ Commercial System</option>
+              </select>
+            </div>
+
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition"
+            >
+              <span>Instant WhatsApp Request</span>
+            </a>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

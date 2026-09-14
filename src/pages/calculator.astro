@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SolarCalculator from '../components/SolarCalculator';
+import AdSlot from '../components/AdSlot.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Nigerian Solar Load & Cost Calculator",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "All",
+  "description": "Calculate exact solar inverter kVA, lithium battery capacity in kWh, solar panel wattage, and turnkey costs in Nigerian Naira.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "NGN"
+  }
+};
+---
+
+<BaseLayout
+  title="Solar Load & Cost Sizing Calculator Nigeria (2026 Engine)"
+  description="Accurately calculate your inverter kVA, lithium battery bank in kWh, and solar panels required for your home or business in Ibadan, Lagos, Ogun, Abuja, or Port Harcourt."
+  schema={schema}
+>
+  <div class="bg-slate-900 text-white py-12 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs font-bold text-solar-400 uppercase tracking-wider">Free Engineering Tool</span>
+      <h1 class="text-3xl sm:text-5xl font-black mt-2 tracking-tight">
+        Solar Sizing & Naira Cost Calculator
+      </h1>
+      <p class="mt-4 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
+        Configure your appliances below to calculate exact running load, battery storage, solar array size, and real turnkey installation budgets across Nigeria.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <SolarCalculator client:load />
+
+    <AdSlot slotType="in-article" sponsorName="Discounted Lithium LiFePO4 Batteries" />
+
+    {/* Educational / Explanatory Content for SEO & User Authority */}
+    <div class="mt-16 bg-white rounded-2xl p-8 border border-slate-200 shadow-sm prose prose-slate max-w-none">
+      <h2 class="text-2xl font-bold text-slate-900">How Solar System Sizing Works in Nigeria</h2>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        Sizing a solar power system in Nigeria requires careful balance between your <strong>instantaneous peak wattage</strong> (which determines your Inverter size), your <strong>daily energy consumption in Watt-hours</strong> (which dictates your Battery storage), and your <strong>sunlight recharge capacity</strong> (which dictates your Solar PV panel array).
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 not-prose my-8">
+        <div class="p-5 bg-amber-50/50 rounded-xl border border-amber-100">
+          <div class="text-amber-700 font-bold text-sm uppercase tracking-wider">1. Inverter Sizing (kVA)</div>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+            Inverters convert DC battery power into 220V AC household electricity. We factor in a <strong>25% safety surge headroom</strong> so inductive motor starts (like refrigerators and AC compressors) do not trip the inverter into overload.
+          </p>
+        </div>
+
+        <div class="p-5 bg-blue-50/50 rounded-xl border border-blue-100">
+          <div class="text-blue-700 font-bold text-sm uppercase tracking-wider">2. Battery Bank (kWh vs Ah)</div>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+            <strong>Lithium LiFePO4</strong> batteries allow an 80% to 90% Depth of Discharge (DoD) with 6,000 cycles (10-15 years). Traditional <strong>Tubular Lead-Acid</strong> batteries only permit 50% DoD and last 2 to 3 years under heavy daily grid blackouts.
+          </p>
+        </div>
+
+        <div class="p-5 bg-yellow-50/50 rounded-xl border border-yellow-100">
+          <div class="text-yellow-700 font-bold text-sm uppercase tracking-wider">3. Solar PV Panels (Watts)</div>
+          <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+            South-West Nigeria (Ibadan, Lagos, Ogun) receives an average of <strong>5.0 to 5.4 peak sun hours</strong> daily, while Abuja and the North reach <strong>5.8 to 6.2 hours</strong>. An undersized panel array will fail to fully recharge your batteries before dusk.
+          </p>
+        </div>
+      </div>
+
+      <h3 class="text-xl font-bold text-slate-900 mt-6">Next Steps After Calculating Your Load</h3>
+      <ol class="text-sm text-slate-600 space-y-2">
+        <li><strong>Audit your appliances:</strong> Replace old incandescent bulbs with 7W-9W LEDs and ensure your air conditioner uses DC inverter compressor technology.</li>
+        <li><strong>Get a physical site audit:</strong> Have a certified installer inspect your roof angle, shadow obstructions, and distribution board (DB) wiring.</li>
+        <li><strong>Request quotes:</strong> Connect with vetted installers through our network to compare hardware warranties and labor fees.</li>
+      </ol>
+    </div>
+  </div>
+</BaseLayout>

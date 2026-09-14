@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SolarCalculator from '../components/SolarCalculator';
+import AffiliateCard from '../components/AffiliateCard.astro';
+import AdSlot from '../components/AdSlot.astro';
+import locations from '../data/locations.json';
+import solarPackages from '../data/solar-packages.json';
+import equipmentCatalog from '../data/equipment-catalog.json';
+import digitalProducts from '../data/digital-products.json';
+
+const featuredLocations = locations.slice(0, 8);
+const featuredPackages = solarPackages.slice(0, 3);
+const featuredEquipment = equipmentCatalog.slice(0, 3);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "IbadanSolarHub",
+  "url": "https://ibadansolarhub.com.ng",
+  "description": "Nigeria's premier solar energy portal. Calculate inverter sizing, compare battery prices, buy solar blueprints, and connect with certified solar installers in Ibadan, Lagos, Ogun, Abuja, and Port Harcourt.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://ibadansolarhub.com.ng/locations/{search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+---
+
+<BaseLayout
+  title="Ibadan Solar Hub - Nigeria's #1 Solar, Inverter & Clean Energy Authority"
+  description="Calculate your solar inverter & battery load, compare authentic equipment prices in Naira (₦), and connect with verified solar engineers in Ibadan, Lagos, Ogun, Abuja, and Port Harcourt."
+  schema={schema}
+>
+  {/* Hero Section */}
+  <section class="relative bg-slate-900 text-white overflow-hidden py-16 lg:py-24 border-b border-slate-800">
+    <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-solar-500/10 border border-solar-500/30 text-solar-400 text-xs font-semibold uppercase tracking-wider mb-6">
+          <span class="w-2 h-2 rounded-full bg-solar-400 animate-ping"></span>
+          2026 Nigerian Solar & Inverter Hub
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+          Reliable Solar Power for <span class="text-transparent bg-clip-text bg-gradient-to-r from-solar-400 to-amber-200">Ibadan, Lagos & Across Nigeria</span>
+        </h1>
+
+        <p class="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed">
+          Stop wasting money on fuel and unpredictable DISCO tariffs. Size your solar system to the watt, compare live Nigerian equipment prices, and get verified installation quotes in your city.
+        </p>
+
+        {/* Quick Hub Filter Bar */}
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-2 text-xs">
+          <span class="text-slate-400 font-medium">Browse City Hubs:</span>
+          {locations.slice(0, 6).map(loc => (
+            <a 
+              href={`/locations/${loc.slug}`}
+              class="px-3 py-1.5 bg-slate-800 hover:bg-solar-500 hover:text-slate-950 text-slate-200 rounded-lg border border-slate-700 font-medium transition"
+            >
+              {loc.name}
+            </a>
+          ))}
+          <a href="/locations" class="px-3 py-1.5 bg-solar-500/20 text-solar-300 border border-solar-500/40 rounded-lg hover:bg-solar-500 hover:text-slate-950 font-bold transition">
+            View All Cities &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Interactive Calculator Section */}
+  <section id="calculator-section" class="py-12 lg:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
+    <SolarCalculator client:load />
+  </section>
+
+  {/* Ad Slot (Monetization 1: Display Ads) */}
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <AdSlot slotType="in-article" sponsorName="Top Nigerian Solar Inverter Distributor" />
+  </section>
+
+  {/* Popular Sizing Packages (Monetization 2: Lead Gen & Consultations) */}
+  <section class="py-16 bg-white border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+        <div>
+          <span class="text-xs font-bold text-solar-600 uppercase tracking-wider">Ready-to-Deploy Setups</span>
+          <h2 class="text-3xl font-black text-slate-900 mt-1">Popular Nigerian Solar Packages</h2>
+          <p class="text-sm text-slate-500 mt-1">Engineered specifically for Nigerian appliances, power grids, and climate conditions.</p>
+        </div>
+        <a href="/packages" class="text-sm font-bold text-solar-600 hover:text-solar-700 flex items-center gap-1">
+          Explore all 5 packages &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {featuredPackages.map(pkg => (
+          <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col justify-between hover:border-solar-400 hover:shadow-lg transition">
+            <div>
+              <div class="text-xs font-extrabold uppercase tracking-wider text-slate-500">{pkg.capacity}</div>
+              <h3 class="text-xl font-bold text-slate-900 mt-1">{pkg.name}</h3>
+              <p class="text-xs text-slate-500 mt-1 font-medium">{pkg.idealFor}</p>
+
+              <div class="mt-4 p-3 bg-white rounded-xl border border-slate-200">
+                <span class="text-[11px] text-slate-400 uppercase font-semibold">Estimated Turnkey Cost</span>
+                <div class="text-xl font-black text-slate-900">{pkg.estimatedCost}</div>
+              </div>
+
+              <div class="mt-5">
+                <div class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">What It Powers:</div>
+                <ul class="space-y-1.5 text-xs text-slate-600">
+                  {pkg.appliancesSupported.slice(0, 4).map(app => (
+                    <li class="flex items-center gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-solar-500"></span>
+                      <span>{app}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-slate-200">
+              <a
+                href={`/packages/${pkg.slug}`}
+                class="w-full inline-flex items-center justify-center py-2.5 px-4 bg-slate-900 hover:bg-solar-500 hover:text-slate-950 text-white text-xs font-bold rounded-xl transition"
+              >
+                View Full Bill of Quantities & Specs
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Digital Products Section (Monetization 3: Direct Paystack / Gumroad Sales) */}
+  <section class="py-16 bg-gradient-to-br from-amber-500/10 via-slate-50 to-emerald-500/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold text-solar-700 uppercase tracking-wider">Direct Digital Downloads</span>
+        <h2 class="text-3xl font-black text-slate-900 mt-1">Solar Blueprints & BOQ Spreadsheets</h2>
+        <p class="text-sm text-slate-600 mt-2">
+          Save hundreds of thousands of Naira by mastering solar sizing, detecting counterfeit hardware, and auditing installer quotes.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {digitalProducts.map(prod => (
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="inline-block px-2.5 py-1 bg-solar-100 text-solar-800 text-[11px] font-bold rounded-md">
+                {prod.format}
+              </span>
+              <h3 class="text-lg font-bold text-slate-900 mt-3">{prod.title}</h3>
+              <p class="text-xs text-slate-500 mt-2 leading-relaxed">{prod.description}</p>
+
+              <div class="mt-4 flex items-baseline gap-2">
+                <span class="text-2xl font-black text-emerald-600">₦{prod.priceNgn.toLocaleString()}</span>
+                <span class="text-xs text-slate-400 line-through">₦{prod.originalPriceNgn.toLocaleString()}</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100">
+              <a
+                href={prod.paystackUrl}
+                target="_blank"
+                rel="noopener"
+                class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-sm transition"
+              >
+                Instant Download (Paystack) &rarr;
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Equipment & Affiliate Price Comparison (Monetization 4: Affiliate Commissions) */}
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+      <div>
+        <span class="text-xs font-bold text-solar-600 uppercase tracking-wider">Hardware Reviews & Buying Guides</span>
+        <h2 class="text-3xl font-black text-slate-900 mt-1">Verified Equipment Price Index</h2>
+        <p class="text-sm text-slate-500 mt-1">Compare prices across Jumia, Konga, and verified distributors in Lagos and Ibadan.</p>
+      </div>
+      <a href="/equipment" class="text-sm font-bold text-solar-600 hover:text-solar-700 flex items-center gap-1">
+        Browse complete equipment catalog &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {featuredEquipment.map(item => (
+        <AffiliateCard
+          title={item.name}
+          category={item.category}
+          brand={item.brand}
+          priceRange={item.priceRange}
+          verdict={item.verdict}
+          pros={item.pros}
+          cons={item.cons}
+          affiliateLinks={item.affiliateLinks}
+          slug={item.slug}
+        />
+      ))}
+    </div>
+  </section>
+
+  {/* Programmatic Locations Grid */}
+  <section class="py-16 bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold text-solar-400 uppercase tracking-wider">Hyper-Local Sizing & Grid Profiles</span>
+        <h2 class="text-3xl font-black mt-1">Solar Installation in Your Neighborhood</h2>
+        <p class="text-sm text-slate-300 mt-2">
+          Discover localized grid power reliability, DISCO feeder performance, and connect with nearby certified installers.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {locations.map(loc => (
+          <a
+            href={`/locations/${loc.slug}`}
+            class="p-4 rounded-xl bg-slate-800/80 border border-slate-700/80 hover:border-solar-500 hover:bg-slate-800 transition group"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-solar-400">{loc.city}</span>
+              <span class="text-[10px] text-slate-400 font-medium">{loc.avgDailyGridHours}</span>
+            </div>
+            <h3 class="font-bold text-white text-sm mt-1 group-hover:text-solar-300 transition">
+              {loc.name}
+            </h3>
+            <p class="text-[11px] text-slate-400 mt-1 truncate">{loc.disco}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Lead Generation CTA Banner (Monetization 5: High-Ticket Lead Gen) */}
+  <section class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="bg-gradient-to-r from-solar-500 to-amber-500 rounded-3xl p-8 sm:p-12 text-slate-950 shadow-xl">
+      <h2 class="text-3xl sm:text-4xl font-black tracking-tight">
+        Are You Ready to Switch to 24/7 Silent Solar Power?
+      </h2>
+      <p class="mt-4 text-base sm:text-lg font-medium text-slate-900 max-w-2xl mx-auto">
+        Join over 1,500 satisfied property owners across Ibadan, Lagos, Ogun, Abuja, and Port Harcourt who have eliminated generator headaches.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/quote"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-900 text-white font-black px-8 py-3.5 rounded-xl shadow-lg transition text-sm"
+        >
+          <span>Get Free Quotes from Vetted Installers</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+        <a
+          href="/calculator"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white text-slate-950 font-bold px-6 py-3.5 rounded-xl shadow-sm transition text-sm"
+        >
+          Use Free Load Calculator
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

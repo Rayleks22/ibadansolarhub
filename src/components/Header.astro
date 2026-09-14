@@ -1,0 +1,75 @@
+﻿---
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      
+      {/* Logo */}
+      <a href="/" class="flex items-center gap-2.5 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-solar-500 to-amber-300 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-solar-500/20 group-hover:scale-105 transition">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+          </svg>
+        </div>
+        <div>
+          <span class="text-lg md:text-xl font-black tracking-tight text-white flex items-center gap-1">
+            Ibadan<span class="text-solar-400">SolarHub</span>
+          </span>
+          <span class="block text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Nigeria Solar Authority</span>
+        </div>
+      </a>
+
+      {/* Desktop Navigation Links */}
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+        <a href="/locations" class={`hover:text-solar-400 transition ${currentPath.startsWith('/locations') ? 'text-solar-400 font-semibold' : ''}`}>
+          Locations & DISCOs
+        </a>
+        <a href="/calculator" class={`hover:text-solar-400 transition ${currentPath === '/calculator' ? 'text-solar-400 font-semibold' : ''}`}>
+          Solar Calculator
+        </a>
+        <a href="/packages" class={`hover:text-solar-400 transition ${currentPath.startsWith('/packages') ? 'text-solar-400 font-semibold' : ''}`}>
+          System Packages
+        </a>
+        <a href="/equipment" class={`hover:text-solar-400 transition ${currentPath.startsWith('/equipment') ? 'text-solar-400 font-semibold' : ''}`}>
+          Price Guides
+        </a>
+        <a href="/products" class={`hover:text-solar-400 transition ${currentPath === '/products' ? 'text-solar-400 font-semibold' : ''}`}>
+          Digital Guides
+        </a>
+      </nav>
+
+      {/* CTA Button */}
+      <div class="flex items-center gap-3">
+        <a 
+          href="/quote" 
+          class="inline-flex items-center gap-2 bg-solar-500 hover:bg-solar-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs md:text-sm shadow-md transition transform active:scale-95"
+        >
+          <span>Get Free Quotes</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  {/* Mobile Nav Strip */}
+  <div class="md:hidden flex items-center justify-around border-t border-slate-800/80 bg-slate-950/80 px-2 py-2 text-[11px] font-medium text-slate-300 overflow-x-auto">
+    <a href="/locations" class="px-2 py-1 hover:text-solar-400">Locations</a>
+    <a href="/calculator" class="px-2 py-1 hover:text-solar-400 text-solar-400 font-bold">Calculator</a>
+    <a href="/packages" class="px-2 py-1 hover:text-solar-400">Packages</a>
+    <a href="/equipment" class="px-2 py-1 hover:text-solar-400">Prices</a>
+    <a href="/products" class="px-2 py-1 hover:text-solar-400">Ebooks</a>
+  </div>
+</header>
