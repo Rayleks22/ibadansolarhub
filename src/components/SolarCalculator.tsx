@@ -556,7 +556,7 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
                 href="/products"
                 className="inline-flex items-center justify-center gap-1.5 p-2.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-lg font-medium transition text-center"
               >
-                <FileText className="w-3.5 h-3.5 text-solar-600" /> Sizing BOQ Sheet (₦3k)
+                <FileText className="w-3.5 h-3.5 text-solar-600" /> Solar Toolkit (₦2k)
               </a>
               <a
                 href="/equipment"
