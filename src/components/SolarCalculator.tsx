@@ -137,23 +137,23 @@ export default function SolarCalculator() {
     let minCost = 0;
     let maxCost = 0;
     if (recommendedKva <= 1.2) {
-      minCost = 450000;
-      maxCost = 750000;
+      minCost = 850000;
+      maxCost = 1250000;
     } else if (recommendedKva <= 2.5) {
-      minCost = 1200000;
-      maxCost = 1800000;
+      minCost = 1750000;
+      maxCost = 2450000;
     } else if (recommendedKva <= 3.5) {
-      minCost = 1950000;
-      maxCost = 2900000;
+      minCost = 2850000;
+      maxCost = 3700000;
     } else if (recommendedKva <= 5.0) {
-      minCost = 3200000;
-      maxCost = 4800000;
+      minCost = 3900000;
+      maxCost = 5800000;
     } else if (recommendedKva <= 7.5) {
-      minCost = 5000000;
-      maxCost = 7200000;
+      minCost = 6200000;
+      maxCost = 8500000;
     } else {
-      minCost = 7500000;
-      maxCost = 13500000;
+      minCost = 8500000;
+      maxCost = 15000000;
     }
 
     const formatNaira = (val: number) => {
