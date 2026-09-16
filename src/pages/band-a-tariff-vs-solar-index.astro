@@ -1,17 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import AdSlot from '../components/AdSlot.astro';
-import AffiliateCard from '../components/AffiliateCard.astro';
 import digitalProducts from '../data/digital-products.json';
 
-const bookProduct = digitalProducts.find(p => p.id === 'power-without-the-panic-book');
-const toolkitProduct = digitalProducts.find(p => p.id === 'nigerian-solar-toolkit-bundle');
+const bookProduct = digitalProducts.find(p => p.id === 'power-without-the-panic');
+const toolkitProduct = digitalProducts.find(p => p.id === 'solar-complete-toolkit-bundle');
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Band A Electricity Tariff vs Petrol Generator vs Solar: 2026 Nigeria Payback & Cost Index",
-  "description": "Comprehensive economic research analyzing monthly power expenses under Band A DISCO tariffs (₦209/kWh) and petrol (₦1,150/L) against LiFePO4 solar payback periods in Nigeria.",
+  "description": "Comprehensive economic research analyzing monthly power expenses under Band A DISCO tariffs (₦209/kWh) and petrol (₦1,395–₦1,450/L) against LiFePO4 solar payback periods in Nigeria.",
   "author": {
     "@type": "Organization",
     "name": "Reid Caster Publishing"
@@ -28,7 +26,7 @@ const schema = {
 
 <BaseLayout
   title="Band A Electricity Tariff vs Petrol Generator vs Solar: 2026 Nigeria Payback Index"
-  description="Comprehensive 2026 Nigerian power cost index. Compare Band A DISCO tariffs (₦209/kWh) and petrol generator fuel against turnkey LiFePO4 solar installation payback periods."
+  description="Comprehensive 2026 Nigerian power cost index. Compare Band A DISCO tariffs (₦209/kWh) and current petrol pump prices (₦1,395–₦1,450/L) against turnkey LiFePO4 solar installation payback periods."
   schema={schema}
 >
   {/* Hero Header */}
@@ -42,15 +40,15 @@ const schema = {
         Band A Electricity Tariff vs. Petrol Generator vs. Solar: <span class="text-solar-400">The 2026 Payback Index</span>
       </h1>
       <p class="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto mt-4 leading-relaxed">
-        With Band A DISCO tariffs elevated at <strong>₦209 – ₦225 per kWh</strong> and petrol fluctuating at <strong>₦1,050 – ₦1,250 per litre</strong>, what is the fastest way to stop burning cash on power? Here is the exact mathematical payback model.
+        With Band A DISCO tariffs at <strong>₦209 – ₦225 per kWh</strong> and petrol pump prices now surging between <strong>₦1,395 and ₦1,450 per litre</strong>, how fast does solar actually pay for itself in Nigeria? Here is the exact mathematical payback model.
       </p>
       
       <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-400">
         <span>Author: <strong class="text-white">Reid Caster Publishing</strong></span>
         <span>•</span>
-        <span>Data Updated: <strong class="text-white">September 2026</strong></span>
+        <span>Market Data: <strong class="text-white">PMS @ ₦1,400/L • Band A @ ₦209.50/kWh</strong></span>
         <span>•</span>
-        <span>Reading Time: <strong class="text-white">7 Mins</strong></span>
+        <span>Updated: <strong class="text-white">September 2026</strong></span>
       </div>
     </div>
   </section>
@@ -60,20 +58,22 @@ const schema = {
     {/* Executive Summary Card */}
     <div class="bg-amber-500/10 border-2 border-solar-500/30 rounded-2xl p-6 md:p-8 mb-12">
       <h2 class="text-xl font-bold text-slate-950 flex items-center gap-2 mb-3">
-        ⚡ Executive Key Finding
+        ⚡ Executive Key Finding (Updated for Current Fuel Rates)
       </h2>
       <p class="text-slate-800 text-sm md:text-base leading-relaxed">
-        A standard middle-class Nigerian household (3-bedroom flat or duplex) combining Band A grid electricity with 5–6 hours of generator backup spends an average of <strong>₦240,000 to ₦490,000 monthly</strong> on power. At current equipment prices, an engineered <strong>3.5kVA – 5kVA Lithium (LiFePO4) solar system</strong> fully amortizes itself in <strong>8.5 to 13.5 months</strong>. Over a 10-year battery lifespan, solar saves between <strong>₦18,000,000 and ₦42,000,000</strong> compared to grid-plus-generator operation.
+        With petrol at <strong>₦1,395 – ₦1,450/L</strong>, a standard Nigerian household (2 to 4-bedroom home) running a generator for just 5 to 7 hours daily burns between <strong>₦250,000 and ₦650,000 every month</strong> on fuel alone. When combined with Band A grid tariffs, total monthly power expenditure reaches <strong>₦325,000 to ₦800,000+</strong>. 
+        <br><br>
+        Because fuel costs have skyrocketed, an engineered <strong>2.5kVA – 5kVA Lithium (LiFePO4) solar installation now fully pays for itself in just 5.7 to 7.5 months</strong>. Over a 10-year LiFePO4 lifespan, solar saves between <strong>₦17 Million and ₦43 Million</strong> in direct cash.
       </p>
     </div>
 
-    {/* Section 1: The Three Power Profiles */}
+    {/* Section 1: The Side-by-Side Comparison Table */}
     <div class="prose max-w-none mb-12">
       <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-        1. Side-by-Side Financial Comparison Table
+        1. Side-by-Side Financial Comparison Table (PMS @ ₦1,400/L Baseline)
       </h2>
       <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
-        Below is an empirical cost analysis across three real Nigerian household profiles using verified 2026 market figures:
+        Below is the updated empirical cost analysis across four realistic Nigerian household and office profiles using September 2026 market rates:
       </p>
 
       {/* Comparison Grid Table */}
@@ -83,8 +83,8 @@ const schema = {
             <tr>
               <th class="p-3.5 border-b border-slate-800">Household Profile</th>
               <th class="p-3.5 border-b border-slate-800">Monthly Band A Bill</th>
-              <th class="p-3.5 border-b border-slate-800">Monthly Fuel Bill (Gen)</th>
-              <th class="p-3.5 border-b border-slate-800">Total Monthly Power Spend</th>
+              <th class="p-3.5 border-b border-slate-800">Monthly Fuel Bill (Gen @ ₦1,400/L)</th>
+              <th class="p-3.5 border-b border-slate-800">Total Monthly Power Burn</th>
               <th class="p-3.5 border-b border-slate-800">Turnkey Solar Setup</th>
               <th class="p-3.5 border-b border-slate-800 bg-solar-600 text-slate-950">Payback Breakeven</th>
               <th class="p-3.5 border-b border-slate-800">5-Yr Net Savings</th>
@@ -96,12 +96,12 @@ const schema = {
                 <strong>Starter / Remote Worker</strong><br>
                 <span class="text-xs text-slate-500 font-normal">1-2 Rooms, Laptops, Starlink, Fans, TV</span>
               </td>
-              <td class="p-3.5">₦30,000</td>
-              <td class="p-3.5">₦75,000 <span class="text-[11px] text-slate-400 block">(3 hrs/day Small Gen)</span></td>
-              <td class="p-3.5 font-bold text-red-600">₦105,000/mo</td>
+              <td class="p-3.5">₦31,500 <span class="text-[11px] text-slate-400 block">(150 kWh)</span></td>
+              <td class="p-3.5">₦94,500 <span class="text-[11px] text-slate-400 block">(3 hrs/day Small Gen • 2.25L/day)</span></td>
+              <td class="p-3.5 font-bold text-red-600">₦126,000/mo</td>
               <td class="p-3.5 font-semibold text-slate-900">₦950,000 <span class="text-[11px] text-slate-400 block">(1.2kVA + 1.28kWh LiFePO4)</span></td>
-              <td class="p-3.5 font-extrabold text-green-700 bg-emerald-50">9.0 Months</td>
-              <td class="p-3.5 font-bold text-slate-900">₦5,350,000</td>
+              <td class="p-3.5 font-extrabold text-green-700 bg-emerald-50">7.5 Months</td>
+              <td class="p-3.5 font-bold text-slate-900">₦6,610,000</td>
             </tr>
 
             <tr class="hover:bg-slate-50 transition bg-amber-50/30">
@@ -109,12 +109,12 @@ const schema = {
                 <strong>Essential Home</strong><br>
                 <span class="text-xs text-slate-500 font-normal">2-3 Bed Flat, Inverter Fridge, TV, Fans</span>
               </td>
-              <td class="p-3.5">₦70,000</td>
-              <td class="p-3.5">₦145,000 <span class="text-[11px] text-slate-400 block">(5 hrs/day 3.5kVA Gen)</span></td>
-              <td class="p-3.5 font-bold text-red-600">₦215,000/mo</td>
+              <td class="p-3.5">₦73,500 <span class="text-[11px] text-slate-400 block">(350 kWh)</span></td>
+              <td class="p-3.5">₦252,000 <span class="text-[11px] text-slate-400 block">(5 hrs/day 3.5kVA Gen • 6L/day)</span></td>
+              <td class="p-3.5 font-bold text-red-600">₦325,500/mo</td>
               <td class="p-3.5 font-semibold text-slate-900">₦2,150,000 <span class="text-[11px] text-slate-400 block">(2.5kVA + 2.56kWh LiFePO4)</span></td>
-              <td class="p-3.5 font-extrabold text-green-700 bg-emerald-50">10.0 Months</td>
-              <td class="p-3.5 font-bold text-slate-900">₦10,750,000</td>
+              <td class="p-3.5 font-extrabold text-green-700 bg-emerald-50">6.6 Months</td>
+              <td class="p-3.5 font-bold text-slate-900">₦17,380,000</td>
             </tr>
 
             <tr class="hover:bg-slate-50 transition">
@@ -122,12 +122,12 @@ const schema = {
                 <strong>Standard Comfort (Deep Freezer)</strong><br>
                 <span class="text-xs text-slate-500 font-normal">3-Bed Duplex, Freezer, Fridge, Water Dispenser</span>
               </td>
-              <td class="p-3.5">₦95,000</td>
-              <td class="p-3.5">₦180,000 <span class="text-[11px] text-slate-400 block">(6 hrs/day Gen)</span></td>
-              <td class="p-3.5 font-bold text-red-600">₦275,000/mo</td>
+              <td class="p-3.5">₦94,500 <span class="text-[11px] text-slate-400 block">(450 kWh)</span></td>
+              <td class="p-3.5">₦403,200 <span class="text-[11px] text-slate-400 block">(6 hrs/day 5kVA Gen • 9.6L/day)</span></td>
+              <td class="p-3.5 font-bold text-red-600">₦497,700/mo</td>
               <td class="p-3.5 font-semibold text-slate-900">₦3,100,000 <span class="text-[11px] text-slate-400 block">(3.5kVA + 5.12kWh LiFePO4)</span></td>
-              <td class="p-3.5 font-extrabold text-green-700 bg-emerald-50">11.2 Months</td>
-              <td class="p-3.5 font-bold text-slate-900">₦13,400,000</td>
+              <td class="p-3.5 font-extrabold text-green-700 bg-emerald-50">6.2 Months</td>
+              <td class="p-3.5 font-bold text-slate-900">₦26,762,000</td>
             </tr>
 
             <tr class="hover:bg-slate-50 transition bg-solar-50/40">
@@ -135,12 +135,12 @@ const schema = {
                 <strong>Whole-Home + Inverter AC</strong><br>
                 <span class="text-xs text-slate-500 font-normal">4-Bed Duplex, 1.5HP AC, Pump, Deep Freezer</span>
               </td>
-              <td class="p-3.5">₦160,000</td>
-              <td class="p-3.5">₦290,000 <span class="text-[11px] text-slate-400 block">(8 hrs/day 7.5kVA Gen)</span></td>
-              <td class="p-3.5 font-bold text-red-600">₦450,000/mo</td>
+              <td class="p-3.5">₦157,000 <span class="text-[11px] text-slate-400 block">(750 kWh)</span></td>
+              <td class="p-3.5">₦646,800 <span class="text-[11px] text-slate-400 block">(7 hrs/day 7.5kVA Gen • 15.4L/day)</span></td>
+              <td class="p-3.5 font-bold text-red-600">₦803,800/mo</td>
               <td class="p-3.5 font-semibold text-slate-900">₦4,600,000 <span class="text-[11px] text-slate-400 block">(5kVA + 10.24kWh LiFePO4)</span></td>
-              <td class="p-3.5 font-extrabold text-green-700 bg-emerald-50">10.2 Months</td>
-              <td class="p-3.5 font-bold text-slate-900">₦22,400,000</td>
+              <td class="p-3.5 font-extrabold text-green-700 bg-emerald-50">5.7 Months</td>
+              <td class="p-3.5 font-bold text-slate-900">₦43,628,000</td>
             </tr>
           </tbody>
         </table>
@@ -153,28 +153,28 @@ const schema = {
         2. The "Band A Illusion" vs. Real Grid Performance in Nigeria
       </h2>
       <p class="text-slate-700 text-sm md:text-base leading-relaxed">
-        Many consumers initially believed paying <strong>₦209/kWh</strong> under Band A would solve power reliability. However, empirical field data from IBEDC, EKEDC, IKEDC, and AEDC shows three structural points of failure:
+        Many consumers initially believed paying <strong>₦209.50/kWh</strong> under Band A would guarantee uninterrupted power. However, field reports across IBEDC, EKEDC, IKEDC, AEDC, and EEDC demonstrate three ongoing points of failure:
       </p>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
         <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-          <div class="text-amber-600 font-bold text-sm mb-1">⚡ Grid Collapse Exposure</div>
+          <div class="text-amber-600 font-bold text-sm mb-1">⚡ National Grid System Collapses</div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            When the National Grid collapses (multiple incidents recorded each quarter), Band A feeders drop immediately to zero volts regardless of billing tariff.
+            When the transmission grid collapses, Band A feeders drop immediately to 0 Volts. Customers are forced back to their generators at ₦1,400/litre.
           </p>
         </div>
 
         <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-          <div class="text-amber-600 font-bold text-sm mb-1">🌧️ Distribution Transformer Faults</div>
+          <div class="text-amber-600 font-bold text-sm mb-1">🌧️ Localized Substation & Transformer Faults</div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            Localized feeder cable cutoffs, fallen poles during rainy seasons, and blown substation fuses leave Band A neighborhoods in the dark for days.
+            Fallen poles during storms, burnt feeder cables, and blown transformer fuses frequently cause multi-day blackouts in Band A estates.
           </p>
         </div>
 
         <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-          <div class="text-amber-600 font-bold text-sm mb-1">💸 Compound Tariff Increases</div>
+          <div class="text-amber-600 font-bold text-sm mb-1">📈 Endless Tariff Inflation</div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            Unlike Solar (where your Levelized Cost of Electricity is locked for 10–25 years), Band A tariffs adjust continuously upward to match exchange rates.
+            DISCO tariffs adjust upward as the exchange rate and inflation shift. With Solar, your energy generation equipment is owned outright with 0 ongoing fuel cost.
           </p>
         </div>
       </div>
@@ -183,27 +183,27 @@ const schema = {
     {/* Section 3: The 3 Cost Mistakes Nigerian Buyers Make */}
     <div class="bg-slate-900 text-white rounded-2xl p-6 md:p-8 mb-12 space-y-4">
       <h2 class="text-xl md:text-2xl font-bold text-solar-400">
-        3. The Three Cost Calculation Mistakes To Avoid
+        3. The Three Cost Calculation Traps To Avoid
       </h2>
       <div class="space-y-4 text-sm text-slate-300">
         <div class="border-l-4 border-solar-500 pl-4 py-1">
-          <strong class="text-white">Mistake #1: Omitting Generator Hidden Costs</strong>
+          <strong class="text-white">Trap #1: Ignoring Generator Maintenance & Oil Burn</strong>
           <p class="text-xs text-slate-400 mt-1">
-            A generator doesn't just consume fuel. Engine oil changes (₦4,500 every 100 hours), spark plugs, carburetor servicing, noise pollution stress, and emergency midnight repairs add ₦25,000 – ₦50,000 monthly to your real cost.
+            Beyond ₦1,400/L petrol, running a generator requires engine oil changes (₦4,500 – ₦6,000 every 100 operating hours), replacement spark plugs, carburetors, and technician labor—adding ₦30,000 to ₦60,000 monthly to your real energy cost.
           </p>
         </div>
 
         <div class="border-l-4 border-solar-500 pl-4 py-1">
-          <strong class="text-white">Mistake #2: Confusing Tubular vs. Lithium Battery Payback</strong>
+          <strong class="text-white">Trap #2: Buying Cheap Tubular Batteries Instead of Lithium (LiFePO4)</strong>
           <p class="text-xs text-slate-400 mt-1">
-            Tubular batteries seem cheaper initially, but only provide 50% Depth of Discharge and die within 2 to 3 years in Nigeria's tropical heat. Quality LiFePO4 Lithium batteries last 10+ years (4,000+ cycles) and allow 80%–90% discharge, making them 50% cheaper over 5 years.
+            Tubular lead-acid batteries only offer 50% usable capacity (Depth of Discharge) and degrade within 2 to 3 years in Nigeria's tropical climate. High-grade LiFePO4 Lithium batteries deliver 80%–90% usable energy, last 10+ years (4,000+ cycles), and charge in just 2.5 hours of sunlight.
           </p>
         </div>
 
         <div class="border-l-4 border-solar-500 pl-4 py-1">
-          <strong class="text-white">Mistake #3: Undersizing Solar Panels</strong>
+          <strong class="text-white">Trap #3: Skimping on Solar Panels</strong>
           <p class="text-xs text-slate-400 mt-1">
-            Installing a 5kVA inverter with only 2 or 4 solar panels forces the system to rely on grid/generator charging. To achieve genuine zero-fuel operation, your panel array must generate at least 1.25x your daily kilowatt-hour demand.
+            If you install a 5kVA inverter with only 2 or 4 panels, your battery will rarely reach 100% state-of-charge, forcing you to use generator power to charge batteries. Size panels to produce 1.25x your daily energy target.
           </p>
         </div>
       </div>
@@ -212,16 +212,16 @@ const schema = {
     {/* Section 4: Interactive Calculator CTA */}
     <div class="bg-gradient-to-r from-solar-500 to-amber-400 rounded-2xl p-8 text-slate-950 mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
       <div>
-        <h3 class="text-2xl font-black">Want to Calculate Your Exact Payback?</h3>
+        <h3 class="text-2xl font-black">Audit Your Load & Calculate Your Payback</h3>
         <p class="text-slate-900 text-sm mt-1 max-w-xl">
-          Use our free 2026 Nigerian Solar Sizing Engine to audit your appliances, get exact kVA & Lithium battery specs, and generate a 1-click printable BOQ.
+          Use our interactive 2026 Nigerian Solar Sizing Engine to select your exact appliances, compute required Inverter and Lithium battery specs, and export a 1-click printable BOQ specification sheet.
         </p>
       </div>
       <a 
         href="/calculator"
         class="inline-flex items-center gap-2 bg-slate-950 hover:bg-slate-900 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition transform active:scale-95 text-sm whitespace-nowrap"
       >
-        <span>Launch Solar Calculator</span>
+        <span>Open Solar Calculator</span>
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>
@@ -235,7 +235,7 @@ const schema = {
           Official Nigerian Solar Publications
         </h2>
         <p class="text-sm text-slate-600 mt-1">
-          Published by <strong>Reid Caster Publishing</strong> to protect Nigerian buyers from overpaying or buying substandard solar equipment.
+          Authored & published by <strong>Reid Caster Publishing</strong> to protect Nigerian buyers from overpaying or buying counterfeit solar equipment.
         </p>
       </div>
 
@@ -309,18 +309,18 @@ const schema = {
         <span class="text-xs bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full font-semibold">Copy & Share</span>
       </div>
       <p class="text-xs text-slate-600 mb-4">
-        Copy these pre-formatted posts directly into your Facebook Page, WhatsApp Status, or community groups to drive organic traffic back to IbadanSolarHub:
+        Copy these pre-formatted posts directly into your Facebook Page, WhatsApp Status, or community groups:
       </p>
 
       <div class="space-y-4">
         {/* Social Card 1 */}
         <div class="bg-white p-4 rounded-xl border border-slate-300 text-xs text-slate-800 font-mono leading-relaxed relative">
           <p>
-            🚨 <strong>THE NIGERIAN POWER REALITY CHECK: Band A vs Fuel vs Solar</strong><br><br>
-            If you live in a 3-bedroom flat on Band A (paying ~₦70k/mo) and run a 3.5kVA generator for 5 hrs/day (spending ~₦145k/mo on petrol at ₦1,150/L):<br><br>
-            ➡️ You are burning <strong>₦215,000 every month</strong> (₦2.58 Million every year) just on basic power.<br><br>
-            💡 An engineered 2.5kVA - 3.5kVA Solar System with LiFePO4 Lithium costs ~₦2.15M – ₦3.1M turnkey. That means the solar system <strong>PAYS FOR ITSELF in under 11 months</strong>.<br><br>
-            Every month after month 11 is 100% pure cash savings for the next 10 years.<br><br>
+            🚨 <strong>THE NIGERIAN FUEL MATH: Why Running a Generator at ₦1,400/L Is Financial Suicide</strong><br><br>
+            If you live in a 2-3 bedroom flat on Band A (paying ~₦73,500/mo) and run a 3.5kVA generator for just 5 hours a day (spending ~₦252,000/mo on petrol at ₦1,400/L):<br><br>
+            ➡️ You are burning <strong>₦325,500 every month</strong> (₦3.9 Million every single year) on basic power.<br><br>
+            💡 An engineered 2.5kVA Solar System with a 2.56kWh LiFePO4 Lithium battery costs ~₦2.15 Million turnkey. That means the solar system <strong>PAYS FOR ITSELF IN LESS THAN 7 MONTHS</strong>.<br><br>
+            Every single month after month 7 is 100% pure profit/savings for the next 10 years.<br><br>
             👉 Audit your appliances & calculate your exact setup: https://ibadansolarhub.com.ng/band-a-tariff-vs-solar-index<br>
             📘 Official Guide by Reid Caster Publishing: https://selar.com/34ew22cs83
           </p>
@@ -333,8 +333,8 @@ const schema = {
             1. Are you quoting 50% Depth-of-Discharge Tubular batteries that die in 24 months, or 80% DoD LiFePO4 Lithium that lasts 10+ years?<br>
             2. Is there a DC Surge Protective Device (SPD) and DC breaker between my solar panels and inverter?<br>
             3. Did you size the panels for Nigerian peak sunshine (4.8 sun hours) so the battery actually hits 100% charge before 3 PM?<br><br>
-            Don't waste millions on bad sizing. Download the complete Nigerian Solar Vetting Checklist & Load Calculator here:<br>
-            👉 https://ibadansolarhub.com.ng/calculator
+            Don't waste millions on bad sizing. Download the complete Nigerian Solar Vetting Checklist & Load Calculator here (₦2,000 on Selar):<br>
+            👉 https://selar.com/5sd25u8229
           </p>
         </div>
       </div>
