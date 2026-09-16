@@ -11,29 +11,33 @@ const schema = {
     "position": idx + 1,
     "name": prod.title,
     "description": prod.description,
+    "image": prod.coverImage,
     "offers": {
       "@type": "Offer",
       "price": prod.priceNgn,
       "priceCurrency": "NGN",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/InStock",
+      "url": prod.checkoutUrl
     }
   }))
 };
 ---
 
 <BaseLayout
-  title="Solar Digital Guides, Blueprints & Excel Spreadsheets Nigeria"
-  description="Master solar system sizing, avoid counterfeit batteries, and estimate turnkey project costs with our downloadable Nigerian solar guides and spreadsheets."
+  title="Power Without The Panic & Solar Sizing Guides - IbadanSolarHub"
+  description="Buy Power Without The Panic by Abdulrahman Ogunrinde. The complete Nigerian solar buyer's guide to avoiding fake lithium batteries, wrong sizing, and installer rip-offs."
   schema={schema}
 >
-  <div class="bg-slate-900 text-white py-12 border-b border-slate-800">
+  <div class="bg-slate-900 text-white py-14 border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <span class="text-xs font-bold text-solar-400 uppercase tracking-wider">Instant Downloads</span>
-      <h1 class="text-3xl sm:text-5xl font-black mt-2 tracking-tight">
-        Solar Blueprints, BOQ Spreadsheets & Guides
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-solar-500/15 border border-solar-500/30 text-solar-400 text-xs font-bold uppercase tracking-wider mb-3">
+        📚 Official Digital Publications
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight">
+        Solar Blueprints, Books & BOQ Spreadsheets
       </h1>
       <p class="mt-4 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
-        Avoid costly mistakes, avoid fake lithium batteries, and audit installer quotes with precision. Instant delivery to your email upon payment via Paystack.
+        Don't buy solar in Nigeria based on guesswork. Learn the insider secrets to detect fake lithium batteries, verify inverter sizing, audit installer quotes, and save hundreds of thousands of Naira.
       </p>
     </div>
   </div>
@@ -41,74 +45,117 @@ const schema = {
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="space-y-12">
       {digitalProducts.map((prod) => (
-        <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-md transition grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm hover:shadow-lg transition-all grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
-          <div class="lg:col-span-8">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="px-2.5 py-0.5 bg-solar-100 text-solar-800 text-xs font-bold rounded-md">
-                {prod.format}
-              </span>
-              <span class="text-xs text-emerald-600 font-semibold flex items-center gap-1">
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                Instant Email Delivery
-              </span>
+          {/* Cover Art / Visual Column */}
+          <div class="lg:col-span-4 flex flex-col items-center">
+            <div class="relative w-full max-w-[280px] aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border border-slate-200 bg-slate-900 group">
+              <img
+                src={prod.coverImage}
+                alt={prod.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+                onerror="this.onerror=null; this.src='/favicon.svg';"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="px-2.5 py-1 bg-slate-950/80 backdrop-blur-md text-solar-400 text-[11px] font-extrabold rounded-lg border border-slate-700">
+                  {prod.badge}
+                </span>
+              </div>
             </div>
 
-            <h2 class="text-2xl font-black text-slate-900 mt-2">
-              {prod.title}
-            </h2>
-
-            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
-              {prod.description}
-            </p>
-
-            <div class="mt-5">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">What's Included:</h4>
-              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600">
-                {prod.highlights.map(item => (
-                  <li class="flex items-start gap-2">
-                    <span class="text-solar-600 font-bold">✓</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {prod.author && (
+              <div class="mt-4 text-center">
+                <span class="text-xs font-bold text-slate-900 block">{prod.author}</span>
+                <span class="text-[11px] text-slate-500">{prod.publisher}</span>
+              </div>
+            )}
           </div>
 
-          <div class="lg:col-span-4 bg-slate-50 p-6 rounded-2xl border border-slate-100 text-center flex flex-col justify-between h-full">
+          {/* Details & Sales Copy Column */}
+          <div class="lg:col-span-8 flex flex-col justify-between h-full space-y-6">
             <div>
-              <span class="text-xs text-slate-400 uppercase font-semibold">One-Time Payment</span>
-              <div class="mt-2 flex items-baseline justify-center gap-2">
-                <span class="text-3xl font-black text-slate-900">₦{prod.priceNgn.toLocaleString()}</span>
-                <span class="text-sm text-slate-400 line-through">₦{prod.originalPriceNgn.toLocaleString()}</span>
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span class="px-2.5 py-0.5 bg-solar-100 text-solar-800 text-xs font-bold rounded-md">
+                  {prod.format}
+                </span>
+                <span class="text-xs text-emerald-600 font-semibold flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Instant Digital Delivery
+                </span>
               </div>
-              <span class="inline-block mt-1 text-[11px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">
-                Save 60% Today
-              </span>
+
+              <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                {prod.title}
+              </h2>
+
+              {prod.testimonial && (
+                <div class="mt-3 p-3.5 bg-amber-50/70 border-l-4 border-solar-500 rounded-r-xl text-xs text-slate-700 italic">
+                  {prod.testimonial}
+                </div>
+              )}
+
+              <p class="text-sm text-slate-600 mt-4 leading-relaxed">
+                {prod.description}
+              </p>
+
+              <div class="mt-6">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-3">Key Takeaways & What's Inside:</h4>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-slate-700">
+                  {prod.highlights.map(item => (
+                    <li class="flex items-start gap-2">
+                      <span class="text-solar-600 font-black shrink-0">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            <div class="mt-6 space-y-3">
-              <a
-                href={prod.paystackUrl}
-                target="_blank"
-                rel="noopener"
-                class="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-sm shadow-md transition"
-              >
-                <span>Buy Now via Paystack</span>
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
-              <div class="text-[10px] text-slate-400 flex items-center justify-center gap-1">
-                🔒 Secure 256-bit encryption (Card, Bank Transfer, USSD)
+            {/* Price & Checkout Row */}
+            <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50/60 p-5 rounded-2xl">
+              <div>
+                <span class="text-[11px] text-slate-400 uppercase font-semibold block">Price (Limited Time Offer)</span>
+                <div class="flex items-baseline gap-2">
+                  <span class="text-3xl font-black text-slate-900">₦{prod.priceNgn.toLocaleString()}</span>
+                  <span class="text-sm text-slate-400 line-through">₦{prod.originalPriceNgn.toLocaleString()}</span>
+                  <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">
+                    Save {Math.round(((prod.originalPriceNgn - prod.priceNgn) / prod.originalPriceNgn) * 100)}%
+                  </span>
+                </div>
+              </div>
+
+              <div class="w-full sm:w-auto">
+                <a
+                  href={prod.checkoutUrl}
+                  target="_blank"
+                  rel="noopener"
+                  class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3 px-8 rounded-xl text-sm shadow-md transition transform active:scale-95"
+                >
+                  <span>Get Instant Access &rarr;</span>
+                </a>
               </div>
             </div>
+
           </div>
 
         </div>
       ))}
+    </div>
+
+    {/* Guarantee & FAQ Section */}
+    <div class="mt-16 bg-slate-900 text-white rounded-3xl p-8 sm:p-12">
+      <div class="max-w-3xl mx-auto text-center space-y-4">
+        <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-xl font-bold">
+          🛡️
+        </div>
+        <h3 class="text-2xl font-black tracking-tight">30-Day Complete Peace of Mind Guarantee</h3>
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          One mistake with solar can cost you ₦300,000 to ₦800,000 in fake batteries or undersized inverters. This book costs less than 0.5% of your solar budget and gives you total confidence in your purchase. If you don't find it completely transformative, get a full refund within 30 days.
+        </p>
+      </div>
     </div>
   </div>
 </BaseLayout>
