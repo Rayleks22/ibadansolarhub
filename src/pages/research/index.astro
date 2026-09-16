@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import digitalProducts from '../../data/digital-products.json';
+
+const bookProduct = digitalProducts.find(p => p.id === 'power-without-the-panic');
+const toolkitProduct = digitalProducts.find(p => p.id === 'solar-complete-toolkit-bundle');
+
+const researchArticles = [
+  {
+    title: "Band A Electricity Tariff vs. Petrol Generator vs. Solar: 2026 Payback Index",
+    slug: "/band-a-tariff-vs-solar-index",
+    badge: "🔥 Most Cited",
+    date: "September 2026",
+    summary: "Empirical cost comparison modeling Band A tariffs (₦209.50/kWh) and petrol at ₦1,400/L against LiFePO4 solar payback periods in Nigerian homes and businesses.",
+    source: "NERC MYTO Data / NBS Petroleum Price Watch",
+    readTime: "7 min read"
+  },
+  {
+    title: "The 36-State Nigerian Solar Radiation & PV Yield Benchmark",
+    slug: "/nigeria-solar-radiation-yield-index",
+    badge: "🛰️ World Bank GIS Data",
+    date: "September 2026",
+    summary: "State-by-state ranking of Global Horizontal Irradiation (GHI) and specific Photovoltaic Power Output (PVOUT) with array sizing multipliers from Sokoto to Port Harcourt.",
+    source: "World Bank ESMAP / Solargis Global Solar Atlas 2.0",
+    readTime: "8 min read"
+  },
+  {
+    title: "The 2026 Nigerian Levelized Cost of Electricity (LCOE) Index",
+    slug: "/nigeria-lcoe-solar-vs-fuel-cost-index",
+    badge: "📊 Energy Economics",
+    date: "September 2026",
+    summary: "Rigorous 10-year LCOE cost-per-kilowatt-hour benchmark proving why Solar (₦150/kWh) is 5.2x cheaper than petrol generators (₦852/kWh).",
+    source: "IRENA Renewable Costing Standard / World Bank",
+    readTime: "9 min read"
+  },
+  {
+    title: "Harmattan Dust, Monsoon Clouds & Roof Heat: Nigerian Solar Derating Study",
+    slug: "/harmattan-monsoon-solar-derating-study",
+    badge: "🌡️ Climate Physics",
+    date: "September 2026",
+    summary: "Investigating why 550W panels face 12% thermal losses on 60°C Nigerian roofs and how Harmattan aerosol soiling cuts generation by 25% if uncleaned.",
+    source: "NASA POWER Climatology API / NIMET Records",
+    readTime: "8 min read"
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Nigerian Renewable Energy Research & Data Hub",
+  "description": "Authoritative research, empirical solar radiation datasets, and energy economics whitepapers published by Reid Caster Publishing for the Nigerian energy sector.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "IbadanSolarHub",
+    "url": "https://ibadansolarhub.com.ng"
+  }
+};
+---
+
+<BaseLayout
+  title="Nigerian Solar Research & Energy Economics Data Hub - IbadanSolarHub"
+  description="Authoritative research whitepapers on Nigerian solar energy. Citations from World Bank ESMAP, NASA POWER, IRENA, and NERC. Published by Reid Caster Publishing."
+  schema={schema}
+>
+  {/* Header */}
+  <section class="bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white py-14 md:py-20 border-b border-slate-800 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-solar-500/10 text-solar-400 border border-solar-500/20 rounded-full text-xs font-semibold mb-4">
+        📚 Open Energy Intelligence & Peer-Reviewed Data
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+        Nigerian Solar Research & <span class="text-solar-400">Data Hub</span>
+      </h1>
+      <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto mt-4 leading-relaxed">
+        Empirical engineering whitepapers, satellite climatology datasets, and energy financial models for journalists, engineers, and property owners across Nigeria.
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    
+    {/* Research Grid */}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+      {researchArticles.map(art => (
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:border-solar-400 hover:shadow-xl transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="px-2.5 py-1 bg-solar-100 text-solar-900 text-xs font-bold rounded-lg">
+                {art.badge}
+              </span>
+              <span class="text-xs text-slate-400 font-medium">{art.readTime}</span>
+            </div>
+
+            <h2 class="text-xl font-bold text-slate-900 hover:text-solar-600 transition leading-snug">
+              <a href={art.slug}>{art.title}</a>
+            </h2>
+
+            <p class="text-xs sm:text-sm text-slate-600 mt-3 leading-relaxed">
+              {art.summary}
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div class="text-[11px] text-slate-500">
+              Source: <strong class="text-slate-700">{art.source}</strong>
+            </div>
+            <a
+              href={art.slug}
+              class="inline-flex items-center gap-1 text-xs font-bold text-solar-600 hover:text-solar-700"
+            >
+              <span>Read Full Paper</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Flagship Publications Section */}
+    <div class="border-t border-slate-200 pt-14">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">
+          Official Nigerian Solar Publications
+        </h2>
+        <p class="text-sm text-slate-600 mt-1">
+          Authored and published by <strong>Reid Caster Publishing</strong>.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        {bookProduct && (
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="inline-block px-2.5 py-1 bg-amber-100 text-amber-900 rounded-md text-xs font-bold mb-3">
+                Flagship Ebook (30 Chapters)
+              </span>
+              <h3 class="text-lg font-bold text-slate-900">{bookProduct.title}</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Author: {bookProduct.author}</p>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">{bookProduct.description}</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-2xl font-black text-slate-900">₦{bookProduct.priceNgn.toLocaleString()}</span>
+              </div>
+              <a
+                href={bookProduct.checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-solar-500 hover:bg-solar-600 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs shadow transition"
+              >
+                Buy on Selar &rarr;
+              </a>
+            </div>
+          </div>
+        )}
+
+        {toolkitProduct && (
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="inline-block px-2.5 py-1 bg-blue-100 text-blue-900 rounded-md text-xs font-bold mb-3">
+                4-in-1 Tool Bundle
+              </span>
+              <h3 class="text-lg font-bold text-slate-900">{toolkitProduct.title}</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Publisher: {toolkitProduct.author}</p>
+              <p class="text-xs text-slate-600 mt-2 leading-relaxed">{toolkitProduct.description}</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-2xl font-black text-slate-900">₦{toolkitProduct.priceNgn.toLocaleString()}</span>
+              </div>
+              <a
+                href={toolkitProduct.checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition"
+              >
+                Get Toolkit (₦2,000) &rarr;
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>

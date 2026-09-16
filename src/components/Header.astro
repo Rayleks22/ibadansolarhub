@@ -34,8 +34,8 @@ const currentPath = Astro.url.pathname;
         <a href="/locations" class={`hover:text-solar-400 transition ${currentPath.startsWith('/locations') ? 'text-solar-400 font-semibold' : ''}`}>
           Locations
         </a>
-        <a href="/band-a-tariff-vs-solar-index" class={`hover:text-solar-400 transition ${currentPath === '/band-a-tariff-vs-solar-index' ? 'text-solar-400 font-semibold' : ''}`}>
-          Band A Payback Index
+        <a href="/research" class={`hover:text-solar-400 transition ${currentPath.startsWith('/research') || currentPath.includes('index') ? 'text-solar-400 font-semibold' : ''}`}>
+          Research & Data
         </a>
         <a href="/calculator" class={`hover:text-solar-400 transition ${currentPath === '/calculator' ? 'text-solar-400 font-semibold' : ''}`}>
           Solar Calculator

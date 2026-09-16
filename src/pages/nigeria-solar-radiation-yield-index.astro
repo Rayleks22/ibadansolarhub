@@ -1,0 +1,350 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import digitalProducts from '../data/digital-products.json';
+
+const bookProduct = digitalProducts.find(p => p.id === 'power-without-the-panic');
+const toolkitProduct = digitalProducts.find(p => p.id === 'solar-complete-toolkit-bundle');
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The 36-State Nigerian Solar Radiation & PV Yield Benchmark (World Bank / ESMAP Data)",
+  "description": "Comprehensive empirical solar irradiance (GHI) and photovoltaic power potential (PVOUT) benchmarks for all 36 Nigerian states and FCT based on World Bank and Solargis satellite records.",
+  "author": {
+    "@type": "Organization",
+    "name": "Reid Caster Publishing"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "IbadanSolarHub",
+    "url": "https://ibadansolarhub.com.ng"
+  },
+  "datePublished": "2026-09-16",
+  "mainEntityOfPage": "https://ibadansolarhub.com.ng/nigeria-solar-radiation-yield-index"
+};
+---
+
+<BaseLayout
+  title="The 36-State Nigerian Solar Radiation & PV Yield Benchmark (World Bank Data)"
+  description="Official solar radiation (GHI) and PV generation yield (kWh/kWp) rankings for all 36 Nigerian states and FCT. Data synthesized from World Bank ESMAP and Solargis."
+  schema={schema}
+>
+  {/* Hero Header */}
+  <section class="bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white py-14 md:py-20 border-b border-slate-800 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-solar-500/10 text-solar-400 border border-solar-500/20 rounded-full text-xs font-semibold mb-4">
+        🛰️ Official GIS & Satellite Energy Dataset
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight max-w-4xl mx-auto">
+        The 36-State Nigerian Solar Radiation & <span class="text-solar-400">PV Yield Benchmark</span>
+      </h1>
+      <p class="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto mt-4 leading-relaxed">
+        How much electricity will a solar panel array actually produce on your roof? An empirical state-by-state analysis of Global Horizontal Irradiation (GHI) and specific Photovoltaic Power Output (PVOUT) across Nigeria.
+      </p>
+      
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-400">
+        <span>Primary Source: <strong class="text-white">World Bank Group / ESMAP / Solargis (Global Solar Atlas 2.0)</strong></span>
+        <span>•</span>
+        <span>Analysis: <strong class="text-white">Reid Caster Publishing</strong></span>
+        <span>•</span>
+        <span>Updated: <strong class="text-white">September 2026</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+    
+    {/* Executive Summary */}
+    <div class="bg-amber-500/10 border-2 border-solar-500/30 rounded-2xl p-6 md:p-8 mb-12">
+      <h2 class="text-xl font-bold text-slate-950 flex items-center gap-2 mb-3">
+        ☀️ Key Geological Findings for Nigerian Solar Designers
+      </h2>
+      <p class="text-slate-800 text-sm md:text-base leading-relaxed">
+        Nigeria receives between <strong>1,400 and 2,250 kWh/m²</strong> of solar radiation annually, with daily peak sunshine ranging from <strong>4.0 Peak Sun Hours (PSH) in the Niger Delta</strong> to <strong>6.5 PSH in the Far Northern Sahel</strong>. 
+        <br><br>
+        <strong>Engineering Consequence:</strong> A 1kWp solar panel array in <strong>Sokoto or Kano</strong> generates approximately <strong>1,780 to 1,920 kWh annually</strong>, whereas the exact same array in <strong>Ibadan or Lagos</strong> generates <strong>1,460 to 1,540 kWh</strong>, and in <strong>Port Harcourt or Yenagoa</strong> generates <strong>1,280 to 1,360 kWh</strong>. Installers in Southern Nigeria must size solar panel arrays <strong>18% to 28% larger</strong> than northern installers to deliver identical daily energy.
+      </p>
+    </div>
+
+    {/* Section 1: Regional Solar Zones Table */}
+    <div class="mb-12">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+        1. Comprehensive 36-State & FCT Solar Yield Ranking
+      </h2>
+      <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
+        The table below categorizes every Nigerian state by its average daily Global Horizontal Irradiation (GHI), annual Specific Photovoltaic Electricity Yield ($PVOUT$ in kWh/kWp), and the recommended <strong>Array Sizing Multiplier</strong> relative to national baseline:
+      </p>
+
+      <div class="overflow-x-auto shadow-sm rounded-xl border border-slate-200 mb-8">
+        <table class="w-full text-left text-xs sm:text-sm border-collapse bg-white">
+          <thead class="bg-slate-900 text-white font-bold">
+            <tr>
+              <th class="p-3.5 border-b border-slate-800">Zone / State</th>
+              <th class="p-3.5 border-b border-slate-800">Daily Irradiation (GHI)</th>
+              <th class="p-3.5 border-b border-slate-800">Daily Peak Sun Hours (PSH)</th>
+              <th class="p-3.5 border-b border-slate-800">Annual PV Yield (PVOUT)</th>
+              <th class="p-3.5 border-b border-slate-800 bg-solar-600 text-slate-950">Array Sizing Multiplier</th>
+              <th class="p-3.5 border-b border-slate-800">Solar Viability Tier</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700">
+            {/* Sahel / Far North Tier */}
+            <tr class="bg-amber-50/50 font-semibold text-slate-900">
+              <td colspan="6" class="p-3 bg-slate-100 text-slate-900 text-xs uppercase tracking-wider font-bold">
+                Tier 1: Far North & Sahel (Maximum Solar Radiation)
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Sokoto, Kebbi, Zamfara</td>
+              <td class="p-3.5">6.1 – 6.4 kWh/m²/day</td>
+              <td class="p-3.5">5.8 – 6.2 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,820 – 1,920 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-emerald-700">1.00x (Baseline)</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-bold text-[11px]">Exceptional</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Kano, Katsina, Jigawa</td>
+              <td class="p-3.5">5.9 – 6.2 kWh/m²/day</td>
+              <td class="p-3.5">5.6 – 6.0 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,780 – 1,880 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-emerald-700">1.02x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-bold text-[11px]">Exceptional</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Borno, Yobe</td>
+              <td class="p-3.5">6.0 – 6.3 kWh/m²/day</td>
+              <td class="p-3.5">5.7 – 6.1 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,800 – 1,900 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-emerald-700">1.01x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-bold text-[11px]">Exceptional</span></td>
+            </tr>
+
+            {/* Middle Belt */}
+            <tr class="bg-amber-50/50 font-semibold text-slate-900">
+              <td colspan="6" class="p-3 bg-slate-100 text-slate-900 text-xs uppercase tracking-wider font-bold">
+                Tier 2: Middle Belt & North-Central (High Yield)
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Abuja FCT, Niger, Kaduna</td>
+              <td class="p-3.5">5.3 – 5.7 kWh/m²/day</td>
+              <td class="p-3.5">5.1 – 5.5 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,620 – 1,740 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-emerald-700">1.10x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-green-100 text-green-800 rounded font-bold text-[11px]">Very High</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Plateau, Bauchi, Gombe, Taraba</td>
+              <td class="p-3.5">5.4 – 5.8 kWh/m²/day</td>
+              <td class="p-3.5">5.2 – 5.6 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,650 – 1,760 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-emerald-700">1.08x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-green-100 text-green-800 rounded font-bold text-[11px]">Very High</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Kogi, Kwara, Benue, Nasarawa</td>
+              <td class="p-3.5">5.0 – 5.4 kWh/m²/day</td>
+              <td class="p-3.5">4.8 – 5.2 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,540 – 1,650 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-emerald-700">1.15x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-green-100 text-green-800 rounded font-bold text-[11px]">High</span></td>
+            </tr>
+
+            {/* Southwest */}
+            <tr class="bg-amber-50/50 font-semibold text-slate-900">
+              <td colspan="6" class="p-3 bg-slate-100 text-slate-900 text-xs uppercase tracking-wider font-bold">
+                Tier 3: Southwest Rainforest (Moderate-High Yield, High Commercial Demand)
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Oyo (Ibadan, Ogbomoso, Oyo town)</td>
+              <td class="p-3.5">4.8 – 5.2 kWh/m²/day</td>
+              <td class="p-3.5">4.7 – 5.0 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,480 – 1,560 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-solar-700">1.22x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded font-bold text-[11px]">Solid Commercial</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Lagos, Ogun (Abeokuta, Mowe-Ibafo)</td>
+              <td class="p-3.5">4.6 – 5.0 kWh/m²/day</td>
+              <td class="p-3.5">4.5 – 4.8 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,420 – 1,510 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-solar-700">1.25x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded font-bold text-[11px]">Solid Commercial</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Osun, Ondo, Ekiti</td>
+              <td class="p-3.5">4.7 – 5.1 kWh/m²/day</td>
+              <td class="p-3.5">4.6 – 4.9 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,450 – 1,540 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-solar-700">1.23x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded font-bold text-[11px]">Solid Commercial</span></td>
+            </tr>
+
+            {/* Southeast & South-South */}
+            <tr class="bg-amber-50/50 font-semibold text-slate-900">
+              <td colspan="6" class="p-3 bg-slate-100 text-slate-900 text-xs uppercase tracking-wider font-bold">
+                Tier 4: Southeast & South-South / Coastal Delta (Cloud & Rain Buffer Required)
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Enugu, Anambra, Imo, Abia, Ebonyi</td>
+              <td class="p-3.5">4.5 – 4.9 kWh/m²/day</td>
+              <td class="p-3.5">4.3 – 4.7 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,380 – 1,490 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-red-600">1.28x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-slate-100 text-slate-800 rounded font-bold text-[11px]">Moderate</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Edo, Delta, Cross River</td>
+              <td class="p-3.5">4.3 – 4.7 kWh/m²/day</td>
+              <td class="p-3.5">4.1 – 4.5 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,320 – 1,440 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-red-600">1.32x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-slate-100 text-slate-800 rounded font-bold text-[11px]">Moderate</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-medium text-slate-900">Rivers (Port Harcourt), Bayelsa, Akwa Ibom</td>
+              <td class="p-3.5">4.0 – 4.4 kWh/m²/day</td>
+              <td class="p-3.5">3.9 – 4.3 hrs</td>
+              <td class="p-3.5 font-bold text-slate-900">1,260 – 1,360 kWh/kWp</td>
+              <td class="p-3.5 font-bold text-red-600">1.38x</td>
+              <td class="p-3.5"><span class="px-2 py-0.5 bg-red-100 text-red-800 rounded font-bold text-[11px]">Rain Buffer Needed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {/* Section 2: Mathematical Sizing Implications */}
+    <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm mb-12 space-y-4">
+      <h2 class="text-xl md:text-2xl font-bold text-slate-900">
+        2. How to Use the Array Sizing Multiplier (Engineering Rules)
+      </h2>
+      <p class="text-slate-700 text-sm md:text-base leading-relaxed">
+        If an installer in Abuja designs a system with <strong>6x 550W panels (3,300W array)</strong> to power a 3.5kVA household, that exact same household in <strong>Lagos or Ibadan</strong> requires <strong>8x 550W panels (4,400W array)</strong>, and in <strong>Port Harcourt</strong> requires <strong>8–9x 550W panels</strong> to generate the identical daily Watt-hours throughout June–August.
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div class="text-solar-600 font-bold text-sm mb-1">📐 Tilt Angle Optimization</div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            In Southern Nigeria (Latitude 4°–7°N), mount panels at a minimum <strong>10° to 15° tilt angle</strong> (never flat 0°) to ensure rainwater washes off dust and organic moss.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div class="text-solar-600 font-bold text-sm mb-1">☀️ High-Diffuse TOPCon Cells</div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            In cloud-heavy states (Rivers, Lagos, Delta), specify <strong>N-Type TOPCon or Bifacial Monocrystalline panels</strong> which generate 8%–12% more energy under diffuse, overcast skies.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div class="text-solar-600 font-bold text-sm mb-1">🔋 Rapid MPPT Tracking</div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Fast-moving cloud transitions in the rainforest belt cause sudden irradiance swings. High-speed MPPT charge controllers prevent power tracking clipping.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* CTA to Calculator */}
+    <div class="bg-gradient-to-r from-solar-500 to-amber-400 rounded-2xl p-8 text-slate-950 mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="text-2xl font-black">Size Your System For Your Exact State</h3>
+        <p class="text-slate-900 text-sm mt-1 max-w-xl">
+          Our free interactive solar calculator automatically applies geographic derating factors across Southwest, North, and Niger Delta locations.
+        </p>
+      </div>
+      <a 
+        href="/calculator"
+        class="inline-flex items-center gap-2 bg-slate-950 hover:bg-slate-900 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition text-sm whitespace-nowrap"
+      >
+        <span>Open Solar Calculator</span>
+        <span>&rarr;</span>
+      </a>
+    </div>
+
+    {/* Product Monetization Cards */}
+    <div class="mb-14">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">
+          Authoritative Engineering Guides
+        </h2>
+        <p class="text-sm text-slate-600 mt-1">
+          Published by <strong>Reid Caster Publishing</strong> for Nigerian homeowners and solar engineers.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {bookProduct && (
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="inline-block px-2.5 py-1 bg-amber-100 text-amber-900 rounded-md text-xs font-bold mb-3">
+                Flagship Ebook (30 Chapters)
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">{bookProduct.title}</h3>
+              <p class="text-xs text-slate-500 mt-1">Author: {bookProduct.author}</p>
+              <p class="text-slate-600 text-sm mt-3 leading-relaxed">{bookProduct.description}</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-xs text-slate-400 block">Instant Download</span>
+                <span class="text-2xl font-black text-slate-900">₦{bookProduct.priceNgn.toLocaleString()}</span>
+              </div>
+              <a
+                href={bookProduct.checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-solar-500 hover:bg-solar-600 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs shadow transition"
+              >
+                Buy on Selar (₦{bookProduct.priceNgn.toLocaleString()})
+              </a>
+            </div>
+          </div>
+        )}
+
+        {toolkitProduct && (
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="inline-block px-2.5 py-1 bg-blue-100 text-blue-900 rounded-md text-xs font-bold mb-3">
+                Complete Tool Bundle (4-in-1)
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">{toolkitProduct.title}</h3>
+              <p class="text-xs text-slate-500 mt-1">Publisher: {toolkitProduct.author}</p>
+              <p class="text-slate-600 text-sm mt-3 leading-relaxed">{toolkitProduct.description}</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-xs text-slate-400 block">Instant Excel & PDF Bundle</span>
+                <span class="text-2xl font-black text-slate-900">₦{toolkitProduct.priceNgn.toLocaleString()}</span>
+              </div>
+              <a
+                href={toolkitProduct.checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 py-2.5 rounded-xl text-xs shadow transition"
+              >
+                Get Toolkit (₦{toolkitProduct.priceNgn.toLocaleString()})
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    {/* Citations & Data Attribution */}
+    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 text-xs text-slate-500 space-y-2">
+      <div class="font-bold text-slate-700 uppercase tracking-wider text-[11px]">Academic & Institutional Data Sources:</div>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>World Bank Group & ESMAP:</strong> Global Solar Atlas 2.0 (GSA), validated via Solargis high-resolution satellite irradiance models.</li>
+        <li><strong>NIMET (Nigerian Meteorological Agency):</strong> Annual Climate Review & Solar Radiation Monitoring Stations (Lagos, Ibadan, Abuja, Kano).</li>
+        <li><strong>ECN (Energy Commission of Nigeria):</strong> National Energy Masterplan & Renewable Resource Assessments.</li>
+        <li><strong>Editorial Analysis:</strong> Prepared by Reid Caster Publishing for IbadanSolarHub.com.ng (2026).</li>
+      </ul>
+    </div>
+
+  </div>
+</BaseLayout>
