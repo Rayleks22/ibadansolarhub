@@ -1,4 +1,4 @@
-﻿---
+---
 const currentPath = Astro.url.pathname;
 ---
 
@@ -30,21 +30,24 @@ const currentPath = Astro.url.pathname;
       </a>
 
       {/* Desktop Navigation Links */}
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+      <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-slate-300">
         <a href="/locations" class={`hover:text-solar-400 transition ${currentPath.startsWith('/locations') ? 'text-solar-400 font-semibold' : ''}`}>
-          Locations & DISCOs
+          Locations
+        </a>
+        <a href="/band-a-tariff-vs-solar-index" class={`hover:text-solar-400 transition ${currentPath === '/band-a-tariff-vs-solar-index' ? 'text-solar-400 font-semibold' : ''}`}>
+          Band A Payback Index
         </a>
         <a href="/calculator" class={`hover:text-solar-400 transition ${currentPath === '/calculator' ? 'text-solar-400 font-semibold' : ''}`}>
           Solar Calculator
         </a>
         <a href="/packages" class={`hover:text-solar-400 transition ${currentPath.startsWith('/packages') ? 'text-solar-400 font-semibold' : ''}`}>
-          System Packages
+          Packages
         </a>
         <a href="/equipment" class={`hover:text-solar-400 transition ${currentPath.startsWith('/equipment') ? 'text-solar-400 font-semibold' : ''}`}>
-          Price Guides
+          Prices
         </a>
         <a href="/products" class={`hover:text-solar-400 transition ${currentPath === '/products' ? 'text-solar-400 font-semibold' : ''}`}>
-          Digital Guides
+          Guides
         </a>
       </nav>
 

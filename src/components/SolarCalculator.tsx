@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { 
   Sun, Battery, Zap, ShieldCheck, 
-  RotateCcw, MessageCircle, FileText, ShoppingCart, Sparkles
+  RotateCcw, MessageCircle, FileText, ShoppingCart, Sparkles,
+  Copy, Check, Printer
 } from 'lucide-react';
 
 interface Appliance {
@@ -53,6 +54,7 @@ export default function SolarCalculator() {
   });
 
   const [selectedCity, setSelectedCity] = useState('Ibadan');
+  const [copied, setCopied] = useState(false);
 
   const updateCount = (id: string, delta: number) => {
     setCounts(prev => ({
@@ -81,6 +83,155 @@ export default function SolarCalculator() {
       ac_1_5hp: 0,
       pump: 0,
     });
+  };
+
+  const handleCopySpecs = () => {
+    const text = 
+`☀️ SOLAR SYSTEM SIZING & BOQ SPECIFICATION
+📍 Target Location: ${selectedCity}
+🏢 Source: IbadanSolarHub.com.ng (Reid Caster Publishing)
+
+⚡ AUDITED LOAD METRICS:
+• Running Load: ${stats.continuousWatts}W
+• Daily Energy: ${stats.dailyKwh} kWh/day
+
+⚙️ SYSTEM HARDWARE SPECIFICATIONS:
+• Inverter: ${stats.recommendedKva} kVA Pure Sine Wave (${stats.systemVoltage})
+• Battery Bank: ${stats.recommendedLithiumKwh} kWh LiFePO4 Lithium (or ${stats.recommendedTubularAh}Ah Tubular)
+• Solar Panels: ${stats.panels550WNeeded}x 550W Tier-1 Mono PERC (${stats.panels550WNeeded * 550}W Array)
+• Turnkey Benchmark: ${stats.costRange} (Includes BOS, Cables & Install)
+
+🛡️ VETTING MANDATES BEFORE HIRING AN INSTALLER:
+1. Ensure pure copper battery cables (min 16mm² - 25mm²)
+2. Require DC Surge Protection Device (SPD) + DC Breaker
+3. Verify Lithium battery cycle life rating (min. 4,000 cycles at 80% DoD)
+
+Get verified installer quotes or calculate custom setups: https://ibadansolarhub.com.ng/calculator`;
+
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
+  };
+
+  const handlePrintBoQ = () => {
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) return;
+    
+    const applianceRows = APPLIANCES.filter(app => (counts[app.id] || 0) > 0)
+      .map(app => `
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${app.name}</td>
+          <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; text-align: center;">${counts[app.id]}</td>
+          <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; text-align: right;">${app.defaultWatts}W</td>
+          <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; text-align: right;"><strong>${counts[app.id] * app.defaultWatts}W</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; text-align: right;">${hours[app.id] || app.defaultHours} hrs</td>
+        </tr>
+      `).join('');
+
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Solar Sizing Specification & BOQ Summary - IbadanSolarHub</title>
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1e293b; padding: 30px; margin: 0; }
+          .header { border-bottom: 3px solid #f59e0b; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-end; }
+          .logo { font-size: 22px; font-weight: 900; color: #0f172a; }
+          .logo span { color: #f59e0b; }
+          .meta { font-size: 13px; color: #64748b; }
+          .section-title { font-size: 16px; font-weight: 700; color: #0f172a; margin-top: 25px; margin-bottom: 10px; border-left: 4px solid #f59e0b; padding-left: 8px; }
+          table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 20px; }
+          th { background: #f8fafc; padding: 10px 8px; text-align: left; border-bottom: 2px solid #cbd5e1; color: #334155; }
+          .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+          .spec-card { border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; background: #f8fafc; }
+          .spec-label { font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 600; }
+          .spec-val { font-size: 18px; font-weight: 800; color: #0f172a; margin-top: 4px; }
+          .spec-sub { font-size: 12px; color: #475569; margin-top: 4px; }
+          .highlight-box { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 15px; margin-top: 20px; }
+          .vetting-rules { font-size: 12px; color: #334155; line-height: 1.6; }
+          .footer { margin-top: 35px; border-top: 1px solid #e2e8f0; padding-top: 15px; font-size: 11px; color: #94a3b8; text-align: center; }
+          @media print { body { padding: 15px; } }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <div>
+            <div class="logo">Ibadan<span>SolarHub</span></div>
+            <div class="meta">Nigeria Solar Sizing Authority • Engineering Benchmark</div>
+          </div>
+          <div class="meta" style="text-align: right;">
+            <div><strong>Location Target:</strong> ${selectedCity}</div>
+            <div><strong>Date:</strong> ${new Date().toLocaleDateString('en-GB')}</div>
+          </div>
+        </div>
+
+        <div class="section-title">1. Engineered System Specifications</div>
+        <div class="spec-grid">
+          <div class="spec-card">
+            <div class="spec-label">Pure Sine Wave Inverter</div>
+            <div class="spec-val">${stats.recommendedKva} kVA (${stats.systemVoltage})</div>
+            <div class="spec-sub">Continuous Running Load: ${stats.continuousWatts}W (with surge reserve)</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-label">Battery Storage Capacity</div>
+            <div class="spec-val">${stats.recommendedLithiumKwh} kWh LiFePO4 Lithium</div>
+            <div class="spec-sub">Or Tubular Equivalent: ${stats.recommendedTubularAh}Ah (50% DoD)</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-label">Solar PV Array</div>
+            <div class="spec-val">${stats.panels550WNeeded}x 550W Tier-1 Panels</div>
+            <div class="spec-sub">Total Array: ${stats.panels550WNeeded * 550}W (Calculated for 4.8 Peak Sun Hours)</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-label">Estimated Turnkey Budget</div>
+            <div class="spec-val" style="color: #047857;">${stats.costRange}</div>
+            <div class="spec-sub">Includes BOS, Cables, Protection & Workmanship</div>
+          </div>
+        </div>
+
+        <div class="section-title">2. Appliance Load Audit</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Appliance Description</th>
+              <th style="text-align: center;">Qty</th>
+              <th style="text-align: right;">Unit Power</th>
+              <th style="text-align: right;">Total Power</th>
+              <th style="text-align: right;">Daily Run</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${applianceRows}
+            <tr style="background: #f1f5f9; font-weight: bold;">
+              <td colspan="3" style="padding: 8px;">Total Calculated Energy Consumption:</td>
+              <td style="padding: 8px; text-align: right;">${stats.continuousWatts}W</td>
+              <td style="padding: 8px; text-align: right;">${stats.dailyKwh} kWh/day</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box">
+          <div style="font-weight: 700; color: #065f46; font-size: 13px; margin-bottom: 6px;">
+            ⚠️ Installer Vetting Mandates (Mandatory Contract Clauses)
+          </div>
+          <div class="vetting-rules">
+            1. <strong>DC Surge Protective Device (SPD):</strong> Installer MUST install a dedicated DC SPD and DC circuit breaker between solar array and MPPT.<br>
+            2. <strong>Cable Gauge:</strong> Minimum 16mm² / 25mm² 100% pure copper battery cables with heavy-duty pressed lugs.<br>
+            3. <strong>Cycle Rating:</strong> Lithium batteries must carry written manufacturer warranty for ≥ 4,000 cycles at 80% DoD.
+          </div>
+        </div>
+
+        <div class="footer">
+          Generated via <strong>IbadanSolarHub.com.ng</strong> • Author: <strong>Reid Caster Publishing</strong> (Power Without The Panic)
+        </div>
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => {
+      printWindow.print();
+    }, 400);
   };
 
   // Calculations
@@ -371,12 +522,31 @@ export default function SolarCalculator() {
           </div>
 
           {/* Action CTAs (Monetization & Leads) */}
-          <div className="mt-6 pt-6 border-t border-slate-200 space-y-3">
+          <div className="mt-6 pt-6 border-t border-slate-200 space-y-2.5">
+            {/* 1-Click Share & Export Suite */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button
+                onClick={handleCopySpecs}
+                className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 px-3 rounded-xl shadow-sm transition text-xs"
+              >
+                {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4 text-solar-400" />}
+                <span>{copied ? 'Copied to Clipboard!' : 'Copy WhatsApp Specs'}</span>
+              </button>
+
+              <button
+                onClick={handlePrintBoQ}
+                className="inline-flex items-center justify-center gap-2 bg-solar-500 hover:bg-solar-400 text-slate-950 font-bold py-2.5 px-3 rounded-xl shadow-sm transition text-xs"
+              >
+                <Printer className="w-4 h-4" />
+                <span>Download / Print BOQ</span>
+              </button>
+            </div>
+
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition transform active:scale-98 text-sm"
+              className="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition transform active:scale-98 text-sm"
             >
               <MessageCircle className="w-5 h-5" /> Request Quotes from {selectedCity.split(' ')[0]} Installers
             </a>
