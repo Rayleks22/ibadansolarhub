@@ -31,7 +31,7 @@
     "originalPriceNgn": 15000,
     "checkoutUrl": "https://selar.com/5sd25u8229",
     "coverImage": "/images/solar-toolkit-bundle-cover.jpg",
-    "badge": "🔥 Complete 4-in-1 Suite (Save 63%)",
+    "badge": "🛠️ Complete 4-in-1 Suite (Save 63%)",
     "testimonial": "\"The installer vetting checklist and quote scorecard saved me from paying ₦450k for refurbished batteries.\" — Emeka K., Abuja",
     "description": "Get all 4 essential calculators, ROI simulators, and engineering inspection checklists used by smart homeowners and businesses to audit solar quotes and size their systems accurately.",
     "highlights": [
@@ -39,46 +39,6 @@
       "Tool 2: Solar vs Generator ROI & Monthly Fuel Payback Simulator (Excel .xlsx)",
       "Tool 3: Printable 3-Page Solar Installer Vetting & Site Inspection Checklist (PDF)",
       "Tool 4: 3-Way Solar Quote Scorecard & Component Price Auditor (PDF)"
-    ]
-  },
-  {
-    "id": "solar-sizing-boq-spreadsheet",
-    "title": "Solar Load & BOQ Sizing Calculator Spreadsheet",
-    "author": "Reid Caster Publishing",
-    "publisher": "Engineering Tools",
-    "format": "Excel (.xlsx) + Google Sheets Template",
-    "priceNgn": 3000,
-    "originalPriceNgn": 6000,
-    "checkoutUrl": "https://selar.com/34ew22cs83",
-    "coverImage": "/images/solar-toolkit-bundle-cover.jpg",
-    "badge": "⚡ Sizing Template",
-    "testimonial": "\"Allowed me to calculate my exact inverter and battery capacity before calling any installer.\" — Tunde A., Ibadan",
-    "description": "Plug in your household or business appliances. The spreadsheet automatically computes your required Inverter kVA, Battery Bank kWh, Solar Panel Wattage, Cable Sizes, Breakers, and estimated Nigerian market costs.",
-    "highlights": [
-      "Dynamic formulas pre-loaded with typical Nigerian appliance wattages",
-      "Automatic battery sizing for both Lithium (LiFePO4) and Tubular setups",
-      "Instant Bill of Quantities (BOQ) generator ready to print or export to PDF",
-      "Payback period & generator fuel savings simulator"
-    ]
-  },
-  {
-    "id": "solar-installer-business-kit",
-    "title": "Solar Installer Business Proposal & Contract Kit",
-    "author": "Reid Caster Publishing Pro",
-    "publisher": "Pro Business Suite",
-    "format": "PowerPoint (.pptx) + Word Proposal Templates + Contract",
-    "priceNgn": 7500,
-    "originalPriceNgn": 25000,
-    "checkoutUrl": "https://selar.com/34ew22cs83",
-    "coverImage": "/images/solar-toolkit-bundle-cover.jpg",
-    "badge": "💼 For Installers & Engineers",
-    "testimonial": "\"Helped me close a ₦4.5M duplex installation project with a corporate proposal.\" — Segun E., Solar Tech",
-    "description": "Designed for solar engineers, electricians, and installation firms across Nigeria looking to close corporate, residential, and estate projects with executive-grade proposals.",
-    "highlights": [
-      "Editable solar project proposal template tailored for Nigerian clients",
-      "Standard client installation agreement & warranty contract",
-      "Energy audit checklist and site assessment form",
-      "Professional PowerPoint slide deck for pitching to businesses and estates"
     ]
   }
 ]
