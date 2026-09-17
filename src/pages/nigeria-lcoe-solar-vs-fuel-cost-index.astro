@@ -8,8 +8,8 @@ const toolkitProduct = digitalProducts.find(p => p.id === 'solar-complete-toolki
 const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "The 2026 Levelized Cost of Electricity (LCOE) Index in Nigeria: Solar vs Petrol vs Diesel vs Grid",
-  "description": "Rigorous Levelized Cost of Electricity (LCOE) financial analysis in Nigeria based on IRENA and World Bank methodologies. Comparing solar kWh costs against ₦1,400/L petrol and Band A grid tariffs.",
+  "headline": "The 2026 Levelized Cost of Electricity (LCOE) Index in Nigeria: Solar vs Petrol vs Diesel vs CNG vs Grid",
+  "description": "Rigorous Levelized Cost of Electricity (LCOE) financial analysis in Nigeria based on IRENA and World Bank standards. Comparing solar kWh costs against ₦1,400/L petrol, ₦1,950/L diesel, CNG gas, and Band A grid tariffs.",
   "author": {
     "@type": "Organization",
     "name": "Reid Caster Publishing"
@@ -19,14 +19,14 @@ const schema = {
     "name": "IbadanSolarHub",
     "url": "https://ibadansolarhub.com.ng"
   },
-  "datePublished": "2026-09-16",
+  "datePublished": "2026-09-17",
   "mainEntityOfPage": "https://ibadansolarhub.com.ng/nigeria-lcoe-solar-vs-fuel-cost-index"
 };
 ---
 
 <BaseLayout
-  title="Levelized Cost of Electricity (LCOE) Index Nigeria 2026: Solar vs Fuel vs Grid"
-  description="Comprehensive 2026 Nigerian LCOE cost per kilowatt-hour benchmark. Discover why Solar (₦145/kWh) is drastically cheaper than Petrol Generators (₦850/kWh) and Band A (₦209/kWh)."
+  title="Nigeria LCOE Index 2026: Solar vs Petrol vs Diesel vs CNG vs Grid (Cost per kWh)"
+  description="Official Nigerian Levelized Cost of Electricity (LCOE) benchmark. Compare true cost per kWh across Solar (₦150/kWh), CNG (₦310/kWh), Band A (₦219/kWh), Petrol (₦852/kWh), and Diesel (₦980/kWh)."
   schema={schema}
 >
   {/* Hero Section */}
@@ -40,13 +40,13 @@ const schema = {
         The 2026 Nigerian Levelized Cost of Electricity <span class="text-solar-400">(LCOE) Index</span>
       </h1>
       <p class="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto mt-4 leading-relaxed">
-        What is the true, all-inclusive cost of generating 1 kilowatt-hour (1 kWh) of electricity in Nigeria today? An empirical comparison of Solar PV + LiFePO4 Storage, Petrol Generators, Diesel Plants, and Band A DISCO Tariffs.
+        What is the true, all-inclusive cost to produce 1 kilowatt-hour (1 kWh) of electricity in Nigeria? A complete empirical analysis comparing <strong>Solar PV + LiFePO4 Storage, Compressed Natural Gas (CNG), Petrol Generators, Diesel Plants, and Band A DISCO Tariffs</strong>.
       </p>
       
       <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-400">
-        <span>Methodology: <strong class="text-white">IRENA Renewable Costing Standard / World Bank LCOE Framework</strong></span>
+        <span>Methodology: <strong class="text-white">IRENA Renewable Costing Standard / World Bank LCOE Model</strong></span>
         <span>•</span>
-        <span>Baseline: <strong class="text-white">PMS @ ₦1,400/L • AGO @ ₦1,300/L</strong></span>
+        <span>Fuel Baselines: <strong class="text-white">PMS @ ₦1,400/L • AGO @ ₦1,950/L • CNG @ ₦300/Sm³</strong></span>
         <span>•</span>
         <span>Author: <strong class="text-white">Reid Caster Publishing</strong></span>
       </div>
@@ -58,69 +58,86 @@ const schema = {
     {/* Executive Summary Card */}
     <div class="bg-amber-500/10 border-2 border-solar-500/30 rounded-2xl p-6 md:p-8 mb-12">
       <h2 class="text-xl font-bold text-slate-950 flex items-center gap-2 mb-3">
-        ⚡ The Bottom-Line Number: Cost Per Kilowatt-Hour (kWh)
+        ⚡ The Bottom-Line: True Cost Per Kilowatt-Hour (kWh) in Nigeria
       </h2>
       <p class="text-slate-800 text-sm md:text-base leading-relaxed">
-        When all capital expenditures, battery degradation, inverter replacements, fuel consumption, engine oil changes, and technician maintenance are amortized over a 10-year lifecycle:
+        When upfront capital expenditures, fuel logistics, cylinder conversions, lubrication oil changes, top-end rebuilds, and equipment depreciation are amortized over a 10-year operating horizon:
         <br><br>
-        • <strong>Solar PV + LiFePO4 Lithium Storage:</strong> <strong class="text-emerald-800">₦145 – ₦175 per kWh</strong> (Levelized Lifetime Cost)<br>
-        • <strong>Band A Grid Electricity (DISCOs):</strong> <strong>₦209.50 – ₦225 per kWh</strong> (+ future inflation adjustments)<br>
-        • <strong>Diesel Generator (AGO):</strong> <strong>₦740 – ₦890 per kWh</strong><br>
-        • <strong>Petrol Generator (PMS @ ₦1,400/L):</strong> <strong class="text-red-700">₦820 – ₦980 per kWh</strong>
+        • <strong>1. Solar PV + LiFePO4 Lithium:</strong> <strong class="text-emerald-800">₦145 – ₦175 per kWh</strong> (Lowest Lifetime Cost)<br>
+        • <strong>2. Band A DISCO Grid:</strong> <strong>₦209.50 – ₦225 per kWh</strong> (+ inflation & VAT)<br>
+        • <strong>3. CNG (Compressed Natural Gas Genset):</strong> <strong>₦280 – ₦360 per kWh</strong> (including conversion kit amortization & cylinder logistics)<br>
+        • <strong>4. Petrol Generator (PMS @ ₦1,400/L):</strong> <strong>₦850 – ₦980 per kWh</strong><br>
+        • <strong>5. Diesel Generator (AGO @ ₦1,800–₦2,100/L):</strong> <strong class="text-red-700">₦920 – ₦1,150 per kWh</strong>
         <br><br>
-        <strong>Conclusion:</strong> Generating power with a petrol generator in Nigeria is <strong>5.2x more expensive per unit of energy</strong> than installing a premium lithium solar system.
+        <strong>Key Insight:</strong> While CNG offers substantial relief over petrol and diesel for commercial fleets and heavy industrial plants, <strong>Solar PV remains 45% cheaper per kWh than CNG</strong> and <strong>over 5.5x cheaper than diesel/petrol</strong>, while eliminating fuel refilling logistics, maintenance downtime, and noise.
       </p>
     </div>
 
-    {/* Section 1: Detailed LCOE Comparison Table */}
+    {/* Section 1: Detailed 10-Year LCOE Comparison Table */}
     <div class="mb-12">
       <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
         1. 10-Year Levelized Cost of Electricity Breakdown
       </h2>
       <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
-        The table below models the 10-year total cost of ownership (TCO) to deliver <strong>5,000 kWh annually</strong> (~13.7 kWh/day, representative of an active 3-bedroom flat or medium SME):
+        The table below models the 10-year total cost of ownership (TCO) required to deliver <strong>5,000 kWh annually</strong> (~13.7 kWh/day, equivalent to an active 3-bedroom residence, bakery, clinic, or tech office):
       </p>
 
       <div class="overflow-x-auto shadow-sm rounded-xl border border-slate-200 mb-8">
         <table class="w-full text-left text-xs sm:text-sm border-collapse bg-white">
           <thead class="bg-slate-900 text-white font-bold">
             <tr>
-              <th class="p-3.5 border-b border-slate-800">Power Source</th>
-              <th class="p-3.5 border-b border-slate-800">Initial Capex</th>
-              <th class="p-3.5 border-b border-slate-800">10-Yr Fuel & Grid Spend</th>
+              <th class="p-3.5 border-b border-slate-800">Energy Source</th>
+              <th class="p-3.5 border-b border-slate-800">Initial Setup & Equipment</th>
+              <th class="p-3.5 border-b border-slate-800">10-Yr Fuel & Tariff Spend</th>
               <th class="p-3.5 border-b border-slate-800">10-Yr Maintenance & Parts</th>
               <th class="p-3.5 border-b border-slate-800">10-Yr Total Energy Cost</th>
               <th class="p-3.5 border-b border-slate-800 bg-solar-600 text-slate-950">Effective Cost / kWh</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100 text-slate-700">
+            {/* Solar PV Row */}
             <tr class="hover:bg-slate-50 bg-emerald-50/40 font-semibold text-slate-900">
               <td class="p-3.5">
                 <strong class="text-emerald-900">LiFePO4 Solar System (3.5kVA / 5.12kWh)</strong><br>
                 <span class="text-xs text-slate-500 font-normal">Tier-1 Mono Panels + High-Voltage Inverter</span>
               </td>
               <td class="p-3.5">₦3,100,000</td>
-              <td class="p-3.5 text-emerald-700">₦0 (Sunlight)</td>
-              <td class="p-3.5">₦650,000 <span class="text-[11px] text-slate-400 block">(Mid-life Inverter Refresh)</span></td>
+              <td class="p-3.5 text-emerald-700 font-bold">₦0 (100% Free Solar)</td>
+              <td class="p-3.5">₦650,000 <span class="text-[11px] text-slate-400 block">(Year 6 inverter capacitor refresh)</span></td>
               <td class="p-3.5 font-bold text-emerald-900">₦3,750,000</td>
               <td class="p-3.5 font-black text-emerald-800 text-base bg-emerald-100">₦150 / kWh</td>
             </tr>
 
+            {/* Band A Grid */}
             <tr class="hover:bg-slate-50">
               <td class="p-3.5">
                 <strong>Band A DISCO Grid</strong><br>
-                <span class="text-xs text-slate-500 font-normal">Subject to historical 12% annual tariff inflation</span>
+                <span class="text-xs text-slate-500 font-normal">Subject to periodic NERC tariff indexation</span>
               </td>
               <td class="p-3.5">₦120,000 <span class="text-[11px] text-slate-400 block">(Meter & Connection)</span></td>
               <td class="p-3.5">₦10,475,000 <span class="text-[11px] text-slate-400 block">(@ ₦209.50/kWh baseline)</span></td>
-              <td class="p-3.5">₦350,000 <span class="text-[11px] text-slate-400 block">(Transformer levies)</span></td>
+              <td class="p-3.5">₦350,000 <span class="text-[11px] text-slate-400 block">(Estate transformer levies)</span></td>
               <td class="p-3.5 font-bold text-slate-900">₦10,945,000</td>
               <td class="p-3.5 font-bold text-slate-900 text-base">₦219 / kWh</td>
             </tr>
 
-            <tr class="hover:bg-slate-50 bg-red-50/30">
+            {/* CNG Genset */}
+            <tr class="hover:bg-slate-50 bg-blue-50/30">
               <td class="p-3.5">
-                <strong class="text-red-950">Petrol Generator (3.5kVA / 0.55L/kWh)</strong><br>
+                <strong class="text-blue-950">CNG Generator (Dedicated / Converted)</strong><br>
+                <span class="text-xs text-slate-500 font-normal">Gas @ ₦300/Sm³ + Type-2 200-Bar Cylinder</span>
+              </td>
+              <td class="p-3.5">₦1,150,000 <span class="text-[11px] text-slate-400 block">(Genset + ₦650k CNG kit & tank)</span></td>
+              <td class="p-3.5 text-blue-800 font-semibold">₦7,500,000 <span class="text-[11px] text-slate-400 block">(25,000 Sm³ natural gas)</span></td>
+              <td class="p-3.5">₦2,850,000 <span class="text-[11px] text-slate-400 block">(Valves, plugs, cylinder hydro-tests)</span></td>
+              <td class="p-3.5 font-bold text-blue-950">₦11,500,000</td>
+              <td class="p-3.5 font-black text-blue-900 text-base bg-blue-100">₦230 – ₦310 / kWh</td>
+            </tr>
+
+            {/* Petrol Gen */}
+            <tr class="hover:bg-slate-50 bg-amber-50/20">
+              <td class="p-3.5">
+                <strong>Petrol Generator (3.5kVA / 0.55L/kWh)</strong><br>
                 <span class="text-xs text-slate-500 font-normal">PMS @ ₦1,400/L baseline</span>
               </td>
               <td class="p-3.5">₦480,000</td>
@@ -130,65 +147,74 @@ const schema = {
               <td class="p-3.5 font-black text-red-700 text-base bg-red-100">₦852 / kWh</td>
             </tr>
 
-            <tr class="hover:bg-slate-50">
+            {/* Diesel Gen */}
+            <tr class="hover:bg-slate-50 bg-red-50/30">
               <td class="p-3.5">
-                <strong>Diesel Generator (7.5kVA / 0.38L/kWh)</strong><br>
-                <span class="text-xs text-slate-500 font-normal">AGO @ ₦1,300/L baseline</span>
+                <strong class="text-red-950">Diesel Generator (7.5kVA / 0.35L/kWh)</strong><br>
+                <span class="text-xs text-slate-500 font-normal">AGO @ ₦1,950/L retail market rate</span>
               </td>
-              <td class="p-3.5">₦1,850,000</td>
-              <td class="p-3.5 font-bold text-slate-900">₦24,700,000 <span class="text-[11px] text-slate-400 block">(19,000 Litres AGO)</span></td>
-              <td class="p-3.5">₦4,800,000 <span class="text-[11px] text-slate-400 block">(Top-end overhauls & oil)</span></td>
-              <td class="p-3.5 font-bold text-slate-900">₦31,350,000</td>
-              <td class="p-3.5 font-bold text-slate-900 text-base">₦760 / kWh</td>
+              <td class="p-3.5">₦2,100,000</td>
+              <td class="p-3.5 text-red-700 font-bold">₦34,125,000 <span class="text-[11px] text-slate-400 block">(17,500 Litres AGO)</span></td>
+              <td class="p-3.5">₦5,200,000 <span class="text-[11px] text-slate-400 block">(Heavy 15W40 oil, filters, injectors)</span></td>
+              <td class="p-3.5 font-bold text-red-900">₦41,425,000</td>
+              <td class="p-3.5 font-black text-red-800 text-base bg-red-100">₦980 / kWh</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    {/* Section 2: The Mathematical LCOE Formula */}
+    {/* Section 2: Deep Dive into CNG (Compressed Natural Gas) */}
     <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm mb-12 space-y-4">
       <h2 class="text-xl md:text-2xl font-bold text-slate-900">
-        2. Standard LCOE Calculation Methodology
+        2. The Rise of CNG: Where It Wins and Where Solar Still Dominates
       </h2>
       <p class="text-slate-700 text-sm md:text-base leading-relaxed">
-        The Levelized Cost of Electricity ($LCOE$) measures the net present value of the unit-cost of electricity over the entire lifetime of a generating asset. We follow the standard formula codified by the <strong>International Renewable Energy Agency (IRENA)</strong>:
+        With petrol at ₦1,400/L and diesel hitting ₦1,950–₦2,100/L, <strong>Compressed Natural Gas (CNG)</strong> has become the fastest-growing fuel transition in Nigeria. Commercial tricycles (Keke), ride-hailing cabs, intra-state haulage trucks, and manufacturing plants are converting to gas rapidly:
       </p>
 
-      <div class="bg-slate-900 text-amber-300 font-mono text-xs sm:text-sm p-4 rounded-xl overflow-x-auto text-center">
-        LCOE = [ Initial Capex + ∑(O&M_t + Fuel_t) / (1 + r)^t ] ÷ [ ∑ Energy_Generated_t / (1 + r)^t ]
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div class="text-blue-600 font-bold text-sm mb-1">⛽ The Fuel Cost Advantage</div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            At ₦230–₦350 per standard cubic meter (Sm³), CNG cuts raw generator fuel spend by <strong>60% to 70% compared to petrol</strong>, making it viable for 12-hour factory shifts and continuous heavy commercial pumping.
+          </p>
+        </div>
 
-      <div class="text-xs text-slate-600 space-y-1.5 pt-2">
-        <p>• <strong>Capex ($I_0$):</strong> Includes turnkey inverter, LiFePO4 cells, tier-1 monocrystalline panels, DC/AC switchgear, and installation labor.</p>
-        <p>• <strong>O&M ($M_t$):</strong> Annual panel cleaning, terminal torque audits, and a designated mid-life inverter capacitor/motherboard refresh fund at Year 6.</p>
-        <p>• <strong>Fuel ($F_t$):</strong> Exactly ₦0.00 for Solar PV vs ₦1,400/L (PMS) and ₦1,300/L (AGO).</p>
-        <p>• <strong>Degradation Factor:</strong> Accounted at 0.55% annual panel output degradation and 1.8% annual battery capacity retention decay.</p>
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div class="text-amber-600 font-bold text-sm mb-1">⚠️ The Logistics Bottleneck</div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Unlike petrol which can be bought in jerrycans anywhere, CNG requires transporting heavy 200-bar steel cascade cylinders to specialized mother/daughter dispensing stations (often facing long tanker queues).
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <div class="text-emerald-600 font-bold text-sm mb-1">☀️ Why Solar Remains Supreme for Homes</div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            At <strong>₦150/kWh</strong>, Solar is still <strong>45% cheaper than CNG</strong>, requires zero fuel refilling runs, emits zero carbon monoxide fumes, and generates silent power during midnight outages.
+          </p>
+        </div>
       </div>
     </div>
 
-    {/* Section 3: Why Nigerians Miscalculate Solar Cost */}
+    {/* Section 3: The Mathematical LCOE Formula */}
     <div class="bg-slate-900 text-white rounded-2xl p-6 md:p-8 mb-12 space-y-4">
       <h2 class="text-xl md:text-2xl font-bold text-solar-400">
-        3. The "CapEx vs OpEx" Cognitive Trap
+        3. Standard LCOE Calculation Methodology
       </h2>
-      <p class="text-sm text-slate-300 leading-relaxed">
-        The primary reason Nigerian consumers hesitate before installing solar is the <strong>Upfront Capital Expenditure (CapEx) shock</strong>:
+      <p class="text-slate-300 text-sm leading-relaxed">
+        The Levelized Cost of Electricity ($LCOE$) measures the net present value of the unit cost of electricity over the entire lifetime of a generating asset. We apply the standard formula codified by the <strong>International Renewable Energy Agency (IRENA)</strong>:
       </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 text-xs">
-        <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
-          <div class="text-red-400 font-bold text-sm mb-1">💸 The Generator Trap (Micro-Bleed)</div>
-          <p class="text-slate-300 leading-relaxed">
-            Buying a generator feels cheap at ₦450,000. But buying ₦12,000 in fuel daily drains ₦360,000 monthly. In 24 months, the generator has quietly consumed <strong>₦8.6 Million in petrol</strong>, leaving the owner with 0 equity.
-          </p>
-        </div>
 
-        <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
-          <div class="text-emerald-400 font-bold text-sm mb-1">🛡️ The Solar Asset (Capital Prepayment)</div>
-          <p class="text-slate-300 leading-relaxed">
-            Solar is simply pre-paying for 10 to 15 years of electricity upfront at a discounted rate of ₦150/kWh. Once installed, daily operating expense drops to zero, shielding the owner from future exchange rate crashes and fuel hikes.
-          </p>
-        </div>
+      <div class="bg-slate-800 text-amber-300 font-mono text-xs sm:text-sm p-4 rounded-xl overflow-x-auto text-center border border-slate-700">
+        LCOE = [ Initial Capex + ∑(O&M_t + Fuel_t) / (1 + r)^t ] ÷ [ ∑ Energy_Generated_t / (1 + r)^t ]
+      </div>
+
+      <div class="text-xs text-slate-400 space-y-1.5 pt-2">
+        <p>• <strong>Capex ($I_0$):</strong> Includes turnkey inverter, LiFePO4 cells, tier-1 monocrystalline panels, DC/AC switchgear, and professional installation labor.</p>
+        <p>• <strong>O&M ($M_t$):</strong> Annual panel cleaning, terminal torque audits, and a designated mid-life inverter capacitor/motherboard refresh fund at Year 6.</p>
+        <p>• <strong>Fuel ($F_t$):</strong> Exactly ₦0.00 for Solar PV vs ₦1,400/L (PMS), ₦1,950/L (AGO), and ₦300/Sm³ (CNG).</p>
+        <p>• <strong>Degradation Factor:</strong> Accounted at 0.55% annual panel output degradation and 1.8% annual battery capacity retention decay.</p>
       </div>
     </div>
 
@@ -197,7 +223,7 @@ const schema = {
       <div>
         <h3 class="text-2xl font-black">Model Your Household's LCOE & Payback</h3>
         <p class="text-slate-900 text-sm mt-1 max-w-xl">
-          Enter your current monthly generator and NEPA bill to calculate your exact breakeven month and 10-year cash savings.
+          Enter your monthly generator fuel and NEPA bill to calculate your exact breakeven month and 10-year cash savings vs solar.
         </p>
       </div>
       <a 
@@ -283,7 +309,8 @@ const schema = {
       <ul class="list-disc pl-5 space-y-1">
         <li><strong>IRENA (International Renewable Energy Agency):</strong> <em>Renewable Power Generation Costs & Levelized Cost Methodologies</em>.</li>
         <li><strong>NERC (Nigerian Electricity Regulatory Commission):</strong> Multi-Year Tariff Order (MYTO) Band A-E Rate Schedules (2024–2026).</li>
-        <li><strong>National Bureau of Statistics (NBS):</strong> Premium Motor Spirit (PMS) and Automotive Gas Oil (AGO) Price Watch reports (September 2026).</li>
+        <li><strong>National Bureau of Statistics (NBS):</strong> Automotive Gas Oil (Diesel), PMS, and Natural Gas Price Watch reports (September 2026).</li>
+        <li><strong>PCNGI (Presidential Compressed Natural Gas Initiative):</strong> Commercial gas conversion tariff & dispensing benchmarks.</li>
         <li><strong>Financial Modeling:</strong> Prepared by Reid Caster Publishing for IbadanSolarHub.com.ng.</li>
       </ul>
     </div>
