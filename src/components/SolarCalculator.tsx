@@ -89,7 +89,7 @@ export default function SolarCalculator() {
     const text = 
 `☀️ SOLAR SYSTEM SIZING & BOQ SPECIFICATION
 📍 Target Location: ${selectedCity}
-🏢 Source: IbadanSolarHub.com.ng (Reid Caster Publishing)
+🏢 Source: IbadanSolarHub.com.ng (Ibadan Solar Hub)
 
 ⚡ AUDITED LOAD METRICS:
 • Running Load: ${stats.continuousWatts}W
@@ -222,7 +222,7 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
         </div>
 
         <div class="footer">
-          Generated via <strong>IbadanSolarHub.com.ng</strong> • Author: <strong>Reid Caster Publishing</strong> (Power Without The Panic)
+          Generated via <strong>IbadanSolarHub.com.ng</strong> • Publisher: <strong>Ibadan Solar Hub</strong> (Power Without The Panic)
         </div>
       </body>
       </html>
