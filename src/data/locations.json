@@ -12,7 +12,7 @@
     "heroSubtitle": "Get top-tier solar inverters, lithium batteries, and certified installers in Bodija Estate and Old Bodija.",
     "description": "Bodija is one of Ibadan's premier residential and commercial hubs, comprising Old Bodija and Bodija Housing Estate. With erratic grid power from IBEDC and soaring petrol costs for generators, homeowners, boutique offices, and restaurants in Bodija are rapidly transitioning to clean 3.5kVA - 5kVA lithium solar systems.",
     "recommendedSystem": "3.5kVA – 5kVA LiFePO4 Solar System",
-    "avgInstallationCost": "₦2,200,000 – ₦4,800,000",
+    "avgInstallationCost": "₦2,850,000 – ₦5,800,000",
     "popularInstallations": [
       "3-Bedroom Flat 3.5kVA Inverter with 5kWh Lithium Battery",
       "5kVA Duplex System running 1HP Inverter AC and Refrigerator",
@@ -43,7 +43,7 @@
     "heroSubtitle": "Affordable and industrial-grade solar inverter solutions in Oluyole Estate, Ibadan.",
     "description": "Oluyole is a bustling zone of residential mansions and commercial establishments. Frequent transformer breakdowns and high fuel expenses make solar power the most economical investment for families and enterprises in Oluyole.",
     "recommendedSystem": "5kVA – 10kVA Hybrid Solar System",
-    "avgInstallationCost": "₦3,200,000 – ₦7,500,000",
+    "avgInstallationCost": "₦3,900,000 – ₦8,500,000",
     "popularInstallations": [
       "5kVA Hybrid Solar System with 10kWh Lithium Battery",
       "Industrial & Warehouse Solar Backup in Oluyole Industrial Area",
@@ -70,7 +70,7 @@
     "heroSubtitle": "Beat erratic power in Akobo, General Gas, and Kolapo Ishola Estate with solar installations.",
     "description": "Covering General Gas, Kolapo Ishola GRA, and Oju-Irin, Akobo is one of Ibadan's fastest-expanding suburban belts. Many residential estates face frequent feeder tripping, making 2.5kVA and 5kVA solar setups essential for 24/7 electricity.",
     "recommendedSystem": "2.5kVA – 5kVA Solar Inverter Setup",
-    "avgInstallationCost": "₦1,800,000 – ₦4,200,000",
+    "avgInstallationCost": "₦1,750,000 – ₦5,800,000",
     "popularInstallations": [
       "Remote Tech Worker 1.5kVA Backup System for 24/7 Laptops & Starlink",
       "Duplex 5kVA Solar Package with Roof-mounted Mono Panels",
@@ -97,7 +97,7 @@
     "heroSubtitle": "Luxury high-capacity solar and energy storage systems in Jericho GRA, Ibadan.",
     "description": "Jericho is renowned for high-end residential estates, consulates, private clinics, and diplomatic quarters. Property owners prioritize silent, clean, zero-carbon solar systems that replace noisy 20kVA-40kVA diesel generators.",
     "recommendedSystem": "7.5kVA – 15kVA High-Voltage Solar Plant",
-    "avgInstallationCost": "₦4,800,000 – ₦12,500,000",
+    "avgInstallationCost": "₦6,200,000 – ₦15,000,000",
     "popularInstallations": [
       "10kVA - 15kVA Three-Phase Solar System with Tier-1 Lithium Racks",
       "Medical Diagnostic Center Uninterrupted Solar Backup",
@@ -124,7 +124,7 @@
     "heroSubtitle": "Solar power installations for homes, commercial banks, and retail outlets along Ring Road & Challenge.",
     "description": "The economic artery connecting Ring Road, Mobil, and Challenge has intense commercial and residential energy demands. Cutting generator diesel expenses is the primary motivation for retail plazas and residential blocks.",
     "recommendedSystem": "3.5kVA – 7.5kVA Solar Power System",
-    "avgInstallationCost": "₦2,400,000 – ₦5,600,000",
+    "avgInstallationCost": "₦2,850,000 – ₦8,500,000",
     "popularInstallations": [
       "Commercial Plaza Common-Area Lighting & Elevator Backup",
       "3.5kVA Solar Package for Residential Flats",
@@ -134,7 +134,7 @@
     "frequentlyAsked": [
       {
         "question": "How much can a business on Ring Road save by switching to solar?",
-        "answer": "A business running a 10kVA diesel generator for 8 hours daily saves between ₦450,000 and ₦800,000 monthly in fuel and maintenance alone."
+        "answer": "A business running a 10kVA diesel generator for 8 hours daily saves between ₦1,200,000 and ₦1,600,000 monthly in fuel and maintenance alone."
       }
     ]
   },
@@ -145,13 +145,13 @@
     "state": "Oyo State",
     "region": "South-West",
     "disco": "IBEDC (University of Ibadan Feeder)",
-    "powerReliabilityScore": 4,
+    "powerReliabilityScore": 4.0,
     "avgDailyGridHours": "6 - 10 hours",
     "peakSunHours": "5.3 peak sun hours/day",
     "heroSubtitle": "Affordable student, lecturer, and tech-hub solar setups in Samonda, UI, and Agbowo.",
     "description": "Home to the University of Ibadan, academic institutions, students, tech hubs, and print businesses along Sango/Samonda. Demand centers on cost-effective 1kVA - 3.5kVA packages.",
     "recommendedSystem": "1.2kVA – 3kVA Affordable Solar Inverter",
-    "avgInstallationCost": "₦650,000 – ₦2,200,000",
+    "avgInstallationCost": "₦850,000 – ₦2,850,000",
     "popularInstallations": [
       "Student Hostel & Shared Apartment Solar Power Kit",
       "Lecturer Quarter 3kVA Inverter with 200Ah Tubular Battery",
@@ -178,7 +178,7 @@
     "heroSubtitle": "Commercial solar panel and inverter solutions for Dugbe CBD corporate offices and merchants.",
     "description": "Dugbe is the financial nerve center of Ibadan, boasting Cocoa House, major bank headquarters, electronics markets, and legal chambers. Clean, continuous power is crucial for business operations.",
     "recommendedSystem": "5kVA – 20kVA Commercial Hybrid Solar",
-    "avgInstallationCost": "₦3,500,000 – ₦15,000,000",
+    "avgInstallationCost": "₦3,900,000 – ₦18,000,000",
     "popularInstallations": [
       "Bank Branch & ATM Solar Backup",
       "Law Firm & Audit Chamber 5kVA Solar Power Setup",
@@ -205,7 +205,7 @@
     "heroSubtitle": "Premium solar inverter installations and lithium battery upgrades in Lekki Phase 1, Ikate & Chevron.",
     "description": "Lekki Peninsula represents Nigeria's highest concentration of premium residential estates. Despite Band-A tariffs exceeding ₦209/kWh, power outages remain frequent. Solar installations with smart LiFePO4 batteries deliver predictable 24/7 electricity at half the cost of estate generator surcharges.",
     "recommendedSystem": "5kVA – 15kVA Smart Hybrid Solar System",
-    "avgInstallationCost": "₦3,800,000 – ₦12,000,000",
+    "avgInstallationCost": "₦3,900,000 – ₦15,000,000",
     "popularInstallations": [
       "5kVA 48V Setup with 10kWh Wall-mount Lithium Battery",
       "10kVA - 15kVA Solar System powering 3 Inverter ACs and Deep Freezers",
@@ -232,7 +232,7 @@
     "heroSubtitle": "Commercial and residential solar power solutions in Ikeja GRA, Allen Avenue, and Maryland.",
     "description": "As Lagos State's capital and a major corporate epicenter, Ikeja features high energy demands from businesses, media firms, government offices, and upscale residences in Ikeja GRA. Installing solar mitigates skyrocketing Band-A grid tariffs.",
     "recommendedSystem": "5kVA – 10kVA Pure Sine Wave Solar System",
-    "avgInstallationCost": "₦3,200,000 – ₦8,500,000",
+    "avgInstallationCost": "₦3,900,000 – ₦9,500,000",
     "popularInstallations": [
       "Corporate Office 10kVA Backup with 15kWh Lithium Storage",
       "Ikeja GRA Duplex Solar System with 1.5HP Inverter AC",
@@ -259,7 +259,7 @@
     "heroSubtitle": "Reliable solar inverters and lithium batteries for Ajah, Sangotedo, and Abraham Adesanya estates.",
     "description": "Rapid suburban growth in Ajah, Badore, Sangotedo, and Eleko has outpaced electrical infrastructure. Thousands of homeowners depend on solar inverters to power their homes without constant generator fumes.",
     "recommendedSystem": "3.5kVA – 5kVA Lithium Solar System",
-    "avgInstallationCost": "₦2,400,000 – ₦5,200,000",
+    "avgInstallationCost": "₦2,850,000 – ₦5,800,000",
     "popularInstallations": [
       "3.5kVA Inverter with 5kWh Battery for 3-Bedroom Flats",
       "5kVA Setup with 8x 550W Panels for Standalone Duplexes",
@@ -286,7 +286,7 @@
     "heroSubtitle": "Solar setups for tech startups, creative studios, and family residences in Yaba and Surulere.",
     "description": "Known as Nigeria's Silicon Lagoon, Yaba hosts prominent tech firms, coding hubs, and universities, while Surulere features vibrant residential estates and creative production studios requiring non-stop electricity.",
     "recommendedSystem": "2.5kVA – 5kVA Solar Inverter Setup",
-    "avgInstallationCost": "₦1,900,000 – ₦4,500,000",
+    "avgInstallationCost": "₦1,750,000 – ₦5,800,000",
     "popularInstallations": [
       "Tech Co-working Space Inverter Backup",
       "Creative Sound/Video Studio Silent Solar Setup",
@@ -313,7 +313,7 @@
     "heroSubtitle": "Trusted solar inverter installations across Abeokuta, Ibara, Oke-Mosan, and Obantoko.",
     "description": "Ogun State's capital city features intense solar irradiance and heavy demand for residential and civil servant solar power. Transitioning to solar frees families from the weekly burden of petrol purchases.",
     "recommendedSystem": "2.5kVA – 5kVA Solar Power System",
-    "avgInstallationCost": "₦1,800,000 – ₦4,200,000",
+    "avgInstallationCost": "₦1,750,000 – ₦5,800,000",
     "popularInstallations": [
       "Civil Servant Bungalow 2.5kVA Solar Package",
       "Hotel & Hospitality 10kVA - 20kVA Solar Backup in Ibara GRA",
@@ -340,7 +340,7 @@
     "heroSubtitle": "Ditch the dark in Mowe, Ibafo, Magboro, and Arepo with whole-home solar installations.",
     "description": "Communities along the Lagos-Ibadan Expressway house hundreds of thousands of Lagos commuters. Feeder reliability is notoriously erratic, making solar power not a luxury, but an absolute household necessity.",
     "recommendedSystem": "3.5kVA – 5kVA High-Harvest Solar Array",
-    "avgInstallationCost": "₦2,100,000 – ₦4,600,000",
+    "avgInstallationCost": "₦2,850,000 – ₦5,800,000",
     "popularInstallations": [
       "Commuter Family 3.5kVA Solar System with 5kWh Lithium Battery",
       "Gated Estate Solar Street Lighting & Security Cameras",
@@ -367,7 +367,7 @@
     "heroSubtitle": "High-yield solar power systems in Abuja: Maitama, Gwarinpa, Wuse 2, Jabi, and Asokoro.",
     "description": "Abuja boasts some of the highest solar irradiance levels in Nigeria (nearly 6.0 peak sun hours per day). High-income residents, government dignitaries, NGOs, and enterprises choose high-efficiency solar setups to avoid high AEDC tariffs and achieve energy autonomy.",
     "recommendedSystem": "5kVA – 15kVA Premium LiFePO4 Solar Setup",
-    "avgInstallationCost": "₦3,600,000 – ₦11,000,000",
+    "avgInstallationCost": "₦3,900,000 – ₦15,000,000",
     "popularInstallations": [
       "Gwarinpa Estate 5kVA Solar System running 2 Inverter ACs",
       "Maitama & Asokoro Luxury Duplex 15kVA Solar Energy Storage",
@@ -394,7 +394,7 @@
     "heroSubtitle": "Industrial-grade solar inverters and battery systems in Port Harcourt, Old GRA & Peter Odili.",
     "description": "Nigeria's oil capital demands dependable, round-the-clock power. Between soaring diesel prices and soot concerns, Port Harcourt homes, offshore logistics offices, and businesses are aggressively switching to clean solar power.",
     "recommendedSystem": "5kVA – 10kVA Heavy Duty Hybrid Solar",
-    "avgInstallationCost": "₦3,500,000 – ₦9,500,000",
+    "avgInstallationCost": "₦3,900,000 – ₦9,500,000",
     "popularInstallations": [
       "Peter Odili Duplex 5kVA Solar Package with 10kWh Battery",
       "Trans-Amadi Oilfield Servicing Office Solar Backup",
@@ -421,7 +421,7 @@
     "heroSubtitle": "Affordable home and commercial solar power systems in Osogbo, Osun State.",
     "description": "Osogbo features abundant solar sunshine and an active commercial sector. Homeowners and traders install 1.5kVA - 3.5kVA systems to eliminate generator expenses.",
     "recommendedSystem": "2kVA – 3.5kVA Solar Inverter Setup",
-    "avgInstallationCost": "₦1,400,000 – ₦3,500,000",
+    "avgInstallationCost": "₦1,750,000 – ₦3,700,000",
     "popularInstallations": [
       "Residential 2.5kVA Solar Power System",
       "Hospital & Clinic Emergency Solar Backup",
@@ -448,7 +448,7 @@
     "heroSubtitle": "Complete solar energy systems and inverters in Akure, Alagbaka, and FUTA environs.",
     "description": "Akure residents, academic communities around FUTA, and commercial centers in Alagbaka benefit from solar power to counter frequent BEDC blackouts.",
     "recommendedSystem": "2.5kVA – 5kVA Solar Package",
-    "avgInstallationCost": "₦1,700,000 – ₦4,200,000",
+    "avgInstallationCost": "₦1,750,000 – ₦5,800,000",
     "popularInstallations": [
       "Alagbaka GRA 5kVA Solar System",
       "FUTA Student & Academic 1.5kVA Solar Kit",
@@ -475,7 +475,7 @@
     "heroSubtitle": "Reliable solar inverters and lithium storage systems in Benin City, GRA & Ugbowo.",
     "description": "Benin City is seeing rapid adoption of solar power across residential neighborhoods, diaspora-funded homes, and commercial enterprises seeking freedom from volatile fuel costs.",
     "recommendedSystem": "3.5kVA – 7.5kVA Solar Energy System",
-    "avgInstallationCost": "₦2,300,000 – ₦5,800,000",
+    "avgInstallationCost": "₦2,850,000 – ₦8,500,000",
     "popularInstallations": [
       "Diaspora-funded Residential Solar System in Benin GRA",
       "Cold Room & Pharmacy 5kVA Inverter Backup",
