@@ -9,7 +9,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "The 2026 Levelized Cost of Electricity (LCOE) Index in Nigeria: Solar vs Petrol vs Diesel vs CNG vs Grid",
-  "description": "Rigorous Levelized Cost of Electricity (LCOE) financial analysis in Nigeria based on IRENA and World Bank standards. Comparing solar kWh costs against ₦1,400/L petrol, ₦1,950/L diesel, CNG gas, and Band A grid tariffs.",
+  "description": "Rigorous Levelized Cost of Electricity (LCOE) financial analysis in Nigeria based on IRENA and World Bank standards. Comparing solar kWh costs against ₦1,400/L petrol, ₦1,950/L diesel, ₦380–₦500/scm CNG, and Band A grid tariffs.",
   "author": {
     "@type": "Organization",
     "name": "Reid Caster Publishing"
@@ -26,7 +26,7 @@ const schema = {
 
 <BaseLayout
   title="Nigeria LCOE Index 2026: Solar vs Petrol vs Diesel vs CNG vs Grid (Cost per kWh)"
-  description="Official Nigerian Levelized Cost of Electricity (LCOE) benchmark. Compare true cost per kWh across Solar (₦150/kWh), CNG (₦310/kWh), Band A (₦219/kWh), Petrol (₦852/kWh), and Diesel (₦980/kWh)."
+  description="Official Nigerian Levelized Cost of Electricity (LCOE) benchmark. Compare true cost per kWh across Solar (₦150/kWh), Band A (₦219/kWh), CNG (₦315/kWh), Petrol (₦852/kWh), and Diesel (₦980/kWh)."
   schema={schema}
 >
   {/* Hero Section */}
@@ -46,7 +46,7 @@ const schema = {
       <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm text-slate-400">
         <span>Methodology: <strong class="text-white">IRENA Renewable Costing Standard / World Bank LCOE Model</strong></span>
         <span>•</span>
-        <span>Fuel Baselines: <strong class="text-white">PMS @ ₦1,400/L • AGO @ ₦1,950/L • CNG @ ₦300/Sm³</strong></span>
+        <span>Fuel Baselines: <strong class="text-white">PMS @ ₦1,400/L • AGO @ ₦1,950/L • CNG @ ₦380–₦500/Sm³</strong></span>
         <span>•</span>
         <span>Author: <strong class="text-white">Reid Caster Publishing</strong></span>
       </div>
@@ -65,11 +65,11 @@ const schema = {
         <br><br>
         • <strong>1. Solar PV + LiFePO4 Lithium:</strong> <strong class="text-emerald-800">₦145 – ₦175 per kWh</strong> (Lowest Lifetime Cost)<br>
         • <strong>2. Band A DISCO Grid:</strong> <strong>₦209.50 – ₦225 per kWh</strong> (+ inflation & VAT)<br>
-        • <strong>3. CNG (Compressed Natural Gas Genset):</strong> <strong>₦280 – ₦360 per kWh</strong> (including conversion kit amortization & cylinder logistics)<br>
+        • <strong>3. CNG (Compressed Natural Gas @ ₦380–₦500/Sm³):</strong> <strong>₦300 – ₦380 per kWh</strong> (including conversion kit amortization & cylinder logistics)<br>
         • <strong>4. Petrol Generator (PMS @ ₦1,400/L):</strong> <strong>₦850 – ₦980 per kWh</strong><br>
         • <strong>5. Diesel Generator (AGO @ ₦1,800–₦2,100/L):</strong> <strong class="text-red-700">₦920 – ₦1,150 per kWh</strong>
         <br><br>
-        <strong>Key Insight:</strong> While CNG offers substantial relief over petrol and diesel for commercial fleets and heavy industrial plants, <strong>Solar PV remains 45% cheaper per kWh than CNG</strong> and <strong>over 5.5x cheaper than diesel/petrol</strong>, while eliminating fuel refilling logistics, maintenance downtime, and noise.
+        <strong>Key Revelation:</strong> At recent dispensing rates of <strong>₦380 to ₦500 per Sm³</strong>, CNG generators now generate power at <strong>₦300–₦380/kWh</strong>—making CNG more expensive than Band A grid power (₦209.50) and <strong>more than double the lifetime cost of Solar PV (₦150/kWh)</strong>. While CNG offers substantial relief over petrol and diesel, Solar PV remains the uncontested lowest-cost energy source in Nigeria.
       </p>
     </div>
 
@@ -125,13 +125,13 @@ const schema = {
             <tr class="hover:bg-slate-50 bg-blue-50/30">
               <td class="p-3.5">
                 <strong class="text-blue-950">CNG Generator (Dedicated / Converted)</strong><br>
-                <span class="text-xs text-slate-500 font-normal">Gas @ ₦300/Sm³ + Type-2 200-Bar Cylinder</span>
+                <span class="text-xs text-slate-500 font-normal">Gas @ ₦440/Sm³ + Type-2 200-Bar Cylinder</span>
               </td>
               <td class="p-3.5">₦1,150,000 <span class="text-[11px] text-slate-400 block">(Genset + ₦650k CNG kit & tank)</span></td>
-              <td class="p-3.5 text-blue-800 font-semibold">₦7,500,000 <span class="text-[11px] text-slate-400 block">(25,000 Sm³ natural gas)</span></td>
+              <td class="p-3.5 text-blue-800 font-semibold">₦11,000,000 <span class="text-[11px] text-slate-400 block">(25,000 Sm³ natural gas @ ₦440)</span></td>
               <td class="p-3.5">₦2,850,000 <span class="text-[11px] text-slate-400 block">(Valves, plugs, cylinder hydro-tests)</span></td>
-              <td class="p-3.5 font-bold text-blue-950">₦11,500,000</td>
-              <td class="p-3.5 font-black text-blue-900 text-base bg-blue-100">₦230 – ₦310 / kWh</td>
+              <td class="p-3.5 font-bold text-blue-950">₦15,000,000</td>
+              <td class="p-3.5 font-black text-blue-900 text-base bg-blue-100">₦300 – ₦380 / kWh</td>
             </tr>
 
             {/* Petrol Gen */}
@@ -167,31 +167,31 @@ const schema = {
     {/* Section 2: Deep Dive into CNG (Compressed Natural Gas) */}
     <div class="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm mb-12 space-y-4">
       <h2 class="text-xl md:text-2xl font-bold text-slate-900">
-        2. The Rise of CNG: Where It Wins and Where Solar Still Dominates
+        2. The Real Economics of CNG at ₦380 – ₦500 / Sm³
       </h2>
       <p class="text-slate-700 text-sm md:text-base leading-relaxed">
-        With petrol at ₦1,400/L and diesel hitting ₦1,950–₦2,100/L, <strong>Compressed Natural Gas (CNG)</strong> has become the fastest-growing fuel transition in Nigeria. Commercial tricycles (Keke), ride-hailing cabs, intra-state haulage trucks, and manufacturing plants are converting to gas rapidly:
+        With petrol at ₦1,400/L and diesel at ₦1,950–₦2,100/L, <strong>Compressed Natural Gas (CNG)</strong> has surged in popularity across commercial tricycles (Keke), ride-hailing cabs, inter-city trucks, and manufacturing facilities. However, with dispensing prices climbing to <strong>₦380 – ₦500 per Sm³</strong> at retail stations in major hubs, the economics reveal important trade-offs:
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
         <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-          <div class="text-blue-600 font-bold text-sm mb-1">⛽ The Fuel Cost Advantage</div>
+          <div class="text-blue-600 font-bold text-sm mb-1">⛽ Relief vs Petrol & Diesel</div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            At ₦230–₦350 per standard cubic meter (Sm³), CNG cuts raw generator fuel spend by <strong>60% to 70% compared to petrol</strong>, making it viable for 12-hour factory shifts and continuous heavy commercial pumping.
+            At ₦380–₦500/Sm³, CNG is still <strong>60% cheaper than petrol (₦852/kWh) and diesel (₦980/kWh)</strong>, providing essential survival margins for commercial transportation and factory shifts.
           </p>
         </div>
 
         <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-          <div class="text-amber-600 font-bold text-sm mb-1">⚠️ The Logistics Bottleneck</div>
+          <div class="text-amber-600 font-bold text-sm mb-1">⚠️ The Logistics & Safety Burden</div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            Unlike petrol which can be bought in jerrycans anywhere, CNG requires transporting heavy 200-bar steel cascade cylinders to specialized mother/daughter dispensing stations (often facing long tanker queues).
+            CNG requires transporting heavy 200-bar steel cascade cylinders to specialized mother/daughter dispensing stations (frequently facing long commercial queues) and paying for mandatory periodic cylinder recertification.
           </p>
         </div>
 
         <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-          <div class="text-emerald-600 font-bold text-sm mb-1">☀️ Why Solar Remains Supreme for Homes</div>
+          <div class="text-emerald-600 font-bold text-sm mb-1">☀️ Why Solar Crushes CNG for Homes</div>
           <p class="text-xs text-slate-600 leading-relaxed">
-            At <strong>₦150/kWh</strong>, Solar is still <strong>45% cheaper than CNG</strong>, requires zero fuel refilling runs, emits zero carbon monoxide fumes, and generates silent power during midnight outages.
+            At <strong>₦150/kWh</strong>, Solar is <strong>more than 50% cheaper per kWh than CNG (₦300–₦380/kWh)</strong>, involves zero gas hauling trips, produces zero carbon monoxide emissions, and delivers silent 24/7 power.
           </p>
         </div>
       </div>
@@ -213,7 +213,7 @@ const schema = {
       <div class="text-xs text-slate-400 space-y-1.5 pt-2">
         <p>• <strong>Capex ($I_0$):</strong> Includes turnkey inverter, LiFePO4 cells, tier-1 monocrystalline panels, DC/AC switchgear, and professional installation labor.</p>
         <p>• <strong>O&M ($M_t$):</strong> Annual panel cleaning, terminal torque audits, and a designated mid-life inverter capacitor/motherboard refresh fund at Year 6.</p>
-        <p>• <strong>Fuel ($F_t$):</strong> Exactly ₦0.00 for Solar PV vs ₦1,400/L (PMS), ₦1,950/L (AGO), and ₦300/Sm³ (CNG).</p>
+        <p>• <strong>Fuel ($F_t$):</strong> Exactly ₦0.00 for Solar PV vs ₦1,400/L (PMS), ₦1,950/L (AGO), and ₦440/Sm³ (CNG).</p>
         <p>• <strong>Degradation Factor:</strong> Accounted at 0.55% annual panel output degradation and 1.8% annual battery capacity retention decay.</p>
       </div>
     </div>
