@@ -1,0 +1,432 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import digitalProducts from '../data/digital-products.json';
+
+const bookProduct = digitalProducts.find(p => p.id === 'power-without-the-panic');
+const toolkitProduct = digitalProducts.find(p => p.id === 'solar-complete-toolkit-bundle');
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Nigerian Inverter Air Conditioner Inrush Current & Locked Rotor Amps (LRA) Solar Sizing Guide",
+  "description": "Comprehensive electrical engineering analysis on air conditioner starting current surges, Locked Rotor Amps (LRA), Inverter vs Non-Inverter compressor physics, and precision inverter-battery sizing for Nigerian homes and offices.",
+  "author": {
+    "@type": "Organization",
+    "name": "Ibadan Solar Hub"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "IbadanSolarHub",
+    "url": "https://ibadansolarhub.com.ng"
+  },
+  "datePublished": "2026-09-21",
+  "dateModified": "2026-09-21",
+  "image": "https://ibadansolarhub.com.ng/og-image.jpg"
+};
+---
+
+<BaseLayout
+  title="Air Conditioner Solar Surge & Inrush Sizing Guide Nigeria (LRA vs FLA) | IbadanSolarHub"
+  description="Learn why a 1.5HP AC trips 3.5kVA and 5kVA inverters. Engineering guide on Locked Rotor Amps (LRA), Dual-Inverter soft-starting, power factor, and solar battery sizing in Nigeria."
+  schema={schema}
+>
+  {/* Hero Section */}
+  <section class="bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white py-14 md:py-20 border-b border-slate-800 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-solar-500/10 text-solar-400 border border-solar-500/20 rounded-full text-xs font-semibold mb-4">
+        ⚡ Electrical Engineering & Thermal Dynamics Whitepaper
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+        The Nigerian Solar Air Conditioner Surge Guide: <span class="text-solar-400">LRA, Inrush Physics & Sizing</span>
+      </h1>
+      <p class="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto mt-4 leading-relaxed">
+        Why does a 1.5HP AC rated at 1,100 Watts suddenly overload a 5kVA solar inverter or stall a 3.5kVA generator? An empirical breakdown of Locked Rotor Amps (LRA), compressor motor physics, and inverter surge capacity under tropical Nigerian ambient temperatures.
+      </p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4 mt-6 text-xs text-slate-400">
+        <span>Published by: <strong class="text-white">Ibadan Solar Hub</strong></span>
+        <span>•</span>
+        <span>Category: <strong class="text-solar-400">Power Electronics & HVAC Sizing</strong></span>
+        <span>•</span>
+        <span>Updated: <strong class="text-white">September 2026</strong></span>
+      </div>
+    </div>
+  </section>
+
+  {/* Main Content */}
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 text-slate-800 leading-relaxed text-base sm:text-lg">
+    
+    {/* Executive Summary Box */}
+    <div class="bg-amber-500/10 border-2 border-solar-500/30 rounded-2xl p-6 sm:p-8 mb-12">
+      <h2 class="text-xl sm:text-2xl font-black text-slate-900 mb-3 flex items-center gap-2">
+        <span>📌</span> Executive Summary: The Nigerian AC Solar Dilemma
+      </h2>
+      <p class="text-sm sm:text-base text-slate-700 leading-relaxed mb-4">
+        Air conditioning accounts for over <strong>60% to 75% of residential and commercial peak electrical loads</strong> across Nigeria. However, thousands of Nigerian homeowners and businesses face severe system trips, blown inverter MOSFETs, and battery voltage collapse when trying to power air conditioners on solar.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm pt-2 border-t border-solar-500/20">
+        <div class="bg-white/80 p-3 rounded-xl border border-amber-200">
+          <strong class="text-slate-900 block mb-1">Non-Inverter AC Reality:</strong>
+          A standard 1.5HP fixed-speed AC draws <strong>5x to 7x its running current</strong> during startup (Locked Rotor Amps: 28A–35A at 230V = <strong>6,400W–8,000W surge</strong> for 300ms–500ms).
+        </div>
+        <div class="bg-white/80 p-3 rounded-xl border border-amber-200">
+          <strong class="text-slate-900 block mb-1">Inverter AC Advantage:</strong>
+          A true DC Inverter AC utilizes a Variable Frequency Drive (VFD) soft-start, ramping from <strong>150W up to 900W with 0A inrush surge</strong>, allowing multiple units to run seamlessly on a 3.5kVA or 5kVA solar setup.
+        </div>
+      </div>
+    </div>
+
+    {/* Section 1: Non-Inverter vs Inverter Compressor Physics */}
+    <section class="mb-14">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-6">
+        1. Compressor Physics: Why Standard ACs Demand Massive Surge
+      </h2>
+      <p class="mb-4">
+        To understand why solar systems struggle with air conditioning, we must examine the electromechanical design of single-phase induction motors used in traditional rotary and reciprocating compressors versus modern Brushless DC (BLDC) inverter compressors.
+      </p>
+
+      <div class="my-6 bg-slate-900 text-white rounded-2xl p-6 overflow-x-auto text-sm">
+        <div class="font-mono text-solar-400 font-bold mb-2">Motor Inrush Starting Current Equation:</div>
+        <div class="font-mono text-slate-200">
+          I<sub>start</sub> = V<sub>line</sub> / (Z<sub>stator</sub> + Z'<sub>rotor</sub>)
+        </div>
+        <p class="text-xs text-slate-400 mt-2">
+          At standstill (Rotor Speed = 0, Slip s = 1.0), rotor counter-electromotive force (Back-EMF) is zero. The motor impedance is limited solely to the pure copper winding resistance and leakage reactance, causing an instantaneous current spike of 500% to 700% of nominal Full Load Amps (FLA).
+        </p>
+      </div>
+
+      <p class="mb-4">
+        When a traditional fixed-speed air conditioner's thermostat calls for cooling, the contactor closes and connects the stationary motor directly across the 230V AC line. Until the compressor overcomes mechanical inertia and head pressure in the refrigerant lines (R410A / R22 / R32), the electrical draw equals the <strong>Locked Rotor Amps (LRA)</strong>.
+      </p>
+
+      <div class="overflow-x-auto my-8">
+        <table class="w-full text-left text-xs sm:text-sm border-collapse bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200">
+          <thead class="bg-slate-900 text-white uppercase text-[11px] tracking-wider">
+            <tr>
+              <th class="p-3.5 sm:p-4">AC Horsepower (HP)</th>
+              <th class="p-3.5 sm:p-4">Running Power (FLA @ 230V)</th>
+              <th class="p-3.5 sm:p-4">Non-Inverter LRA (Surge Amps)</th>
+              <th class="p-3.5 sm:p-4">Instantaneous Surge Power</th>
+              <th class="p-3.5 sm:p-4">Inverter AC Soft-Start Peak</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3.5 sm:p-4 font-bold text-slate-900">1.0 HP (9,000 BTU)</td>
+              <td class="p-3.5 sm:p-4">800W–900W (3.8A)</td>
+              <td class="p-3.5 sm:p-4 text-red-600 font-bold">18A – 24A</td>
+              <td class="p-3.5 sm:p-4 font-bold text-red-600">4,140W – 5,520W</td>
+              <td class="p-3.5 sm:p-4 text-green-700 font-bold">0A surge (Ramps 150W→750W)</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 bg-slate-50/50">
+              <td class="p-3.5 sm:p-4 font-bold text-slate-900">1.5 HP (12,000 BTU)</td>
+              <td class="p-3.5 sm:p-4">1,150W–1,300W (5.5A)</td>
+              <td class="p-3.5 sm:p-4 text-red-600 font-bold">28A – 36A</td>
+              <td class="p-3.5 sm:p-4 font-bold text-red-600">6,440W – 8,280W</td>
+              <td class="p-3.5 sm:p-4 text-green-700 font-bold">0A surge (Ramps 200W→1,050W)</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50">
+              <td class="p-3.5 sm:p-4 font-bold text-slate-900">2.0 HP (18,000 BTU)</td>
+              <td class="p-3.5 sm:p-4">1,600W–1,850W (7.8A)</td>
+              <td class="p-3.5 sm:p-4 text-red-600 font-bold">38A – 48A</td>
+              <td class="p-3.5 sm:p-4 font-bold text-red-600">8,740W – 11,040W</td>
+              <td class="p-3.5 sm:p-4 text-green-700 font-bold">0A surge (Ramps 300W→1,500W)</td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 bg-slate-50/50">
+              <td class="p-3.5 sm:p-4 font-bold text-slate-900">3.0 HP (24,000 BTU)</td>
+              <td class="p-3.5 sm:p-4">2,400W–2,800W (11.5A)</td>
+              <td class="p-3.5 sm:p-4 text-red-600 font-bold">54A – 68A</td>
+              <td class="p-3.5 sm:p-4 font-bold text-red-600">12,420W – 15,640W</td>
+              <td class="p-3.5 sm:p-4 text-green-700 font-bold">0A surge (Ramps 450W→2,200W)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {/* Section 2: Inverter Architecture Comparison (High Frequency vs Low Frequency) */}
+    <section class="mb-14">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-6">
+        2. Inverter Architectures: High Frequency (HF) vs. Low Frequency (LF) Toroidal
+      </h2>
+      <p class="mb-4">
+        Not all solar inverters handle surge currents identically. In the Nigerian solar marketplace, two dominant inverter topologies exist:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="inline-block px-2.5 py-1 bg-blue-100 text-blue-900 text-xs font-bold rounded-md mb-3">
+            High Frequency (Transformerless / SMPS)
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Growatt, Felicity, Deye HF Units</h3>
+          <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
+            <li><strong>Surge Limit:</strong> Typically 2x rated capacity for only 5 seconds (e.g. 5kW inverter can handle 10kW for 5s).</li>
+            <li><strong>Vulnerability:</strong> Relies purely on electronic MOSFET switching. Inductive spikes ($V = -L \cdot di/dt$) from non-inverter compressors can exceed MOSFET breakdown voltages and cause immediate error 07 / overload trip.</li>
+            <li><strong>Efficiency:</strong> High (93%–97%), lightweight (10kg–15kg), and cost-effective.</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="inline-block px-2.5 py-1 bg-amber-100 text-amber-900 text-xs font-bold rounded-md mb-3">
+            Low Frequency (Heavy Toroidal Transformer)
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Outback, Schneider, Luminous Cruze LF</h3>
+          <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
+            <li><strong>Surge Limit:</strong> 3x rated capacity for up to 20 seconds (e.g. 3.5kVA handles over 10kVA surge effortlessly).</li>
+            <li><strong>Surge Handling:</strong> The massive copper-wound toroidal core absorbs large inductive reactive kicks without semiconductor stress.</li>
+            <li><strong>Drawback:</strong> Heavy (35kg–60kg), higher standby self-consumption (40W–80W idle), and more expensive.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {/* Section 3: Battery C-Rate and Voltage Sag Under Inrush */}
+    <section class="mb-14">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-6">
+        3. The Hidden Culprit: DC Battery Sag & Inverter Cut-Off
+      </h2>
+      <p class="mb-4">
+        Many installers assume that if an inverter has a 10,000W surge rating, it can effortlessly start a 1.5HP non-inverter AC. In practice, the system often trips on <strong>Battery Under-Voltage Fault (Low DC Voltage Cut-off)</strong> rather than AC overload.
+      </p>
+
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 my-6 text-sm">
+        <h4 class="font-bold text-slate-900 mb-2">Mathematical DC Surge Current on 24V vs 48V Battery Banks:</h4>
+        <p class="text-slate-700 mb-3">
+          To deliver an 8,000W starting surge for a 1.5HP non-inverter AC through an inverter with 90% conversion efficiency:
+        </p>
+        <div class="bg-white p-4 rounded-xl border border-slate-200 font-mono text-xs text-slate-800 space-y-1">
+          <div>P<sub>DC_In</sub> = 8,000W / 0.90 = <strong>8,888 Watts DC</strong></div>
+          <div class="text-red-600 font-bold">On a 24V Battery Bank: I<sub>DC</sub> = 8,888W / 24V = 370.3 Amperes DC!</div>
+          <div class="text-green-700 font-bold">On a 48V Battery Bank: I<sub>DC</sub> = 8,888W / 48V = 185.1 Amperes DC</div>
+        </div>
+        <p class="text-xs text-slate-600 mt-3">
+          On a 24V system, pulling 370A instantaneously through internal cell resistance (R<sub>int</sub>) and battery cabling creates an instantaneous voltage drop (&Delta;V = I &middot; R). If battery voltage sags below the inverter's low-voltage disconnect threshold (e.g. 21.0V for lead-acid or 44.0V for 48V lithium), the inverter instantly shuts down to protect the battery.
+        </p>
+      </div>
+    </section>
+
+    {/* Section 4: Sizing Matrix and Best Practice Configurations */}
+    <section class="mb-14">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-6">
+        4. Verified Nigerian Solar Sizing Matrix for Air Conditioners
+      </h2>
+      <p class="mb-4">
+        To ensure dependable 24/7 cooling without nuisance tripping, follow this verified engineering sizing table:
+      </p>
+
+      <div class="space-y-4 my-6">
+        <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <h3 class="font-bold text-slate-900 text-base">Setup 1: Single 1.0 HP or 1.5 HP Inverter AC</h3>
+            <span class="px-2.5 py-1 bg-green-100 text-green-800 rounded-lg text-xs font-bold">Most Popular Home Setup</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 mb-3">
+            Ideal for master bedrooms, home offices, and living rooms running 8–12 hours daily.
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Minimum Inverter</span>
+              <span class="text-slate-900">3.5kVA (24V) or 5kVA (48V)</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Battery Capacity</span>
+              <span class="text-slate-900">5.12kWh LiFePO4 (48V 100Ah)</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Solar PV Array</span>
+              <span class="text-slate-900">4x 550W Panels (2.2kWp)</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Daytime Operation</span>
+              <span class="text-slate-900">100% Free on Direct Sun</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <h3 class="font-bold text-slate-900 text-base">Setup 2: Two 1.5 HP Inverter ACs (Simultaneous Running)</h3>
+            <span class="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-lg text-xs font-bold">Standard 3-4 Bedroom Flats</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 mb-3">
+            Provides continuous cooling across living room + bedroom during heatwaves and grid blackouts.
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Minimum Inverter</span>
+              <span class="text-slate-900">5kVA / 5kW (48V Architecture)</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Battery Capacity</span>
+              <span class="text-slate-900">10.24kWh LiFePO4 (2x 5.12kWh)</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Solar PV Array</span>
+              <span class="text-slate-900">8x 550W Panels (4.4kWp)</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Daily Autonomy</span>
+              <span class="text-slate-900">14–18 Hours Operation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-sm">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <h3 class="font-bold text-slate-900 text-base">Setup 3: Non-Inverter AC (1.5HP or 2.0HP) Legacy Retrofit</h3>
+            <span class="px-2.5 py-1 bg-amber-100 text-amber-900 rounded-lg text-xs font-bold">Retrofit Configuration</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 mb-3">
+            If you already own non-inverter ACs and cannot immediately replace them with Dual-Inverter units.
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Minimum Inverter</span>
+              <span class="text-slate-900">5kVA LF Toroidal or 7.5kVA HF</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Mandatory Add-on</span>
+              <span class="text-slate-900">External Electronic Soft Starter</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Battery Capacity</span>
+              <span class="text-slate-900">10kWh+ High Discharge LiFePO4</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+              <span class="text-slate-400 block text-[10px]">Surge Reduction</span>
+              <span class="text-slate-900">Cuts LRA by 60% (35A → 14A)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Section 5: Soft Starters vs Inverter Replacement */}
+    <section class="mb-14">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-6">
+        5. Should You Buy an External Soft Starter or Upgrade to an Inverter AC?
+      </h2>
+      <p class="mb-4">
+        A common debate among Nigerian property owners is whether to buy an aftermarket <strong>Electronic Soft Starter</strong> (e.g. Hyper Engineering SureStart or Micro-Air EasyStart costing ₦120,000–₦180,000) or simply replace the old AC with a genuine Dual-Inverter air conditioner (e.g., LG Dual Inverter, Hisense Inverter, Panasonic Inverter, or Midea Inverter).
+      </p>
+
+      <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 my-6">
+        <h4 class="font-bold text-slate-900 mb-3 text-base">Key Comparative Insights:</h4>
+        <ul class="text-xs sm:text-sm text-slate-700 space-y-3">
+          <li>
+            <strong>Energy Efficiency Ratio (EER):</strong> A soft starter only cures the starting current spike; it does <em>nothing</em> to lower running power consumption. A non-inverter 1.5HP AC continues drawing 1,200W constantly. In contrast, an Inverter AC modulates its compressor down to 300W–500W once room setpoint temperature is achieved, saving over <strong>60% in battery capacity every night</strong>.
+          </li>
+          <li>
+            <strong>Return on Investment (ROI):</strong> Running a non-inverter AC overnight requires an extra ₦1.2M to ₦1.8M in lithium storage capacity. Spending ₦450,000–₦650,000 on a new Inverter AC reduces required battery storage by half, delivering immediate capital savings.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    {/* Product Monetization Cards */}
+    <div class="mb-14">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">
+          Official Nigerian Solar Publications
+        </h2>
+        <p class="text-sm text-slate-600 mt-1">
+          Authored and published by <strong>Ibadan Solar Hub</strong> to prevent sizing blunders and installer rip-offs.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {bookProduct && (
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="inline-block px-2.5 py-1 bg-amber-100 text-amber-900 rounded-md text-xs font-bold mb-3">
+                Flagship Ebook (30 Chapters)
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">{bookProduct.title}</h3>
+              <p class="text-xs text-slate-500 mt-1">Author: {bookProduct.author}</p>
+              <p class="text-slate-600 text-sm mt-3 leading-relaxed">{bookProduct.description}</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-xs text-slate-400 block">Instant Download</span>
+                <span class="text-2xl font-black text-slate-900">₦{bookProduct.priceNgn.toLocaleString()}</span>
+              </div>
+              <a
+                href={bookProduct.checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-solar-500 hover:bg-solar-600 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs shadow transition"
+              >
+                Buy on Selar (₦{bookProduct.priceNgn.toLocaleString()})
+              </a>
+            </div>
+          </div>
+        )}
+
+        {toolkitProduct && (
+          <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="inline-block px-2.5 py-1 bg-blue-100 text-blue-900 rounded-md text-xs font-bold mb-3">
+                Complete Tool Bundle (4-in-1)
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">{toolkitProduct.title}</h3>
+              <p class="text-xs text-slate-500 mt-1">Publisher: {toolkitProduct.author}</p>
+              <p class="text-slate-600 text-sm mt-3 leading-relaxed">{toolkitProduct.description}</p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div>
+                <span class="text-xs text-slate-400 block">Instant Excel & PDF Bundle</span>
+                <span class="text-2xl font-black text-slate-900">₦{toolkitProduct.priceNgn.toLocaleString()}</span>
+              </div>
+              <a
+                href={toolkitProduct.checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 py-2.5 rounded-xl text-xs shadow transition"
+              >
+                Get Toolkit (₦{toolkitProduct.priceNgn.toLocaleString()})
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    {/* Related Research Whitepapers Cross-Linking */}
+    <div class="mb-14 bg-slate-50 p-6 sm:p-8 rounded-3xl border border-slate-200">
+      <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+        <span>📚</span> Related Nigerian Energy Research Whitepapers
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+        <a href="/packages/premium-inverter-ac-5kva" class="p-4 bg-white rounded-xl border border-slate-200 hover:border-solar-400 transition">
+          <div class="font-bold text-slate-900 mb-1">5kVA Premium Inverter AC Solar Package</div>
+          <div class="text-slate-500">Engineered specifically to power 1.5HP Inverter ACs + home essentials 24/7.</div>
+        </a>
+        <a href="/nigeria-battery-lifespan-tco-study" class="p-4 bg-white rounded-xl border border-slate-200 hover:border-solar-400 transition">
+          <div class="font-bold text-slate-900 mb-1">Nigerian Battery Lifespan & 10-Yr TCO Study</div>
+          <div class="text-slate-500">LiFePO4 vs AGM Dry Cell vs Tall Tubular heat degradation models.</div>
+        </a>
+        <a href="/band-a-tariff-vs-solar-index" class="p-4 bg-white rounded-xl border border-slate-200 hover:border-solar-400 transition">
+          <div class="font-bold text-slate-900 mb-1">Band A vs Petrol Generator Payback Index</div>
+          <div class="text-slate-500">Payback modeling under ₦1,400/L petrol and ₦209.50/kWh grid tariffs.</div>
+        </a>
+        <a href="/nigeria-lcoe-solar-vs-fuel-cost-index" class="p-4 bg-white rounded-xl border border-slate-200 hover:border-solar-400 transition">
+          <div class="font-bold text-slate-900 mb-1">The 2026 Nigerian LCOE Cost per kWh Index</div>
+          <div class="text-slate-500">Levelized cost per kWh: Solar (₦150) vs CNG (₦315) vs Petrol (₦852).</div>
+        </a>
+      </div>
+    </div>
+
+    {/* Academic & Engineering Citations */}
+    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 text-xs text-slate-500 space-y-2">
+      <div class="font-bold text-slate-700 uppercase tracking-wider text-[11px]">Engineering Standards & HVAC Citations:</div>
+      <ul class="list-disc pl-5 space-y-1">
+        <li><strong>ASHRAE Standard 90.1:</strong> Energy Standard for Buildings and Inverter-Driven HVAC Equipment Performance.</li>
+        <li><strong>IEEE Std 141:</strong> Recommended Practice for Electric Power Distribution in Industrial Plants (Motor Inrush Dynamics).</li>
+        <li><strong>IEC 60335-2-40:</strong> Particular Requirements for Electrical Heat Pumps, Air-Conditioners and Dehumidifiers.</li>
+        <li><strong>Editorial Analysis:</strong> Prepared by Ibadan Solar Hub for IbadanSolarHub.com.ng (2026).</li>
+      </ul>
+    </div>
+
+  </div>
+</BaseLayout>
