@@ -9,7 +9,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "El Nino, Extreme Heatwaves & The Nigerian Energy Crisis: How ENSO Disrupts Hydropower, Solar Yield & The National Grid",
-  "description": "Exhaustive climatological and power engineering whitepaper analyzing how El Nino (ENSO) anomalies reduce Nigerian hydropower output by 25%, trigger grid frequency cascade collapses, and accelerate decentralized solar grid defection.",
+  "description": "Exhaustive climatological and power engineering whitepaper analyzing how El Nino (ENSO) anomalies impact Nigeria's energy mix, gas-fired thermal plants, hydropower deficits, and the rise of decentralized solar mini-grids.",
   "author": {
     "@type": "Organization",
     "name": "Ibadan Solar Hub"
@@ -27,7 +27,7 @@ const schema = {
 
 <BaseLayout
   title="El Nino, Extreme Heatwaves & The Nigerian Energy Crisis | IbadanSolarHub"
-  description="How El Nino disrupts Nigeria's power grid. Empirical analysis of 25% hydropower deficits at Kainji and Shiroro dams, grid frequency instability, and decentralized solar defection."
+  description="How El Nino disrupts Nigeria's power grid. Empirical analysis of gas-fired thermal generation, 25% hydropower deficits at Kainji and Shiroro dams, grid frequency instability, and decentralized solar defection."
   schema={schema}
 >
   {/* Hero Section */}
@@ -40,13 +40,13 @@ const schema = {
         El Ni&ntilde;o, Extreme Heatwaves &amp; <span class="text-solar-400">The Nigerian Energy Crisis</span>
       </h1>
       <p class="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto mt-4 leading-relaxed">
-        How the El Ni&ntilde;o Southern Oscillation (ENSO) disrupts West African precipitation, cuts Nigerian hydropower capacity by over 25%, triggers cascading national grid collapses, and accelerates commercial solar defection.
+        How the El Ni&ntilde;o Southern Oscillation (ENSO) disrupts West African weather, strains Nigeria&apos;s thermal-hydro generation mix, triggers cascading grid collapses, and accelerates the nationwide rollout of decentralized solar mini-grids.
       </p>
 
       <div class="flex flex-wrap items-center justify-center gap-4 mt-6 text-xs text-slate-400">
         <span>Published by: <strong class="text-white">Ibadan Solar Hub</strong></span>
         <span>&bull;</span>
-        <span>Data Sources: <strong class="text-solar-400">TCN NCC Osogbo / NIMET / WMO / World Bank ESMAP</strong></span>
+        <span>Data Sources: <strong class="text-solar-400">TCN NCC Osogbo / NERC / NIMET / WMO / World Bank ESMAP</strong></span>
         <span>&bull;</span>
         <span>Published: <strong class="text-white">September 2026</strong></span>
       </div>
@@ -62,25 +62,56 @@ const schema = {
         <span class="font-normal inline-block not-italic" aria-hidden="true">📌</span> Executive Summary: The Climate-Energy Nexus
       </h2>
       <p class="text-sm sm:text-base text-slate-700 leading-relaxed mb-4">
-        The 2023&ndash;2026 global climate cycle has been marked by record-breaking sea surface temperature anomalies in the tropical Pacific, known as <strong>El Ni&ntilde;o (ENSO)</strong>. While global attention focuses on agriculture and coastal weather, its impact on developing power grids is catastrophic. In Nigeria, El Ni&ntilde;o alters the <strong>West African Monsoon (WAM)</strong>, delaying rainy season onset, accelerating reservoir evaporation, and plunging the national power grid into structural instability.
+        The 2023&ndash;2026 global climate cycle has been marked by severe sea surface temperature anomalies in the tropical Pacific, known as <strong>El Ni&ntilde;o (ENSO)</strong>. In Nigeria, El Ni&ntilde;o disrupts the <strong>West African Monsoon (WAM)</strong>, delaying rainy season onset and depleting water heads across the hydropower fleet. While <strong>gas-fired thermal plants generate ~70%&ndash;75% of Nigeria&apos;s on-grid electricity</strong>, the loss of hydro capacity removes vital spinning reserves and frequency stabilizers, precipitating nationwide grid fragility.
       </p>
 
       {/* Visual KPI Cards */}
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
         <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-sm text-center">
-          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Hydropower Deficit</div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Hydropower Dispatch Deficit</div>
           <div class="text-3xl font-black text-red-600 my-1">-25.4%</div>
           <p class="text-[11px] text-slate-600">Peak hydro dispatch drop at Kainji, Jebba, and Shiroro dams during ENSO dry spells.</p>
         </div>
         <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-sm text-center">
-          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Ambient Heatwave Peak</div>
-          <div class="text-3xl font-black text-amber-600 my-1">+3.2&deg;C</div>
-          <p class="text-[11px] text-slate-600">Average maximum temperature anomaly across Nigerian cities (pushing roofs to 65&deg;C+).</p>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Thermal Gas Plant Load</div>
+          <div class="text-3xl font-black text-solar-600 my-1">75% – 80%</div>
+          <p class="text-[11px] text-slate-600">Share of total grid generation shouldered by gas-fired plants during dry season peaks.</p>
         </div>
         <div class="bg-white p-4 rounded-xl border border-amber-200 shadow-sm text-center">
-          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Solar Defection Surge</div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Decentralized Solar Growth</div>
           <div class="text-3xl font-black text-emerald-600 my-1">+140%</div>
-          <p class="text-[11px] text-slate-600">Commercial &amp; residential adoption of decentralized Solar + LiFePO4 storage.</p>
+          <p class="text-[11px] text-slate-600">Surge in commercial C&amp;I solar and community mini-grid deployments across Nigeria.</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Nigeria Grid Generation Overview Card */}
+    <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 mb-12 border border-slate-800">
+      <h3 class="text-lg sm:text-xl font-bold text-solar-400 mb-3">Understanding Nigeria&apos;s Generation Fleet: Thermal vs. Hydro vs. Solar</h3>
+      <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+        Nigeria&apos;s grid operates with an installed capacity of ~13,000 MW, with daily operational dispatch typically ranging between 3,500 MW and 4,800 MW:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+          <span class="text-solar-400 font-bold block mb-1 text-sm">🔥 Gas Thermal Plants (70%–75%)</span>
+          <p class="text-slate-300 leading-relaxed">
+            The backbone of Nigeria&apos;s bulk electricity generation. Major stations include <strong>Egbin ST (1,320 MW)</strong>, <strong>Delta/Ughelli (900 MW)</strong>, <strong>Azura-Edo IPP (461 MW)</strong>, <strong>Geregu (848 MW)</strong>, <strong>Afam IV-VI (970 MW)</strong>, <strong>Okpai IPP (480 MW)</strong>, <strong>Olorunsogo (1,089 MW)</strong>, <strong>Omotosho (848 MW)</strong>, and <strong>Sapele (1,020 MW)</strong>. During the dry season, thermal plants shoulder nearly 80% of total generation.
+          </p>
+        </div>
+
+        <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+          <span class="text-blue-400 font-bold block mb-1 text-sm">💧 Hydroelectric Plants (20%–25%)</span>
+          <p class="text-slate-300 leading-relaxed">
+            Concentrated in Niger State and Northern catchments: <strong>Kainji Dam (760 MW)</strong>, <strong>Jebba Dam (578 MW)</strong>, <strong>Shiroro Dam (600 MW)</strong>, <strong>Zungeru (700 MW)</strong>, and <strong>Dadin Kowa (40 MW)</strong>. Hydro stations provide the grid&apos;s crucial fast-ramping spinning reserve and black-start restoration capability.
+          </p>
+        </div>
+
+        <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+          <span class="text-emerald-400 font-bold block mb-1 text-sm">☀️ Decentralized Solar Mini-Grids</span>
+          <p class="text-slate-300 leading-relaxed">
+            A rapidly growing decentralized fleet powered by the Rural Electrification Agency (REA), the World Bank NEP/DARES program, and private developers. Hundreds of solar-plus-storage mini-grids and commercial C&amp;I rooftop arrays now supply reliable clean power directly to communities, hospitals, and industrial hubs.
+          </p>
         </div>
       </div>
     </div>
@@ -91,30 +122,30 @@ const schema = {
         1. Climatological Mechanism: How El Ni&ntilde;o Alters the West African Monsoon
       </h2>
       <p class="mb-4">
-        The climate of Nigeria is governed by the seasonal oscillation of the <strong>Intertropical Convergence Zone (ITCZ)</strong>&mdash;the boundary interface between the dry, dust-laden continental Tropical (cT) air mass from the Sahara (the Harmattan) and the moist maritime Tropical (mT) air mass from the Atlantic Ocean (the Monsoon).
+        The climate of Nigeria is governed by the seasonal oscillation of the <strong>Intertropical Convergence Zone (ITCZ)</strong>&mdash;the boundary interface between the dry continental Tropical (cT) air mass from the Sahara (the Harmattan) and the moist maritime Tropical (mT) air mass from the Atlantic Ocean (the Monsoon).
       </p>
 
       {/* Visual Chart / Diagram: Atmospheric Mechanism */}
       <div class="my-8 bg-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl">
         <div class="text-xs font-bold text-solar-400 uppercase tracking-wider mb-2">Climate Mechanics Diagram</div>
-        <h3 class="text-lg font-bold text-white mb-4">The Atmospheric Transmission Mechanism: ENSO to Nigerian Grid Deficit</h3>
+        <h3 class="text-lg font-bold text-white mb-4">The Atmospheric Transmission Mechanism: ENSO to Grid Deficit</h3>
         
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
           <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
             <span class="text-solar-400 font-bold block mb-1">Step 1: Pacific Warming</span>
-            <p class="text-slate-300">Equatorial Pacific sea surface temperatures rise &gt;1.5&deg;C above baseline, shifting the global Walker Circulation cells.</p>
+            <p class="text-slate-300">Equatorial Pacific sea surface temperatures rise &gt;1.5&deg;C above baseline, altering global atmospheric Walker Circulation cells.</p>
           </div>
           <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
             <span class="text-solar-400 font-bold block mb-1">Step 2: ITCZ Suppression</span>
-            <p class="text-slate-300">The northward migration of the rain-bearing Atlantic monsoon is stalled, delaying rain onset across the Niger and Benue river catchments by 4&ndash;7 weeks.</p>
+            <p class="text-slate-300">The northward migration of the rain-bearing Atlantic monsoon is delayed, postponing rain onset across river catchments by 4&ndash;7 weeks.</p>
           </div>
           <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
             <span class="text-solar-400 font-bold block mb-1">Step 3: Reservoir Depletion</span>
-            <p class="text-slate-300">Runoff into the Kainji and Shiroro reservoirs drops by 20%&ndash;35%, while extreme ambient heat causes massive surface evaporation losses.</p>
+            <p class="text-slate-300">Runoff into the Kainji and Shiroro dams drops by 20%&ndash;35%, with severe surface evaporation losses reducing hydraulic head.</p>
           </div>
           <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
-            <span class="text-red-400 font-bold block mb-1">Step 4: Grid Destabilization</span>
-            <p class="text-slate-300">Hydropower stations lose generation head and cannot provide primary spinning reserve, triggering cascade grid collapse.</p>
+            <span class="text-red-400 font-bold block mb-1">Step 4: Grid Frequency Risk</span>
+            <p class="text-slate-300">Hydro stations lose fast-ramping spinning reserve capacity, leaving the thermal-heavy grid vulnerable to sudden frequency collapse.</p>
           </div>
         </div>
       </div>
@@ -130,7 +161,7 @@ const schema = {
         2. Empirical Hydropower Deficits: Kainji, Jebba &amp; Shiroro Impact
       </h2>
       <p class="mb-4">
-        Nigeria&apos;s on-grid power generation relies on three primary legacy hydro plants located in Niger State: <strong>Kainji Dam (760 MW installed)</strong>, <strong>Jebba Dam (578 MW installed)</strong>, and <strong>Shiroro Dam (600 MW installed)</strong>, plus the newly commissioned <strong>Zungeru Hydropower Plant (700 MW)</strong> and Dadin Kowa (40 MW).
+        While gas thermal plants generate the bulk of energy, Nigeria&apos;s hydropower stations&mdash;<strong>Kainji Dam (760 MW)</strong>, <strong>Jebba Dam (578 MW)</strong>, <strong>Shiroro Dam (600 MW)</strong>, <strong>Zungeru (700 MW)</strong>, and <strong>Dadin Kowa (40 MW)</strong>&mdash;serve as the essential stabilizers of grid frequency and voltage. During El Ni&ntilde;o droughts, reservoir heads drop precipitously:
       </p>
 
       {/* Visual Chart: Reservoir Water Head and Generation Loss */}
@@ -221,7 +252,7 @@ const schema = {
         </div>
         Where <strong>&eta;</strong> is turbine efficiency, <strong>&rho;</strong> is water density, <strong>g</strong> is gravitational acceleration (9.81 m/s&sup2;), <strong>Q</strong> is volumetric flow rate (m&sup3;/s), and <strong>H</strong> is the effective hydraulic head (m).
         <p class="mt-3">
-          During El Ni&ntilde;o droughts, both flow rate (Q) and reservoir head (H) decline simultaneously. Because power output is proportional to the product of flow and head, a 15% drop in reservoir water level combined with a 20% reduction in river inflow causes an aggregate <strong>32% reduction in continuous electrical energy generation</strong>.
+          During El Ni&ntilde;o droughts, both flow rate (Q) and reservoir head (H) decline simultaneously. Because power output is proportional to the product of flow and head, a 15% drop in reservoir water level combined with a 20% reduction in river inflow causes an aggregate <strong>32% reduction in continuous hydro electrical energy generation</strong>.
         </p>
       </div>
     </section>
@@ -229,40 +260,40 @@ const schema = {
     {/* Section 3: Why Grid Collapses Explode During El Nino */}
     <section class="mb-14">
       <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-6">
-        3. The Rotational Inertia Deficit: Why National Grid Collapses Spike
+        3. The Rotational Inertia Deficit: Why Grid Collapses Spike
       </h2>
       <p class="mb-4">
-        As detailed in our <a href="/nigeria-grid-collapse-feeder-reliability-report" class="text-solar-600 font-semibold hover:underline">11-Year National Grid Collapse Audit</a>, Nigeria suffers from severe system collapse vulnerabilities. What few observers realize is the pivotal thermodynamic and mechanical role hydropower plays in grid stabilization:
+        As detailed in our <a href="/nigeria-grid-collapse-feeder-reliability-report" class="text-solar-600 font-semibold hover:underline">11-Year National Grid Collapse Audit</a>, Nigeria suffers from severe system collapse vulnerabilities. When hydro dams lose water head, the entire grid loses its dynamic stability cushion:
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <div class="inline-block px-2.5 py-1 bg-blue-100 text-blue-900 text-xs font-bold rounded-md mb-3">
-            Hydropower&apos;s Grid Stabilization Role
+            Hydropower's Grid Stabilization Role
           </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Massive Mechanical Inertia &amp; Fast Response</h3>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Fast Dynamic Response &amp; Black-Start</h3>
           <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
-            <li><strong>Inertia Constant (H):</strong> Hydro turbines possess massive physical rotating mass that opposes instantaneous frequency deviations (RoCoF).</li>
-            <li><strong>Governor Response:</strong> Hydro generators can ramp power output from 20% to 100% within <strong>15 to 30 seconds</strong> to absorb sudden load changes.</li>
-            <li><strong>Black-Start Capability:</strong> Hydro dams serve as the primary black-start stations used to re-energize the national grid following a nationwide blackout.</li>
+            <li><strong>Mechanical Inertia:</strong> Massive hydro rotor mass resists instantaneous frequency deviations (RoCoF).</li>
+            <li><strong>Fast Governor Response:</strong> Hydro generators ramp power output within <strong>15 to 30 seconds</strong> to arrest sudden frequency drops.</li>
+            <li><strong>Black-Start Capability:</strong> Hydro dams serve as the primary black-start units to re-energize transmission lines after total grid failure.</li>
           </ul>
         </div>
 
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="inline-block px-2.5 py-1 bg-red-100 text-red-900 text-xs font-bold rounded-md mb-3">
-            Thermal Gas Turbines Under Heatwaves
+          <div class="inline-block px-2.5 py-1 bg-amber-100 text-amber-900 text-xs font-bold rounded-md mb-3">
+            Thermal Gas Plants Under Dry Season Strain
           </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Thermal Derating &amp; Gas Supply Bottlenecks</h3>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">High Load &amp; Gas Supply Constraints</h3>
           <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
-            <li><strong>Combustion Air Derating:</strong> Gas turbines (in Afam, Egbin, Delta, Sapele) lose <strong>0.7% to 1.0% output power for every 1&deg;C rise in ambient inlet air temperature</strong> above 15&deg;C due to lower air density.</li>
-            <li><strong>Gas Supply Illiquidity:</strong> Thermal plants face chronic gas supply curtailments due to commercial debt and pipeline vandalism.</li>
-            <li><strong>Fragile Frequency Control:</strong> Gas turbines cannot ramp fast enough to prevent cascade tripping when a 330kV transmission line collapses.</li>
+            <li><strong>Thermal Derating:</strong> High ambient intake air temperatures (&gt;35&deg;C) reduce gas turbine combustion density by 0.7% per &deg;C.</li>
+            <li><strong>Gas Pipeline Pressures:</strong> Thermal stations (Egbin, Geregu, Delta) often experience gas supply curtailments during dry periods.</li>
+            <li><strong>Slower Ramp Rates:</strong> Thermal turbines cannot ramp instantaneously to catch sudden transmission trips when hydro reserves are depleted.</li>
           </ul>
         </div>
       </div>
 
       <p class="mb-4">
-        When El Ni&ntilde;o incapacitates Kainji and Shiroro, the Nigerian grid operates with near-zero spinning reserves. Any single transmission line fault or sudden feeder trip causes grid frequency to drop below the statutory 48.5 Hz threshold, precipitating total nationwide blackout within milliseconds.
+        When El Ni&ntilde;o reduces hydro dispatch, the national grid operates with near-zero spinning reserve margins. Any sudden line trip or generator outage causes frequency to breach statutory thresholds (&lt;48.5 Hz), resulting in rapid cascade blackouts.
       </p>
     </section>
 
@@ -279,20 +310,20 @@ const schema = {
       <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 my-6">
         <h3 class="text-lg font-bold text-solar-400 mb-3">The Trans-National Ripple Effect:</h3>
         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
-          When Nigerian domestic hydropower output falls by 25% during El Ni&ntilde;o, Nigeria faces a severe dilemma: curtail domestic distribution or curtail international export obligations.
+          When Nigerian domestic generation is squeezed during El Ni&ntilde;o dry seasons, the supply deficit reverberates across West Africa:
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
           <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
             <strong class="text-white block mb-1">Republic of Niger:</strong>
-            Relies on Nigerian grid exports for over 70% of its capital city power. Hydro curtailments cause rolling 18-hour blackouts in Niamey.
+            Relies heavily on Nigerian electricity exports for capital city baseload. Curtailments trigger extensive load-shedding in Niamey.
           </div>
           <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
             <strong class="text-white block mb-1">Benin &amp; Togo (CEB):</strong>
-            Forced to burn emergency heavy fuel oil (HFO) and high-cost LNG, driving regional electricity tariffs upward by 35%&ndash;50%.
+            Forced to ramp up expensive heavy fuel oil (HFO) and LNG thermal generators, driving regional power costs upward.
           </div>
           <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
             <strong class="text-solar-400 block mb-1">The Solar Mini-Grid Acceleration:</strong>
-            Regional governments and development banks (AfDB, World Bank) have doubled funding for independent solar-plus-storage mini-grids.
+            Regional governments and development institutions (AfDB, World Bank) are accelerating funding for off-grid solar mini-grids.
           </div>
         </div>
       </div>
@@ -301,10 +332,10 @@ const schema = {
     {/* Section 5: The Structural Shift to Decentralized Solar */}
     <section class="mb-14">
       <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-6">
-        5. The Economic Resolution: Solar PV as Nigeria&apos;s Climate Insurance
+        5. The Economic Resolution: Solar PV as Nigeria&apos;s Climate Shield
       </h2>
       <p class="mb-4">
-        The vulnerability exposed by El Ni&ntilde;o has proven that relying on centralized, river-dependent hydropower and gas pipelines is an existential operational risk for Nigerian businesses and homes.
+        The vulnerability exposed by El Ni&ntilde;o cycles has accelerated Nigeria&apos;s decentralized energy transition. From the hundreds of rural mini-grids funded under the Rural Electrification Agency (REA) to private rooftop commercial installations, distributed solar-plus-storage offers insulation against fuel scarcity and grid fragility.
       </p>
       <p class="mb-4">
         As demonstrated in our <a href="/nigeria-lcoe-solar-vs-fuel-cost-index" class="text-solar-600 font-semibold hover:underline">2026 Nigerian LCOE Cost per kWh Benchmark</a>:
@@ -359,7 +390,7 @@ const schema = {
       </div>
 
       <p class="mb-4">
-        Solar PV systems do not consume water, require zero pipelines, and experience negligible fuel cost volatility. While heatwaves do induce panel derating (which we analyze in our companion study, <a href="/climate-resilient-solar-design-nigeria-heatwaves" class="text-solar-600 font-semibold hover:underline">Designing Climate-Resilient Solar Systems in Tropical Africa</a>), decentralized solar remains Nigeria&apos;s most bulletproof shield against climate-induced grid collapse.
+        Solar PV systems consume zero water, require no gas pipelines, and face zero commodity fuel volatility. While heatwaves do induce panel derating (analyzed in our companion study, <a href="/climate-resilient-solar-design-nigeria-heatwaves" class="text-solar-600 font-semibold hover:underline">Designing Climate-Resilient Solar Systems in Tropical Africa</a>), decentralized solar remains Nigeria&apos;s most reliable defense against climate-induced grid collapse.
       </p>
     </section>
 
@@ -369,11 +400,11 @@ const schema = {
         References &amp; Academic Bibliography
       </h2>
       <ol class="list-decimal pl-5 space-y-2 text-xs text-slate-600 leading-relaxed">
+        <li><strong>Nigerian Electricity Regulatory Commission (NERC)</strong> &mdash; <em>Quarterly Reports &amp; Multi-Year Tariff Order (MYTO) Reviews (2024&ndash;2026)</em>: Grid energy mix (thermal vs. hydro dispatch shares) and spinning reserve audits.</li>
+        <li><strong>Transmission Company of Nigeria (TCN)</strong> &mdash; <em>National Control Centre (NCC) Osogbo Operational Data</em>: Gas thermal dispatch vs. hydro station outputs and system collapse logs.</li>
         <li><strong>World Meteorological Organization (WMO)</strong> &mdash; <em>State of the Climate in Africa Report (2024&ndash;2026)</em>: ENSO impacts on the West African Monsoon and Sudano-Sahelian hydrological cycles.</li>
         <li><strong>Nigerian Meteorological Agency (NIMET)</strong> &mdash; <em>Seasonal Climate Prediction (SCP) &amp; Hydrometeorological Bulletins (2024&ndash;2026)</em>: River Niger and Benue catchment precipitation deficits.</li>
-        <li><strong>Transmission Company of Nigeria (TCN)</strong> &mdash; <em>National Control Centre (NCC) Osogbo Daily Operational Reports</em>: Hydro generation dispatch records and system frequency logs.</li>
-        <li><strong>Nigerian Electricity Regulatory Commission (NERC)</strong> &mdash; <em>Quarterly Reports &amp; Multi-Year Tariff Order (MYTO) Reviews</em>: Spinning reserve deficits and generation shortfall audits.</li>
-        <li><strong>World Bank ESMAP</strong> &mdash; <em>Decentralized Renewable Energy Solutions for Sub-Saharan Africa (2025)</em>: LCOE benchmarks and microgrid climate resilience.</li>
+        <li><strong>Rural Electrification Agency (REA) &amp; World Bank</strong> &mdash; <em>Nigeria Electrification Project (NEP/DARES) Progress Reports</em>: Decentralized solar mini-grid deployment metrics and microgrid resilience.</li>
       </ol>
     </section>
 
