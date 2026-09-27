@@ -60,7 +60,7 @@ const schema = {
     {/* Executive Summary Box */}
     <div class="bg-amber-50 border-l-4 border-solar-500 p-6 rounded-r-2xl mb-12 shadow-sm">
       <h2 class="text-xl font-bold text-amber-950 mb-3 flex items-center gap-2">
-        <span>⚡</span> Executive Summary & Core Findings
+        <span class="font-normal inline-block not-italic" aria-hidden="true">⚡</span> Executive Summary & Core Findings
       </h2>
       <ul class="space-y-2 text-sm sm:text-base text-amber-900 leading-relaxed list-disc list-inside">
         <li><strong>Thermal Vulnerability:</strong> Under tropical ambient operating temperatures (28°C–42°C), lead-based chemistries suffer catastrophic premature capacity loss. In accordance with the Arrhenius reaction rate principle, every 10°C rise above 25°C doubles positive grid corrosion and electrolyte evaporation, slashing tall tubular and AGM lifespans from an advertised 3–5 years down to <strong>14–22 months</strong>.</li>
@@ -398,7 +398,9 @@ const schema = {
       </div>
 
       <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl mb-8">
-        <h3 class="font-bold text-emerald-950 text-base mb-1">💡 The Financial Takeaway:</h3>
+        <h3 class="font-bold text-emerald-950 text-base mb-1">
+          <span class="font-normal inline-block not-italic" aria-hidden="true">💡</span> The Financial Takeaway:
+        </h3>
         <p class="text-sm text-emerald-900 leading-relaxed">
           Choosing tall tubular or AGM batteries to save ₦300,000 on Day 1 creates a hidden compounding liability that costs the property owner over <strong>₦5.3 Million in mandatory replacement cycles and lost round-trip energy over a decade</strong>.
         </p>
@@ -429,7 +431,7 @@ const schema = {
 
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="font-bold text-slate-900 text-base mb-3 flex items-center gap-2">
-            <span class="text-red-600 font-bold">⚠️</span> Engineering Vulnerabilities of AGM
+            <span class="font-normal inline-block not-italic text-red-600" aria-hidden="true">⚠️</span> Engineering Vulnerabilities of AGM
           </h3>
           <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc list-inside">
             <li><strong>Thermal Runaway Hazard:</strong> If charged with high currents (&gt;0.2C) in a warm room above 35°C (as modeled in our <a href="/harmattan-monsoon-solar-derating-study" class="text-solar-600 font-semibold hover:underline">Harmattan & Thermal Derating Study</a>), oxygen recombination generates intense exothermic heat, causing the battery casing to swell and permanently dry out the fiberglass mat.</li>
@@ -451,7 +453,7 @@ const schema = {
         {/* For End-Users */}
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
-            <span>👤</span> For Homeowners & Commercial End-Users
+            <span class="font-normal inline-block not-italic" aria-hidden="true">👤</span> For Homeowners & Commercial End-Users
           </h3>
           <p class="text-sm text-slate-600 leading-relaxed mb-3">
             If your budget permits, <strong>insist on LiFePO4 Lithium (48V architecture)</strong> (such as the <a href="/equipment/felicity-solar-5kwh-lithium-battery" class="text-solar-600 font-semibold hover:underline">Felicity 5kWh 48V Lithium</a>). If budget constraints mandate lead-acid, choose AGM "Dry Cell" for indoor flats or Tall Tubular (like the <a href="/equipment/luminous-220ah-tubular-battery" class="text-solar-600 font-semibold hover:underline">Luminous 220Ah</a>) for ventilated exterior spaces, but budget for replacement every 18 to 24 months. Compare true generation costs in our <a href="/nigeria-lcoe-solar-vs-fuel-cost-index" class="text-solar-600 font-semibold hover:underline">2026 Nigerian LCOE Cost Index</a>.
@@ -461,7 +463,7 @@ const schema = {
         {/* For Installers & EPCs */}
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
-            <span>⚙️</span> For Solar Installers & EPC Engineers
+            <span class="font-normal inline-block not-italic" aria-hidden="true">⚙️</span> For Solar Installers & EPC Engineers
           </h3>
           <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc list-inside">
             <li><strong>Always Install Temperature Sensors:</strong> When installing AGM or Tubular banks, attach the inverter’s Remote Temperature Sensor (RTS) probe directly to the center battery terminal to adjust float voltage dynamically during afternoon heat waves.</li>
@@ -473,7 +475,7 @@ const schema = {
         {/* For Policymakers */}
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
-            <span>🏛️</span> For Policymakers & Standards Regulators (SON / NERC)
+            <span class="font-normal inline-block not-italic" aria-hidden="true">🏛️</span> For Policymakers & Standards Regulators (SON / NERC)
           </h3>
           <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc list-inside">
             <li><strong>Mandatory SONCAP Cycle-Life Testing:</strong> Enforce rigorous pre-shipment laboratory cycle-life verification at 35°C to curb the dumping of substandard, relabeled car starter batteries as deep-cycle solar units.</li>

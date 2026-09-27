@@ -60,7 +60,7 @@ const schema = {
     {/* Executive Summary Box */}
     <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-2xl mb-12 shadow-sm">
       <h2 class="text-xl font-bold text-red-950 mb-3 flex items-center gap-2">
-        <span>⚠️</span> Key Empirical Findings & National Takeaways
+        <span class="font-normal inline-block not-italic" aria-hidden="true">⚠️</span> Key Empirical Findings & National Takeaways
       </h2>
       <ul class="space-y-2 text-sm sm:text-base text-red-900 leading-relaxed list-disc list-inside">
         <li><strong>11-Year Collapse Trajectory:</strong> Between January 2015 and September 2026, Nigeria’s national electricity grid suffered a cumulative <strong>162 system collapses</strong> (118 Total System Collapses and 44 Partial Collapses), representing an average of 14.1 catastrophic grid failures per year.</li>
@@ -302,7 +302,9 @@ const schema = {
       </div>
 
       <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl mb-8">
-        <h3 class="font-bold text-slate-950 text-base mb-1">🔍 Why Suburban Band A Feeders Consistently Fail:</h3>
+        <h3 class="font-bold text-slate-950 text-base mb-1">
+          <span class="font-normal inline-block not-italic" aria-hidden="true">🔍</span> Why Suburban Band A Feeders Consistently Fail:
+        </h3>
         <p class="text-sm text-slate-700 leading-relaxed">
           While premium urban feeders (e.g. Victoria Island, Ikeja GRA, Maitama) maintain 19 to 21 hours of supply, suburban Band A feeders (e.g. Akobo in Ibadan, Ajah/Sangotedo in Lagos, Gwarinpa in Abuja) suffer from <strong>frequent feeder 33kV circuit breaker tripping, overloaded 500kVA community transformers, and localized 415V distribution line faults</strong>. Despite receiving only 14 hours of power, consumers are continuously billed at the full ₦209.50/kWh rate without automated pro-rata compensation.
         </p>
@@ -342,7 +344,9 @@ const schema = {
       </div>
 
       <div class="bg-amber-50 border-l-4 border-solar-500 p-6 rounded-r-2xl mb-8">
-        <h3 class="font-bold text-amber-950 text-base mb-2">📈 The "Utility Death Spiral" Phenomenon</h3>
+        <h3 class="font-bold text-amber-950 text-base mb-2">
+          <span class="font-normal inline-block not-italic" aria-hidden="true">📈</span> The "Utility Death Spiral" Phenomenon
+        </h3>
         <p class="text-sm text-amber-900 leading-relaxed">
           As credit-worthy commercial enterprises (banks, private hospitals, manufacturing plants, cold stores) install rooftop solar microgrids and reduce their daytime grid consumption by 70% to 90%, DISCOs lose their most lucrative paying customers. This revenue loss forces DISCOs to lobby NERC for even higher tariffs on remaining consumers, triggering further solar defection across middle-class residential neighborhoods.
         </p>
@@ -359,7 +363,7 @@ const schema = {
         {/* For End-Users */}
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
-            <span>🏠</span> For Homeowners & Commercial Facilities
+            <span class="font-normal inline-block not-italic" aria-hidden="true">🏠</span> For Homeowners & Commercial Facilities
           </h3>
           <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc list-inside">
             <li><strong>Reprogram Inverter Source Priority:</strong> Change your hybrid inverter work mode from "Utility First" to <strong>"Solar First (SBU / SOL)"</strong>. Let solar power run your daytime loads and charge the lithium battery, utilizing the grid solely as a tertiary fallback during consecutive rainy days.</li>
@@ -370,7 +374,7 @@ const schema = {
         {/* For Installers */}
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
-            <span>⚙️</span> For Solar Installers & System Integrators
+            <span class="font-normal inline-block not-italic" aria-hidden="true">⚙️</span> For Solar Installers & System Integrators
           </h3>
           <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc list-inside">
             <li><strong>Select Wide-Voltage Window Inverters:</strong> Ensure inverters feature an AC input operating range of <strong>160V to 270V AC</strong> to prevent incessant nuisance tripping when DISCO voltage sags during evening peak hours.</li>
@@ -381,7 +385,7 @@ const schema = {
         {/* For Policymakers */}
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
-            <span>🏛️</span> For Policymakers & Regulators (NERC / Federal Ministry of Power)
+            <span class="font-normal inline-block not-italic" aria-hidden="true">🏛️</span> For Policymakers & Regulators (NERC / Federal Ministry of Power)
           </h3>
           <ul class="text-xs sm:text-sm text-slate-700 space-y-2 list-disc list-inside">
             <li><strong>Automated Feeder SLA Penalty Framework:</strong> Implement automated smart-meter telemetry auditing where DISCOs that fail to deliver 20 hours on Band A feeders are automatically downgraded to Band B tariff settlements for that billing cycle.</li>

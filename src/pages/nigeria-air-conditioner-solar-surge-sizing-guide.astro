@@ -60,7 +60,7 @@ const schema = {
     {/* Executive Summary Box */}
     <div class="bg-amber-500/10 border-2 border-solar-500/30 rounded-2xl p-6 sm:p-8 mb-12">
       <h2 class="text-xl sm:text-2xl font-black text-slate-900 mb-3 flex items-center gap-2">
-        <span>📌</span> Executive Summary: The Nigerian AC Solar Dilemma
+        <span class="font-normal inline-block not-italic" aria-hidden="true">📌</span> Executive Summary: The Nigerian AC Solar Dilemma
       </h2>
       <p class="text-sm sm:text-base text-slate-700 leading-relaxed mb-4">
         Air conditioning accounts for over <strong>60% to 75% of residential and commercial peak electrical loads</strong> across Nigeria. However, thousands of Nigerian homeowners and businesses face severe system trips, blown inverter MOSFETs, and battery voltage collapse when trying to power air conditioners on solar.
@@ -162,7 +162,7 @@ const schema = {
           <h3 class="text-lg font-bold text-slate-900 mb-2">Growatt, Felicity, Deye HF Units</h3>
           <ul class="text-xs sm:text-sm text-slate-600 space-y-2">
             <li><strong>Surge Limit:</strong> Typically 2x rated capacity for only 5 seconds (e.g. 5kW inverter can handle 10kW for 5s).</li>
-            <li><strong>Vulnerability:</strong> Relies purely on electronic MOSFET switching. Inductive spikes ($V = -L \cdot di/dt$) from non-inverter compressors can exceed MOSFET breakdown voltages and cause immediate error 07 / overload trip.</li>
+            <li><strong>Vulnerability:</strong> Relies purely on electronic MOSFET switching. Inductive spikes (V = -L &middot; di/dt) from non-inverter compressors can exceed MOSFET breakdown voltages and cause immediate error 07 / overload trip.</li>
             <li><strong>Efficiency:</strong> High (93%–97%), lightweight (10kg–15kg), and cost-effective.</li>
           </ul>
         </div>
