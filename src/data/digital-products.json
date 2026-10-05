@@ -18,7 +18,8 @@
       "The Battery Truth Test: Spot fake lithium batteries made from recycled phone/EV cells in 30 seconds",
       "Business & Home Blueprints: Exact sizing for flats, duplexes, cold rooms, tailors, hotels, clinics & farms"
     ],
-    "priceUsd": 3.69
+    "priceNgn": 5000,
+    "checkoutCurrency": "NGN"
   },
   {
     "id": "solar-complete-toolkit-bundle",
@@ -37,6 +38,7 @@
       "Tool 3: Printable 3-Page Solar Installer Vetting & Site Inspection Checklist (PDF)",
       "Tool 4: 3-Way Solar Quote Scorecard & Component Price Auditor (PDF)"
     ],
-    "priceUsd": 3.0
+    "priceNgn": 2000,
+    "checkoutCurrency": "NGN"
   }
 ]

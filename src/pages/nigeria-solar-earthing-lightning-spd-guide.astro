@@ -266,7 +266,7 @@ const schema = {
             <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
               <div>
                 <span class="text-xs text-slate-400 block">Instant Download</span>
-                <span class="text-2xl font-black text-slate-900">US${bookProduct.priceUsd.toFixed(2)}</span>
+                <span class="text-2xl font-black text-slate-900">₦{bookProduct.priceNgn.toLocaleString()}</span>
               </div>
               <a
                 href={bookProduct.checkoutUrl}
@@ -274,7 +274,7 @@ const schema = {
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 bg-solar-500 hover:bg-solar-600 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs shadow transition"
               >
-                Buy on Selar (US${bookProduct.priceUsd.toFixed(2)})
+                Buy on Selar (₦{bookProduct.priceNgn.toLocaleString()})
               </a>
             </div>
           </div>
@@ -293,7 +293,7 @@ const schema = {
             <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
               <div>
                 <span class="text-xs text-slate-400 block">Instant Excel & PDF Bundle</span>
-                <span class="text-2xl font-black text-slate-900">US${toolkitProduct.priceUsd.toFixed(2)}</span>
+                <span class="text-2xl font-black text-slate-900">₦{toolkitProduct.priceNgn.toLocaleString()}</span>
               </div>
               <a
                 href={toolkitProduct.checkoutUrl}
@@ -301,7 +301,7 @@ const schema = {
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 py-2.5 rounded-xl text-xs shadow transition"
               >
-                Get Toolkit (US${toolkitProduct.priceUsd.toFixed(2)})
+                Get Toolkit (₦{toolkitProduct.priceNgn.toLocaleString()})
               </a>
             </div>
           </div>

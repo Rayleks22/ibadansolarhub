@@ -14,8 +14,8 @@ const schema = {
     "image": prod.coverImage,
     "offers": {
       "@type": "Offer",
-      "price": prod.priceUsd,
-      "priceCurrency": "USD",
+      "price": prod.priceNgn,
+      "priceCurrency": "NGN",
       "availability": "https://schema.org/InStock",
       "url": prod.checkoutUrl
     }
@@ -119,12 +119,8 @@ const schema = {
               <div>
                 <span class="text-[11px] text-slate-600 uppercase font-semibold block">Price</span>
                 <div class="flex items-baseline gap-2">
-                  <span class="text-3xl font-black text-slate-900">US${prod.priceUsd.toFixed(2)}</span>
+                  <span class="text-3xl font-black text-slate-900">₦{prod.priceNgn.toLocaleString()}</span>
                 </div>
-                <span class="block text-[11px] text-slate-500 mt-1 max-w-xs">
-                  Charged in US dollars by Selar. Your bank or card converts at its own rate, so the
-                  naira amount on your statement will differ from any figure shown elsewhere on this site.
-                </span>
               </div>
 
               <div class="w-full sm:w-auto">
