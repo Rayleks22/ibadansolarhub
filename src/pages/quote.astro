@@ -327,6 +327,13 @@ const installerApplyUrl = waLink(
           notes: fields.notes.value.trim(),
           pageUrl: window.location.href,
           submittedAt: new Date().toISOString(),
+          /*
+            Both spam signals are sent so the SERVER can evaluate them. The
+            server stores-and-flags rather than discarding, so sending these can
+            never cost you a real lead — it only lets suspicious ones be marked.
+          */
+          form_loaded_at: loadedAt ? loadedAt.value : '',
+          company_website_url: honeypot ? honeypot.value : '',
         };
 
         const text =

@@ -8,7 +8,9 @@
     "build": "node scripts/check-config.mjs && astro build",
     "preview": "node scripts/preview-server.mjs 4321",
     "astro": "astro",
-    "check:config": "node scripts/check-config.mjs"
+    "check:config": "node scripts/check-config.mjs",
+    "test:worker": "node worker/test/run.mjs",
+    "verify": "npm run check:config && npm run test:worker && npm run build"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",

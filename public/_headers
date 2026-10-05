@@ -24,7 +24,7 @@
 #   'unsafe-inline' (style)  — Tailwind utility classes and the print-BOQ writer.
 #   googletagmanager.com     — GA4, loaded ONLY when ANALYTICS.ga4Id is set.
 #   google-analytics.com     — GA4 beacon endpoint (connect-src, + region1).
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://leads.ibadansolarhub.com.ng https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'
 
 # Immutable, content-hashed build assets — safe to cache for a year.
 /_astro/*

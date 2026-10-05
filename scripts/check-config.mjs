@@ -71,7 +71,9 @@ const requiredConfig = () => {
     );
   }
 
-  const endpointMatch = config.match(/LEAD_ENDPOINT\s*=\s*'([^']*)'/);
+  // Must anchor on `export const` — an unanchored match hits the example in the
+  // doc comment above the declaration and validates the wrong string.
+  const endpointMatch = config.match(/export const LEAD_ENDPOINT\s*=\s*'([^']*)'/);
   if (endpointMatch && endpointMatch[1]) {
     if (!/^https:\/\//.test(endpointMatch[1])) {
       errors.push('LEAD_ENDPOINT must be an https:// URL, or empty for WhatsApp-only mode.');
@@ -128,6 +130,61 @@ for (const file of files) {
     });
   }
 }
+
+/*
+ * ─────────────────────────────────────────────────────────────────────────────
+ * CSP / endpoint consistency.
+ *
+ * The quote form POSTs to LEAD_ENDPOINT and then swallows any error with
+ * `.catch(() => {})`, so a blocked request is invisible: the visitor still sees
+ * "Request Sent" while the lead is thrown away. The deployed Worker will NOT be
+ * on the same origin as the site (it is a workers.dev URL or a subdomain), so a
+ * missing entry in `connect-src` would silently destroy every durable lead in
+ * production — and nothing on the page would look wrong.
+ *
+ * This check makes that failure impossible to ship unnoticed.
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+function checkCspAllowsEndpoints() {
+  const headersPath = path.join(ROOT, 'public', '_headers');
+  if (!fs.existsSync(headersPath)) return;
+  const cfg = fs.readFileSync(path.join(ROOT, 'src/config/site.ts'), 'utf8');
+  const LEAD_ENDPOINT =
+    (cfg.match(/export const LEAD_ENDPOINT\s*=\s*'([^']*)'/) || [])[1] || '';
+  // Skip comment lines so the documented example cannot masquerade as the value.
+  const CUSTOM_ANALYTICS_SRC =
+    (cfg.split('\n').filter((l) => !/^\s*(\*|\/\/)/.test(l)).join('\n')
+      .match(/customScriptSrc:\s*'([^']*)'/) || [])[1] || '';
+  const csp = fs.readFileSync(headersPath, 'utf8')
+    .split('\n')
+    .find((l) => l.includes('Content-Security-Policy')) || '';
+  const connect = (csp.match(/connect-src([^;]*)/) || [])[1] || '';
+  const script = (csp.match(/script-src([^;]*)/) || [])[1] || '';
+
+  const targets = [
+    { value: LEAD_ENDPOINT, directive: connect, label: 'LEAD_ENDPOINT', name: 'connect-src' },
+    { value: CUSTOM_ANALYTICS_SRC, directive: script, label: 'ANALYTICS.customScriptSrc', name: 'script-src' },
+  ];
+
+  for (const { value, directive, label, name } of targets) {
+    if (!value || !/^https?:\/\//.test(value)) continue;
+    const origin = new URL(value).origin;
+    // Same-origin endpoints are covered by 'self' in the directive.
+    if (origin === 'https://ibadansolarhub.com.ng' && directive.includes("'self'")) continue;
+    if (directive.includes(origin)) continue;
+    problems.push({
+      file: 'public/_headers',
+      line: 0,
+      snippet: `${name}${directive.trim()}`,
+      reason:
+        `${label} is set to ${value}, but ${origin} is not allowed by the CSP ` +
+        `\`${name}\` directive. The browser will BLOCK the request and the site will ` +
+        `silently discard it (the form swallows fetch errors). Add ${origin} to ` +
+        `\`${name}\` in public/_headers.`,
+    });
+  }
+}
+checkCspAllowsEndpoints();
 
 for (const error of requiredConfig()) {
   problems.push({ file: 'src/config/site.ts', line: 0, snippet: '', reason: error });

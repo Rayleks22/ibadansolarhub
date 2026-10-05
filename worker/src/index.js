@@ -115,11 +115,22 @@ export default {
       if (!/^234(70|80|81|90|91)\d{8}$/.test(phone)) {
         return json({ error: 'Valid Nigerian phone number required' }, 400, origin);
       }
-      // Require a realistic human delay (honeypot by timing).
+      /*
+        Timing heuristic — most bots submit within a few hundred milliseconds.
+
+        This previously did `return { ok: true, stored: false }`: it DISCARDED
+        the lead while telling the user it had succeeded. If the heuristic ever
+        misfired on a real person — browser autofill, a fast typist, a slow
+        first paint skewing the start timestamp — that lead vanished with no
+        record, no error, and a success message on screen. An approximation
+        this rough must not have the power to destroy data.
+
+        So the lead is STORED and FLAGGED instead. A flagged lead can be
+        ignored; a discarded one cannot be recovered. Flagged submissions also
+        skip the notification webhook so they do not train you to ignore alerts.
+      */
       const elapsed = Date.now() - (parseInt(data.form_loaded_at, 10) || 0);
-      if (elapsed > 0 && elapsed < 1500) {
-        return json({ ok: true, stored: false }, 200, origin);
-      }
+      const submittedTooFast = elapsed > 0 && elapsed < 1200;
 
       // Simple rate limit per phone number.
       const rlKey = `rl:${phone}`;
@@ -142,6 +153,7 @@ export default {
         country: request.headers.get('CF-IPCountry') || '',
         userAgent: clean(request.headers.get('User-Agent'), 200),
         whatsappDelivered: 'unknown',
+        suspicious: submittedTooFast ? 'submitted-under-1.2s' : '',
       };
 
       await env.LEADS.put(id, JSON.stringify(record));
@@ -150,7 +162,8 @@ export default {
       await env.LEADS.put(rlKey, String(hits + 1), { expirationTtl: 3600 });
 
       // Optional: mirror to an email/webhook if you set one.
-      if (env.NOTIFY_WEBHOOK) {
+      // Flagged-as-suspicious leads are stored but never notified.
+      if (env.NOTIFY_WEBHOOK && !submittedTooFast) {
         try {
           await fetch(env.NOTIFY_WEBHOOK, {
             method: 'POST',

@@ -85,6 +85,14 @@ export const EARTHBOND = {
  * Leave as '' to run WhatsApp-only (the form still works, nothing is stored).
  * Set to your worker endpoint to ALSO save every submission, e.g.
  *   LEAD_ENDPOINT = 'https://leads.ibadansolarhub.com.ng/api/lead'
+ *
+ * ⚠  BEFORE SETTING THIS, read `public/_headers`. The site sends a
+ *    Content-Security-Policy with `connect-src`. If the endpoint's origin is not
+ *    listed there, the browser BLOCKS the request and the form quietly discards
+ *    it — the visitor still sees "Request Sent". The build refuses to run and
+ *    tells you the exact origin to add, so this cannot ship by accident.
+ *    `https://leads.ibadansolarhub.com.ng` is already allowed; a workers.dev
+ *    URL will need adding.
  * See `worker/README.md` for the ready-to-deploy Cloudflare Worker.
  *
  * Why: WhatsApp opens the chat, but if the visitor abandons it you currently
