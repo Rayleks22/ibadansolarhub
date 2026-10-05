@@ -1,0 +1,193 @@
+---
+/**
+ * /terms — terms of use.
+ *
+ * ⚠️ Technically accurate draft, NOT legal advice. Have it reviewed by a
+ * Nigerian lawyer before relying on it.
+ *
+ * The disclaimer sections below matter commercially, not just legally: this site
+ * gives electrical installation guidance and publishes price estimates, and both
+ * carry real risk if a reader treats them as guarantees.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, BUSINESS } from '../config/site';
+
+const pageUrl = `${SITE.url}/terms/`;
+const lastUpdated = '5 October 2026';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: 'Terms of Use',
+  dateModified: '2026-10-05',
+  inLanguage: 'en-NG',
+};
+---
+
+<BaseLayout
+  title="Terms of Use"
+  description="Terms governing use of IbadanSolarHub.com.ng, including the limits of our solar sizing estimates, price data and installer referrals."
+  schema={schema}
+>
+  <section class="bg-slate-900 text-white py-12 border-b border-slate-800">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-black tracking-tight">Terms of Use</h1>
+      <p class="mt-3 text-sm text-slate-400">Last updated: {lastUpdated}</p>
+    </div>
+  </section>
+
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-8 text-sm text-slate-600 leading-relaxed">
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">1. Acceptance</h2>
+      <p class="mt-3">
+        By using {SITE.name} you agree to these terms. If you do not agree, please do not use
+        the site. The site is operated by {BUSINESS.legalName}.
+      </p>
+    </section>
+
+    {/*
+      This is the single most important section on the page. Please do not soften
+      it without legal advice — the sizing output is guidance, not a specification.
+    */}
+    <section class="rounded-2xl border border-amber-200 bg-amber-50 p-6">
+      <h2 class="text-xl font-black text-amber-900">2. Sizing Estimates Are Guidance, Not Guarantees</h2>
+      <div class="mt-3 space-y-3 text-amber-900">
+        <p>
+          <strong>Our calculator produces an estimate.</strong> It is built from the appliance
+          ratings and run hours you enter, using the methodology published on our
+          <a href="/about" class="font-semibold underline underline-offset-2">About page</a>.
+          Its accuracy depends entirely on the accuracy of what you enter.
+        </p>
+        <p>
+          It does not know your actual appliance power ratings, your roof orientation, shading,
+          cable lengths, ambient temperatures, battery health, or the real-world efficiency of
+          the specific equipment you buy. It is not a substitute for a physical site survey by a
+          qualified installer.
+        </p>
+        <p>
+          <strong>Always obtain a site inspection before purchasing or installing a system.</strong>
+          We are not liable for a system that underperforms, trips, or fails to meet your needs
+          where our estimate was used without professional verification.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">3. Price Information</h2>
+      <p class="mt-3">
+        Equipment prices and turnkey installation ranges published on this site are estimates
+        gathered from retailers, distributors and installer quotes. The Naira is volatile,
+        import duties change, and stock availability varies. Prices are indicative benchmarks
+        only. Always confirm the current price directly with the vendor or installer before
+        committing to any purchase.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">4. Estimator and Installer Referrals</h2>
+      <p class="mt-3">
+        We refer enquiries to third-party solar installers. Those installers are independent
+        businesses. We are not their employer, agent or partner, and we do not supervise,
+        warrant or guarantee their work, pricing, timelines or warranties.
+      </p>
+      <p class="mt-3">
+        Any contract for installation is between you and the installer. We may receive a
+        referral fee from installers, which does not increase the price you pay. You are
+        responsible for verifying any installer's credentials, certifications and warranty
+        terms before hiring them.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">5. Affiliate Links</h2>
+      <p class="mt-3">
+        This site contains affiliate links to retailers and financing partners. We may earn a
+        commission if you click through and make a purchase or sign up, at no additional cost
+        to you. See our
+        <a href="/affiliate-disclosure" class="font-semibold text-solar-700 underline underline-offset-2">affiliate disclosure</a>
+        for the full list and our editorial independence commitment.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">6. Electrical Safety</h2>
+      <p class="mt-3">
+        Solar and inverter installations involving mains voltage, battery banks and DC arrays
+        are hazardous and must be carried out by competent, qualified persons. Nothing on this
+        site is instructions for self-installation. Do not attempt to install, modify or repair
+        an electrical system yourself based on information published here.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">7. Digital Products</h2>
+      <p class="mt-3">
+        Our digital downloads (spreadsheets, guides and toolkits) are sold through Selar and are
+        subject to Selar's checkout, delivery and refund terms. Because they are digital goods
+        delivered instantly, they are generally non-refundable once downloaded. They are for your
+        own use and may not be redistributed or resold.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">8. Intellectual Property</h2>
+      <p class="mt-3">
+        The written content, research reports, calculator, data compilations and design of this
+        site are owned by {BUSINESS.legalName} unless otherwise stated. You may quote short
+        extracts with a link back to the source page. You may not republish our research or
+        data compilations in full, or use them to train or populate a competing commercial
+        product, without written permission.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">9. Limitation of Liability</h2>
+      <p class="mt-3">
+        The site and all content are provided "as is". To the fullest extent permitted by
+        Nigerian law, we exclude liability for any indirect, incidental or consequential loss
+        arising from your use of this site, including loss arising from reliance on sizing
+        estimates, price information, or the work of any third-party installer we refer you to.
+        Nothing in these terms limits liability that cannot lawfully be limited.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">10. Availability</h2>
+      <p class="mt-3">
+        We aim to keep the site available but do not guarantee uninterrupted access. We may
+        change, suspend or withdraw any part of the site, including the calculator and research
+        content, without notice.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">11. Governing Law</h2>
+      <p class="mt-3">
+        These terms are governed by the laws of the Federal Republic of Nigeria, and disputes
+        are subject to the exclusive jurisdiction of the Nigerian courts.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">12. Contact</h2>
+      <p class="mt-3">
+        Questions about these terms:
+        <a href={`mailto:${SITE.email}`} class="font-semibold text-solar-700 underline underline-offset-2">{SITE.email}</a>
+        or via our <a href="/contact" class="font-semibold text-solar-700 underline underline-offset-2">contact page</a>.
+      </p>
+    </section>
+
+    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+      <p class="text-xs text-slate-500 leading-relaxed">
+        <strong class="text-slate-700">Note for the site owner:</strong> this is a good-faith,
+        technically accurate draft reflecting how the site actually operates. It is not legal
+        advice. Have a Nigerian lawyer review sections 2, 4 and 9 in particular — those carry
+        the most commercial risk.
+      </p>
+    </div>
+
+  </div>
+</BaseLayout>

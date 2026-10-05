@@ -4,6 +4,7 @@ import AdSlot from '../../components/AdSlot.astro';
 import locations from '../../data/locations.json';
 import solarPackages from '../../data/solar-packages.json';
 import equipmentCatalog from '../../data/equipment-catalog.json';
+import { waLink } from '../../lib/whatsapp';
 
 export async function getStaticPaths() {
   return locations.map((loc) => ({
@@ -82,13 +83,13 @@ const schema = {
   ]
 };
 
-const whatsappUrl = `https://wa.me/2348000000000?text=${encodeURIComponent(
+const whatsappUrl = waLink(
   `Hello IbadanSolarHub! I am inquiring about solar installation services and installer recommendations for my property in ${loc.name}, ${loc.city}. Please connect me with vetted installers.`
-)}`;
+);
 
-const installerListingUrl = `https://wa.me/2348000000000?text=${encodeURIComponent(
+const installerListingUrl = waLink(
   `Hello IbadanSolarHub! I am a verified solar installer in ${loc.name}, ${loc.city} and want to claim my directory listing and receive verified client leads.`
-)}`;
+);
 ---
 
 <BaseLayout
@@ -126,7 +127,7 @@ const installerListingUrl = `https://wa.me/2348000000000?text=${encodeURICompone
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-md transition"
+              class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-md transition"
             >
               <span>Get Quotes from {loc.name} Installers</span>
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -145,9 +146,9 @@ const installerListingUrl = `https://wa.me/2348000000000?text=${encodeURICompone
 
         {/* Local Metric Summary Card */}
         <div class="lg:col-span-4 bg-slate-800/90 rounded-2xl p-6 border border-slate-700 shadow-xl space-y-4">
-          <h3 class="text-xs font-bold uppercase tracking-wider text-solar-400">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-solar-400">
             {loc.name} Energy Profile
-          </h3>
+          </h2>
 
           <div class="space-y-3 text-xs">
             <div class="flex justify-between py-1.5 border-b border-slate-700">
@@ -319,8 +320,8 @@ const installerListingUrl = `https://wa.me/2348000000000?text=${encodeURICompone
             <input type="hidden" name="location" value={`${loc.name}, ${loc.city}`} />
             
             <div>
-              <label class="block text-slate-300 mb-1">Your Property Type:</label>
-              <select name="property" class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2.5 focus:ring-1 focus:ring-solar-500">
+              <label for="loc-property" class="block text-slate-300 mb-1">Your Property Type:</label>
+              <select id="loc-property" name="property" class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2.5 min-h-11 focus:ring-1 focus:ring-solar-500">
                 <option>3-Bedroom Flat</option>
                 <option>Duplex / Mansion</option>
                 <option>Commercial Office / Shop</option>
@@ -329,8 +330,8 @@ const installerListingUrl = `https://wa.me/2348000000000?text=${encodeURICompone
             </div>
 
             <div>
-              <label class="block text-slate-300 mb-1">Desired Capacity:</label>
-              <select name="systemSize" class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2.5 focus:ring-1 focus:ring-solar-500">
+              <label for="loc-system" class="block text-slate-300 mb-1">Desired Capacity:</label>
+              <select id="loc-system" name="systemSize" class="w-full bg-slate-950 border border-slate-700 text-white rounded-lg p-2.5 min-h-11 focus:ring-1 focus:ring-solar-500">
                 <option>2.5kVA Inverter System</option>
                 <option>3.5kVA Inverter System</option>
                 <option>5kVA Inverter + AC System</option>
@@ -342,7 +343,7 @@ const installerListingUrl = `https://wa.me/2348000000000?text=${encodeURICompone
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition"
+              class="w-full inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-4 rounded-xl shadow-md transition"
             >
               <span>Instant WhatsApp Request</span>
             </a>

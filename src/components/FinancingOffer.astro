@@ -1,0 +1,77 @@
+---
+/**
+ * FinancingOffer — Earthbond referral block.
+ *
+ * Deliberately contextual: only rendered when the system size justifies
+ * financing (>= EARTHBOND.minKvaForOffer). Surfacing a payment plan next to a
+ * ₦850k starter kit would be noise and would undermine trust in the sizing tool.
+ *
+ * Audit reference: this is a monetisation slot added 5 Oct 2026.
+ */
+import { EARTHBOND } from '../config/site';
+
+interface Props {
+  /** Recommended inverter size in kVA. Drives whether the offer renders. */
+  kva: number;
+  /** Where the block appears — used for copy tuning and click analytics. */
+  variant?: 'calculator' | 'package' | 'page';
+  /** Optional override of the surrounding context line. */
+  context?: string;
+}
+
+const { kva, variant = 'page', context } = Astro.props;
+
+const eligible = kva >= EARTHBOND.minKvaForOffer;
+
+const defaultContext =
+  variant === 'calculator'
+    ? `Your sized system (${kva} kVA) sits in the range that businesses usually finance rather than buy outright.`
+    : variant === 'package'
+      ? 'Prefer to spread the cost instead of paying the full turnkey amount upfront?'
+      : 'Solar financed over time instead of bought outright.';
+---
+
+{eligible && (
+  <a
+    href={EARTHBOND.url}
+    target="_blank"
+    rel="sponsored nofollow noopener"
+    data-financing-partner="earthbond"
+    data-system-kva={kva}
+    class="group block w-full rounded-xl border border-emerald-300 bg-gradient-to-br from-emerald-50 to-teal-50 p-4 transition hover:border-emerald-400 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+  >
+    <div class="flex items-start gap-3">
+      <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-700 text-white">
+        <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="5" width="20" height="14" rx="2" />
+          <path d="M2 10h20" />
+        </svg>
+      </div>
+
+      <div class="min-w-0 flex-1">
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <span class="text-xs font-black uppercase tracking-wider text-emerald-800">
+            Pay Monthly Instead
+          </span>
+          <span class="rounded border border-emerald-300 bg-white px-1.5 py-px text-[10px] font-bold uppercase tracking-wide text-emerald-700">
+            Partner
+          </span>
+        </div>
+
+        <p class="mt-1.5 text-xs leading-relaxed text-emerald-900">
+          {context ?? defaultContext}
+          <strong class="font-bold">{EARTHBOND.name}</strong> funds solar for Nigerian
+          businesses from {EARTHBOND.rangeLabel} on monthly payment plans —
+          no large upfront capital outlay.
+        </p>
+
+        <span class="mt-2.5 inline-flex items-center gap-1 text-xs font-bold text-emerald-700 underline underline-offset-2 group-hover:text-emerald-800">
+          See if your business qualifies
+          <svg class="h-3 w-3 transition group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </a>
+)}

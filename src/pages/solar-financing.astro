@@ -1,0 +1,298 @@
+---
+/**
+ * /solar-financing — dedicated landing page for the Earthbond referral.
+ *
+ * Two jobs:
+ *   1. Give the affiliate link a legitimate, indexable home (targets
+ *      "solar financing Nigeria", "pay monthly solar", "solar lease Nigeria")
+ *   2. Answer the real question business owners ask — is financing better than
+ *      paying cash? — honestly, including when it is NOT a good idea.
+ *
+ * Honesty note: we publish the downsides too. That is deliberate. A page that
+ * only sells converts worse with a Nigerian business audience that already
+ * distrusts solar vendors.
+ *
+ * Added 5 Oct 2026.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EARTHBOND, SITE, WHATSAPP_DISPLAY } from '../config/site';
+
+const pageUrl = `${SITE.url}/solar-financing/`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: 'Solar Financing & Monthly Payment Plans for Nigerian Businesses',
+      description:
+        'Compare paying cash versus financing a solar system in Nigeria. Payment plans from 5kVA to 50kVA for businesses, offices, schools and clinics.',
+      inLanguage: 'en-NG',
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${pageUrl}#faq`,
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Can I pay for a solar system in monthly instalments in Nigeria?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: `Yes. Financing providers such as ${EARTHBOND.name} fund solar systems for Nigerian businesses from ${EARTHBOND.rangeLabel} and you repay over an agreed monthly schedule instead of paying the full turnkey amount upfront.`,
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Which system sizes qualify for solar financing?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: `Financing is generally available for commercial-scale systems from ${EARTHBOND.rangeLabel}. Small residential starter kits under 5kVA are normally bought outright because the financing overhead does not justify the ticket size.`,
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Is financing a solar system cheaper than buying it outright?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Financing almost always costs more in total naira than paying cash, because you pay interest or a financing margin. It makes sense when the monthly repayment is lower than what you currently spend on diesel, petrol or lost productivity, and when you need the system working now rather than saving for another year.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What happens if a business cannot keep up with repayments?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Financing agreements are contracts and typically give the lender recourse to the equipment. Before signing, confirm the default terms, the total cost of credit, and whether the asset is yours at the end of the term.',
+          },
+        },
+      ],
+    },
+  ],
+};
+
+const comparison = [
+  {
+    label: 'Upfront cash needed',
+    cash: 'Full amount — ₦3.9M to ₦5.8M for a 5kVA system',
+    finance: 'Low or zero upfront depending on the plan',
+  },
+  {
+    label: 'Total cost over the term',
+    cash: 'Lowest — you pay the price and nothing more',
+    finance: 'Higher — you pay a financing margin on top',
+  },
+  {
+    label: 'Cash flow impact',
+    cash: 'Large one-off hit to working capital',
+    finance: 'Spread monthly, easier to plan around',
+  },
+  {
+    label: 'When you get power',
+    cash: 'When you can afford it',
+    finance: 'Immediately, while repaying from savings',
+  },
+  {
+    label: 'Best suited to',
+    cash: 'Businesses with idle capital and no borrowing appetite',
+    finance: 'Businesses bleeding money on diesel every single month',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Can I pay for a solar system in monthly instalments in Nigeria?',
+    a: `Yes. Financing providers such as ${EARTHBOND.name} fund solar systems for Nigerian businesses from ${EARTHBOND.rangeLabel}, and you repay over an agreed monthly schedule instead of paying the full turnkey amount upfront.`,
+  },
+  {
+    q: 'Which system sizes qualify?',
+    a: `Financing is generally aimed at commercial-scale systems from ${EARTHBOND.rangeLabel}. Small residential starter kits under 5kVA are normally bought outright, because the financing overhead does not justify a ticket that size.`,
+  },
+  {
+    q: 'Is financing cheaper than buying outright?',
+    a: 'Almost never in total naira — you pay a financing margin. The case for financing is cash flow and speed: you get the system now and repay monthly, instead of saving for another year while continuing to burn money on fuel. If the monthly repayment is lower than your current fuel bill, the maths works even after the margin.',
+  },
+  {
+    q: 'How do I know if financing actually pays off for my business?',
+    a: 'Add up what you currently spend per month on diesel, petrol, generator servicing and inverter battery replacements. If the financing repayment is below that figure, financing is cash-flow positive from month one. Our Solar vs Generator ROI calculator does this arithmetic for you.',
+  },
+  {
+    q: 'What should I check before signing anything?',
+    a: 'Three things: the total cost of credit over the full term (not just the monthly figure), the default terms and what the lender can reclaim, and whether you own the equipment outright at the end. Get all three in writing.',
+  },
+];
+---
+
+<BaseLayout
+  title="Solar Financing in Nigeria — Monthly Payment Plans for Businesses"
+  description="Pay monthly instead of paying millions upfront. Solar financing for Nigerian businesses, offices, clinics and schools from 5kVA to 50kVA. Compare cash vs financed, honestly."
+  schema={schema}
+>
+  {/* Hero */}
+  <section class="bg-slate-900 text-white py-14 lg:py-20 border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 rounded-full text-xs font-bold uppercase tracking-wider">
+        Business Solar Financing
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black mt-4 tracking-tight leading-tight">
+        Pay Monthly for Solar Instead of Millions Upfront
+      </h1>
+      <p class="mt-5 text-sm sm:text-base text-slate-300 max-w-2xl mx-auto">
+        If your business is spending heavily on diesel every month, financing a solar system
+        can be cash-flow positive from the first payment. Here is how it works, what it costs,
+        and when it is genuinely the wrong choice.
+      </p>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href={EARTHBOND.url}
+          target="_blank"
+          rel="sponsored nofollow noopener"
+          data-financing-partner="earthbond"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition"
+        >
+          Check Financing Eligibility on {EARTHBOND.name}
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+        <a
+          href="/calculator"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3.5 rounded-xl border border-white/20 transition"
+        >
+          Size My System First
+        </a>
+      </div>
+
+      <p class="mt-4 text-[11px] text-slate-400">
+        {EARTHBOND.name} is a commercial partner. We may earn a commission if you proceed —
+        it costs you nothing extra. <a href="/affiliate-disclosure" class="underline hover:text-slate-200">Full disclosure</a>.
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
+
+    {/* When it makes sense */}
+    <section>
+      <h2 class="text-2xl font-black text-slate-900">When Financing Makes Sense — and When It Doesn't</h2>
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="p-6 bg-emerald-50/60 rounded-2xl border border-emerald-200">
+          <h3 class="text-sm font-bold text-emerald-900 uppercase tracking-wider">Financing is a good fit if…</h3>
+          <ul class="mt-3 space-y-2 text-xs text-emerald-800">
+            <li class="flex items-start gap-2"><span class="font-black text-emerald-600" aria-hidden="true">✓</span><span>You already spend a predictable amount monthly on diesel, petrol or generator servicing.</span></li>
+            <li class="flex items-start gap-2"><span class="font-black text-emerald-600" aria-hidden="true">✓</span><span>That monthly fuel spend is <strong>higher</strong> than the proposed repayment.</span></li>
+            <li class="flex items-start gap-2"><span class="font-black text-emerald-600" aria-hidden="true">✓</span><span>Outages are costing you revenue — clinics, cold rooms, POS, manufacturing, remote teams.</span></li>
+            <li class="flex items-start gap-2"><span class="font-black text-emerald-600" aria-hidden="true">✓</span><span>You need the system running now rather than saving for another 12–18 months.</span></li>
+          </ul>
+        </div>
+
+        <div class="p-6 bg-amber-50/60 rounded-2xl border border-amber-200">
+          <h3 class="text-sm font-bold text-amber-900 uppercase tracking-wider">Pay cash instead if…</h3>
+          <ul class="mt-3 space-y-2 text-xs text-amber-800">
+            <li class="flex items-start gap-2"><span class="font-black text-amber-600" aria-hidden="true">!</span><span>You have idle capital earning less than the financing margin costs you.</span></li>
+            <li class="flex items-start gap-2"><span class="font-black text-amber-600" aria-hidden="true">!</span><span>Your load is under 5kVA — small kits are rarely worth financing.</span></li>
+            <li class="flex items-start gap-2"><span class="font-black text-amber-600" aria-hidden="true">!</span><span>Revenue is unstable month to month and a fixed repayment is a real risk.</span></li>
+            <li class="flex items-start gap-2"><span class="font-black text-amber-600" aria-hidden="true">!</span><span>You haven't yet sized the system properly — never finance a guess.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {/* Cash vs finance table */}
+    <section>
+      <h2 class="text-2xl font-black text-slate-900">Paying Cash vs Financing: Side by Side</h2>
+      <div class="mt-6 overflow-x-auto rounded-2xl border border-slate-200">
+        <table class="w-full text-sm">
+          <caption class="sr-only">Comparison of paying cash versus financing a solar system in Nigeria</caption>
+          <thead class="bg-slate-50">
+            <tr>
+              <th scope="col" class="px-4 py-3 text-left font-bold text-slate-700">Consideration</th>
+              <th scope="col" class="px-4 py-3 text-left font-bold text-slate-700">Paying Cash</th>
+              <th scope="col" class="px-4 py-3 text-left font-bold text-slate-700">Financing</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {comparison.map((row) => (
+              <tr>
+                <th scope="row" class="px-4 py-3 text-left font-semibold text-slate-900 bg-white">{row.label}</th>
+                <td class="px-4 py-3 text-slate-600">{row.cash}</td>
+                <td class="px-4 py-3 text-slate-600">{row.finance}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {/* Partner block */}
+    <section class="rounded-2xl border border-emerald-300 bg-gradient-to-br from-emerald-50 to-teal-50 p-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div>
+          <span class="text-xs font-black uppercase tracking-wider text-emerald-800">Financing Partner</span>
+          <h2 class="text-xl font-black text-slate-900 mt-1">{EARTHBOND.name}</h2>
+          <p class="mt-2 text-sm text-slate-700 max-w-xl">
+            {EARTHBOND.tagline} Systems from {EARTHBOND.rangeLabel}, sized to your business's
+            actual consumption and matched to vendors.
+          </p>
+        </div>
+        <a
+          href={EARTHBOND.url}
+          target="_blank"
+          rel="sponsored nofollow noopener"
+          data-financing-partner="earthbond"
+          class="shrink-0 inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition"
+        >
+          Get a Quote
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    {/* FAQs */}
+    <section>
+      <h2 class="text-2xl font-black text-slate-900">Common Questions</h2>
+      <div class="mt-6 space-y-4">
+        {faqs.map((faq) => (
+          <details class="group rounded-2xl border border-slate-200 bg-white p-5">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 text-sm font-bold text-slate-900 marker:content-none">
+              {faq.q}
+              <span class="shrink-0 text-solar-500 transition group-open:rotate-45" aria-hidden="true">＋</span>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600 leading-relaxed">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    {/* Next steps */}
+    <section class="rounded-2xl border border-slate-200 bg-white p-8 text-center">
+      <h2 class="text-xl font-black text-slate-900">Not Sure What Size You Need?</h2>
+      <p class="mt-2 text-sm text-slate-600 max-w-xl mx-auto">
+        Never finance a guess. Run your appliances through the calculator first — it takes a
+        minute and gives you the inverter size, battery bank and panel count to ask about.
+      </p>
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href="/calculator"
+          class="w-full sm:w-auto inline-flex items-center justify-center bg-solar-500 hover:bg-solar-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition"
+        >
+          Open the Solar Calculator
+        </a>
+        <a
+          href="/quote"
+          class="w-full sm:w-auto inline-flex items-center justify-center bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-bold px-6 py-3 rounded-xl transition"
+        >
+          Get Installer Quotes
+        </a>
+      </div>
+      <p class="mt-4 text-xs text-slate-500">
+        Prefer to talk it through? WhatsApp us on {WHATSAPP_DISPLAY}.
+      </p>
+    </section>
+
+  </div>
+</BaseLayout>

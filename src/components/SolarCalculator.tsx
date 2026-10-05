@@ -4,6 +4,33 @@ import {
   RotateCcw, MessageCircle, FileText, ShoppingCart, Sparkles,
   Copy, Check, Printer
 } from 'lucide-react';
+import { WHATSAPP_NUMBER, EARTHBOND } from '../config/site';
+
+/**
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ENGINEERING CONSTANTS
+ * ─────────────────────────────────────────────────────────────────────────────
+ * SURGE_FACTOR — a motor's inrush current at start, expressed as a multiple of
+ * its running wattage. This is the value most solar sizing tools ignore, and it
+ * is the #1 cause of "my inverter trips when the pump starts" complaints.
+ *
+ * These are deliberately conservative. Nigerian installers routinely under-size
+ * inverters because they only size for running load.
+ *
+ *   Resistive loads (LED, TV, laptop PSU)  → ~1.0–1.2× (near-instantaneous)
+ *   Induction motors (fans, fridge)        → ~2.5–3×
+ *   Inverter compressor ACs                → ~3×  (softer than fixed-speed)
+ *   Submersible / borehole pumps           → ~4×  (worst case, hard start)
+ */
+const CONTINUOUS_MARGIN = 1.3;   // headroom above steady running load
+const INVERTER_SURGE_MULTIPLE = 2.0; // quality pure sine wave inverters do ~2× for a few seconds
+const INVERTER_EFFICIENCY = 0.9; // DC→AC conversion loss, so DC draw > AC load
+
+/**
+ * Standard continuous discharge ratings (amps) of lithium battery BMS units sold
+ * in Nigeria. Used to size the battery bank against surge, not just capacity.
+ */
+const BMS_SIZES = [100, 150, 200, 250, 300];
 
 interface Appliance {
   id: string;
@@ -11,19 +38,21 @@ interface Appliance {
   defaultWatts: number;
   category: 'lighting' | 'electronics' | 'cooling' | 'heavy';
   defaultHours: number;
+  /** Inrush multiple of running watts at motor start. 1 = no meaningful surge. */
+  surgeFactor: number;
 }
 
 const APPLIANCES: Appliance[] = [
-  { id: 'led_lights', name: 'LED Bulbs / Energy Savers', defaultWatts: 10, category: 'lighting', defaultHours: 8 },
-  { id: 'fans', name: 'Standing / Ceiling Fans', defaultWatts: 65, category: 'cooling', defaultHours: 12 },
-  { id: 'laptops', name: 'Laptops / Workstations', defaultWatts: 70, category: 'electronics', defaultHours: 8 },
-  { id: 'starlink', name: 'Starlink / 5G Wi-Fi Router', defaultWatts: 50, category: 'electronics', defaultHours: 24 },
-  { id: 'tv', name: 'Smart TV + Decoder', defaultWatts: 120, category: 'electronics', defaultHours: 6 },
-  { id: 'inverter_fridge', name: 'Inverter Refrigerator', defaultWatts: 150, category: 'cooling', defaultHours: 18 },
-  { id: 'deep_freezer', name: 'Chest Deep Freezer', defaultWatts: 250, category: 'cooling', defaultHours: 12 },
-  { id: 'ac_1hp', name: '1.0 HP Inverter AC', defaultWatts: 750, category: 'heavy', defaultHours: 6 },
-  { id: 'ac_1_5hp', name: '1.5 HP Inverter AC', defaultWatts: 1100, category: 'heavy', defaultHours: 6 },
-  { id: 'pump', name: '1HP Submersible Water Pump', defaultWatts: 850, category: 'heavy', defaultHours: 1 },
+  { id: 'led_lights', name: 'LED Bulbs / Energy Savers', defaultWatts: 10, category: 'lighting', defaultHours: 8, surgeFactor: 1 },
+  { id: 'fans', name: 'Standing / Ceiling Fans', defaultWatts: 65, category: 'cooling', defaultHours: 12, surgeFactor: 2.5 },
+  { id: 'laptops', name: 'Laptops / Workstations', defaultWatts: 70, category: 'electronics', defaultHours: 8, surgeFactor: 1.2 },
+  { id: 'starlink', name: 'Starlink / 5G Wi-Fi Router', defaultWatts: 50, category: 'electronics', defaultHours: 24, surgeFactor: 1.2 },
+  { id: 'tv', name: 'Smart TV + Decoder', defaultWatts: 120, category: 'electronics', defaultHours: 6, surgeFactor: 1.2 },
+  { id: 'inverter_fridge', name: 'Inverter Refrigerator', defaultWatts: 150, category: 'cooling', defaultHours: 18, surgeFactor: 3 },
+  { id: 'deep_freezer', name: 'Chest Deep Freezer', defaultWatts: 250, category: 'cooling', defaultHours: 12, surgeFactor: 3 },
+  { id: 'ac_1hp', name: '1.0 HP Inverter AC', defaultWatts: 750, category: 'heavy', defaultHours: 6, surgeFactor: 3 },
+  { id: 'ac_1_5hp', name: '1.5 HP Inverter AC', defaultWatts: 1100, category: 'heavy', defaultHours: 6, surgeFactor: 3 },
+  { id: 'pump', name: '1HP Submersible Water Pump', defaultWatts: 850, category: 'heavy', defaultHours: 1, surgeFactor: 4 },
 ];
 
 export default function SolarCalculator() {
@@ -83,6 +112,21 @@ export default function SolarCalculator() {
       ac_1_5hp: 0,
       pump: 0,
     });
+    // Also restore run hours — previously stale values survived a reset, so
+    // "reset" left the results showing whatever hours the user had dragged.
+    setHours({
+      led_lights: 8,
+      fans: 12,
+      laptops: 8,
+      starlink: 24,
+      tv: 6,
+      inverter_fridge: 18,
+      deep_freezer: 12,
+      ac_1hp: 6,
+      ac_1_5hp: 6,
+      pump: 1,
+    });
+    setSelectedCity('Ibadan (Bodija, Oluyole, Jericho, Akobo)');
   };
 
   const handleCopySpecs = () => {
@@ -95,6 +139,9 @@ export default function SolarCalculator() {
 • Running Load: ${stats.continuousWatts}W
 • Daily Energy: ${stats.dailyKwh} kWh/day
 
+• Peak Starting Surge: ${stats.peakSurgeWatts}W (largest motor: ${stats.largestSurgeAppliance || 'n/a'})
+• Momentary DC Draw at Start: ~${stats.peakDcCurrent}A at ${stats.nominalVolts}V
+
 ⚙️ SYSTEM HARDWARE SPECIFICATIONS:
 • Inverter: ${stats.recommendedKva} kVA Pure Sine Wave (${stats.systemVoltage})
 • Battery Bank: ${stats.recommendedLithiumKwh} kWh LiFePO4 Lithium (or ${stats.recommendedTubularAh}Ah Tubular)
@@ -105,12 +152,45 @@ export default function SolarCalculator() {
 1. Ensure pure copper battery cables (min 16mm² - 25mm²)
 2. Require DC Surge Protection Device (SPD) + DC Breaker
 3. Verify Lithium battery cycle life rating (min. 4,000 cycles at 80% DoD)
+4. Confirm the inverter's surge rating covers your ${stats.peakSurgeWatts}W starting load
+5. Confirm the battery BMS can discharge ${stats.peakDcCurrent}A momentarily (min ${stats.recommendedBmsAmps}A rating) — undersized BMS units cut out on motor start
 
 Get verified installer quotes or calculate custom setups: https://ibadansolarhub.com.ng/calculator`;
 
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 3000);
+    /*
+      Clipboard API needs a secure context and is blocked in some in-app
+      browsers (common on Nigerian Android WebViews). Fall back to a hidden
+      textarea + execCommand so the button never silently does nothing.
+    */
+    const fallbackCopy = (value: string): boolean => {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = value;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      } catch {
+        return false;
+      }
+    };
+
+    const finish = () => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 3000);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(finish).catch(() => {
+        if (fallbackCopy(text)) finish();
+      });
+    } else if (fallbackCopy(text)) {
+      finish();
+    }
   };
 
   const handlePrintBoQ = () => {
@@ -187,6 +267,16 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
             <div class="spec-val" style="color: #047857;">${stats.costRange}</div>
             <div class="spec-sub">Includes BOS, Cables, Protection & Workmanship</div>
           </div>
+          <div class="spec-card">
+            <div class="spec-label">Peak Starting Surge</div>
+            <div class="spec-val">${stats.peakSurgeWatts}W</div>
+            <div class="spec-sub">Largest motor: ${stats.largestSurgeAppliance || 'n/a'} — inverter surge rating must cover this</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-label">Momentary DC Draw</div>
+            <div class="spec-val" style="color: ${stats.bmsUndersized ? '#b91c1c' : '#0f172a'};">~${stats.peakDcCurrent}A @ ${stats.nominalVolts}V</div>
+            <div class="spec-sub">Battery BMS must be rated <strong>${stats.recommendedBmsAmps}A+</strong> continuous${stats.bmsUndersized ? ' — a 100A BMS will cut out on motor start' : ''}</div>
+          </div>
         </div>
 
         <div class="section-title">2. Appliance Load Audit</div>
@@ -217,12 +307,16 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
           <div class="vetting-rules">
             1. <strong>DC Surge Protective Device (SPD):</strong> Installer MUST install a dedicated DC SPD and DC circuit breaker between solar array and MPPT.<br>
             2. <strong>Cable Gauge:</strong> Minimum 16mm² / 25mm² 100% pure copper battery cables with heavy-duty pressed lugs.<br>
-            3. <strong>Cycle Rating:</strong> Lithium batteries must carry written manufacturer warranty for ≥ 4,000 cycles at 80% DoD.
+            3. <strong>Cycle Rating:</strong> Lithium batteries must carry written manufacturer warranty for ≥ 4,000 cycles at 80% DoD.<br>
+            4. <strong>Inverter Surge Rating:</strong> Must cover the ${stats.peakSurgeWatts}W starting load, not just the ${stats.continuousWatts}W running load.<br>
+            5. <strong>Battery BMS Discharge Rating:</strong> Must sustain ~${stats.peakDcCurrent}A momentarily (specify ${stats.recommendedBmsAmps}A+ continuous), or the BMS will cut out when a motor starts.
           </div>
         </div>
 
         <div class="footer">
-          Generated via <strong>IbadanSolarHub.com.ng</strong> • Publisher: <strong>Ibadan Solar Hub</strong> (Power Without The Panic)
+          Generated via <strong>https://ibadansolarhub.com.ng/calculator</strong> • Publisher: <strong>Ibadan Solar Hub</strong> (Power Without The Panic)<br>
+          Verify any installer's quote against this specification — sizing, surge rating, cable gauge and SPD requirements.
+          ${EARTHBOND.url ? `<br>Funding a 5kVA+ system? See monthly payment plans: <strong>${EARTHBOND.name}</strong> — ${EARTHBOND.url}` : ''}
         </div>
       </body>
       </html>
@@ -238,6 +332,9 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
   const stats = useMemo(() => {
     let totalContinuousWatts = 0;
     let totalDailyWattHours = 0;
+    /** Largest single motor's extra inrush above its own running wattage. */
+    let largestMotorSurgeExtra = 0;
+    let largestSurgeAppliance = '';
 
     APPLIANCES.forEach(app => {
       const count = counts[app.id] || 0;
@@ -246,33 +343,83 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
         totalContinuousWatts += itemWatts;
         const itemHours = hours[app.id] || app.defaultHours;
         totalDailyWattHours += itemWatts * itemHours;
+
+        /*
+          Surge model: the worst realistic case is the single largest motor
+          starting while everything else is already running. We deliberately do
+          NOT assume every motor starts simultaneously — that over-sizes badly.
+        */
+        const surgeExtra = app.defaultWatts * (app.surgeFactor - 1);
+        if (surgeExtra > largestMotorSurgeExtra) {
+          largestMotorSurgeExtra = surgeExtra;
+          largestSurgeAppliance = app.name;
+        }
       }
     });
 
-    // Inverter Sizing (Factor in 25% safety surge headroom)
-    const requiredWattsWithHeadroom = totalContinuousWatts * 1.3;
+    /*
+      Inverter sizing is driven by TWO constraints and we take the larger:
+        1. Steady-state: running load + 30% headroom for future additions
+        2. Starting:    peak inrush must not exceed the inverter's surge rating
+                        (quality pure sine wave units sustain ~2× for a few sec)
+    */
+    const continuousBasisWatts = totalContinuousWatts * CONTINUOUS_MARGIN;
+    const peakSurgeWatts = totalContinuousWatts + largestMotorSurgeExtra;
+
+    /*
+      Both bases are in WATTS, then converted to kVA once at the end (1 kVA ≈ 1 kW
+      at the unity-ish power factors pure sine wave inverters actually see).
+
+      peakSurgeWatts is what the load momentarily demands. The inverter can supply
+      INVERTER_SURGE_MULTIPLE × its nameplate for a few seconds, so the smallest
+      nameplate that survives the start is peakSurge / INVERTER_SURGE_MULTIPLE.
+    */
+    const surgeBasisWatts = peakSurgeWatts / INVERTER_SURGE_MULTIPLE;
+    const requiredKva = Math.max(continuousBasisWatts, surgeBasisWatts) / 1000;
+
     let recommendedKva = 1.2;
     let systemVoltage = '12V';
 
-    if (requiredWattsWithHeadroom <= 1000) {
+    if (requiredKva <= 1.0) {
       recommendedKva = 1.2;
       systemVoltage = '12V';
-    } else if (requiredWattsWithHeadroom <= 2200) {
+    } else if (requiredKva <= 2.2) {
       recommendedKva = 2.5;
       systemVoltage = '24V';
-    } else if (requiredWattsWithHeadroom <= 3200) {
+    } else if (requiredKva <= 3.2) {
       recommendedKva = 3.5;
       systemVoltage = '24V or 48V';
-    } else if (requiredWattsWithHeadroom <= 4800) {
+    } else if (requiredKva <= 4.8) {
       recommendedKva = 5.0;
       systemVoltage = '48V';
-    } else if (requiredWattsWithHeadroom <= 7200) {
+    } else if (requiredKva <= 7.2) {
       recommendedKva = 7.5;
       systemVoltage = '48V';
     } else {
       recommendedKva = 10.0;
       systemVoltage = '48V High Voltage';
     }
+
+    /** True when starting torque, not running load, set the inverter size. */
+    const surgeDrivesSizing = surgeBasisWatts > continuousBasisWatts;
+
+    /*
+      ── THE CHECK THAT ACTUALLY BITES ──────────────────────────────────────────
+      An inverter's surge rating is only half the story. The battery has to
+      DELIVER that current. At 24V, a 4kW starting surge needs ~185A from the
+      bank. Most budget 24V lithium BMS units are rated for 100A continuous and
+      will cut out the instant a pump starts — which the owner then blames on
+      "the inverter" or "the battery being fake".
+
+      This is the single most common real-world under-sizing failure in Nigeria,
+      and almost no sizing tool checks it.
+    */
+    const nominalVolts = parseInt(systemVoltage, 10) || 48;
+    const peakDcCurrent = peakSurgeWatts / nominalVolts / INVERTER_EFFICIENCY;
+    const recommendedBmsAmps =
+      BMS_SIZES.find((size) => size >= peakDcCurrent) ?? BMS_SIZES[BMS_SIZES.length - 1];
+    /** A 100A BMS is the most common unit sold — flag when it will not cope. */
+    const bmsUndersized = peakDcCurrent > 100;
 
     // Battery Bank Sizing (LiFePO4 Lithium kWh vs Tubular Ah)
     const dailyKwh = totalDailyWattHours / 1000;
@@ -321,6 +468,13 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
       requiredSolarArrayWatts,
       panels550WNeeded,
       costRange: `${formatNaira(minCost)} – ${formatNaira(maxCost)}`,
+      peakSurgeWatts: Math.round(peakSurgeWatts),
+      surgeDrivesSizing,
+      largestSurgeAppliance,
+      peakDcCurrent: Math.round(peakDcCurrent),
+      recommendedBmsAmps,
+      bmsUndersized,
+      nominalVolts,
     };
   }, [counts, hours]);
 
@@ -335,7 +489,7 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
       `💰 Budget Estimate: ${stats.costRange}\n\n` +
       `Please connect me with verified solar installers in ${selectedCity} for an inspection and precise quotation.`
     );
-    return `https://wa.me/2348000000000?text=${text}`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
   }, [stats, selectedCity]);
 
   return (
@@ -390,35 +544,51 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
                     </div>
 
                     <div className="flex items-center gap-2">
+                      {/*
+                        44×44px minimum touch targets — these are the most-tapped
+                        controls on the site, used one-handed on mobile.
+                        aria-labels added because "-" and "+" alone announce
+                        nothing useful to a screen reader.
+                      */}
                       <button
+                        type="button"
                         onClick={() => updateCount(app.id, -1)}
-                        className="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-700 font-bold hover:bg-slate-100 flex items-center justify-center transition active:scale-95"
+                        disabled={count === 0}
+                        aria-label={`Remove one ${app.name}`}
+                        className="w-11 h-11 rounded-lg bg-white border border-slate-200 text-slate-700 font-bold hover:bg-slate-100 flex items-center justify-center transition active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
                       >
-                        -
+                        <span aria-hidden="true">−</span>
                       </button>
-                      <span className="w-8 text-center font-bold text-slate-900">{count}</span>
+                      <span className="w-8 text-center font-bold text-slate-900" aria-hidden="true">{count}</span>
                       <button
+                        type="button"
                         onClick={() => updateCount(app.id, 1)}
-                        className="w-8 h-8 rounded-lg bg-solar-500 text-white font-bold hover:bg-solar-600 flex items-center justify-center transition active:scale-95"
+                        aria-label={`Add one ${app.name}`}
+                        className="w-11 h-11 rounded-lg bg-solar-500 text-white font-bold hover:bg-solar-600 flex items-center justify-center transition active:scale-95"
                       >
-                        +
+                        <span aria-hidden="true">+</span>
                       </button>
                     </div>
                   </div>
 
                   {count > 0 && (
                     <div className="mt-3 pt-2.5 border-t border-amber-200/60 flex items-center justify-between text-xs">
-                      <span className="text-slate-600">Daily Run Time:</span>
+                      <label htmlFor={`hours-${app.id}`} className="text-slate-600">
+                        Daily Run Time:
+                      </label>
                       <div className="flex items-center gap-2">
                         <input
                           type="range"
+                          id={`hours-${app.id}`}
                           min="1"
                           max="24"
                           value={currentHours}
+                          aria-label={`Daily run time for ${app.name}`}
+                          aria-valuetext={`${currentHours} hours per day`}
                           onChange={(e) => updateHours(app.id, parseInt(e.target.value))}
-                          className="w-28 accent-solar-600 cursor-pointer"
+                          className="w-28 h-11 accent-solar-600 cursor-pointer"
                         />
-                        <span className="font-semibold text-slate-800 w-12 text-right">{currentHours} hrs/day</span>
+                        <span className="font-semibold text-slate-800 w-12 text-right" aria-hidden="true">{currentHours} hrs/day</span>
                       </div>
                     </div>
                   )}
@@ -428,13 +598,14 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
           </div>
 
           <div className="pt-2">
-            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+            <label htmlFor="calc-city" className="block text-xs font-semibold text-slate-700 mb-1.5">
               Select Your City / Market for Location-Specific Pricing:
             </label>
             <select
+              id="calc-city"
               value={selectedCity}
               onChange={(e) => setSelectedCity(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl p-2.5 focus:ring-2 focus:ring-solar-500 focus:outline-none"
+              className="w-full h-11 bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl px-2.5 py-2.5 focus:ring-2 focus:ring-solar-500 focus:outline-none"
             >
               <option value="Ibadan (Bodija, Oluyole, Jericho, Akobo)">Ibadan (Bodija, Oluyole, Jericho, Akobo, etc.)</option>
               <option value="Lagos (Lekki, Ikeja, Ajah, Surulere)">Lagos (Lekki, Ikeja, Ajah, Surulere, etc.)</option>
@@ -473,6 +644,28 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
                 <span>Running Load: <strong className="text-slate-700">{stats.continuousWatts}W</strong></span>
                 <span>Daily Usage: <strong className="text-slate-700">{stats.dailyKwh} kWh</strong></span>
               </div>
+
+              {/* Motor starting surge — the value most sizing tools omit */}
+              {stats.peakSurgeWatts > stats.continuousWatts && (
+                <div className="mt-2 rounded-lg bg-slate-50 border border-slate-200 p-2.5">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-slate-600">Peak starting demand:</span>
+                    <strong className="text-slate-900">{stats.peakSurgeWatts}W</strong>
+                  </div>
+                  <p className="mt-1 text-[11px] leading-relaxed text-slate-500">
+                    When your {stats.largestSurgeAppliance.toLowerCase()} kicks in, it briefly draws
+                    far more than its running watts. Any installer you hire must confirm their
+                    inverter&apos;s <strong className="font-semibold text-slate-600">surge rating</strong> covers
+                    this, not just the running load.
+                  </p>
+                  {stats.surgeDrivesSizing && (
+                    <p className="mt-1.5 text-[11px] font-semibold text-amber-700">
+                      ⚠ Starting surge is what set the {stats.recommendedKva} kVA recommendation above —
+                      not the running load.
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Battery Bank Card */}
@@ -489,6 +682,49 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
                   <Battery className="w-5 h-5" />
                 </div>
               </div>
+              {/*
+                BMS discharge check: the battery must be able to DELIVER the
+                surge current, not just store the energy. This is the failure
+                mode owners most often mistake for "fake battery".
+              */}
+              {stats.peakSurgeWatts > stats.continuousWatts && (
+                <div
+                  className={`mt-2 rounded-lg border p-2.5 ${
+                    stats.bmsUndersized
+                      ? 'bg-red-50 border-red-200'
+                      : 'bg-slate-50 border-slate-200'
+                  }`}
+                >
+                  <div className="flex items-center justify-between text-xs">
+                    <span className={stats.bmsUndersized ? 'text-red-700 font-semibold' : 'text-slate-600'}>
+                      Momentary DC draw at start:
+                    </span>
+                    <strong className={stats.bmsUndersized ? 'text-red-800' : 'text-slate-900'}>
+                      ~{stats.peakDcCurrent}A at {stats.nominalVolts}V
+                    </strong>
+                  </div>
+                  <p className={`mt-1 text-[11px] leading-relaxed ${stats.bmsUndersized ? 'text-red-700' : 'text-slate-500'}`}>
+                    {stats.bmsUndersized ? (
+                      <>
+                        <strong className="font-bold">Check the battery BMS rating.</strong> Storage
+                        capacity being adequate is not enough — the BMS must be able to discharge
+                        {' '}<strong className="font-bold">{stats.peakDcCurrent}A</strong> for a few seconds.
+                        Most budget {stats.nominalVolts}V lithium units are limited to 100A and will shut
+                        off when the motor starts. Specify a BMS rated{' '}
+                        <strong className="font-bold">{stats.recommendedBmsAmps}A+</strong>, or split the
+                        load across two batteries in parallel.
+                      </>
+                    ) : (
+                      <>
+                        Within the 100A continuous limit of common lithium BMS units. Confirm the
+                        datasheet figure anyway — continuous and peak BMS ratings are often quoted
+                        interchangeably by vendors.
+                      </>
+                    )}
+                  </p>
+                </div>
+              )}
+
               <div className="mt-3 pt-2.5 border-t border-slate-100 text-xs text-slate-500">
                 ⚡ 10+ year lifespan with LiFePO4 Lithium (charges in ~2.5 hrs).
               </div>
@@ -546,10 +782,53 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition transform active:scale-98 text-sm"
+              className="w-full inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-4 rounded-xl shadow-md transition active:scale-95 text-sm"
             >
-              <MessageCircle className="w-5 h-5" /> Request Quotes from {selectedCity.split(' ')[0]} Installers
+              <MessageCircle className="w-5 h-5" aria-hidden="true" /> Request Quotes from {selectedCity.split(' ')[0]} Installers
             </a>
+
+            {/*
+              Financing is only surfaced once the sized system is large enough to
+              justify it. Showing "pay monthly" next to a 1.2kVA starter kit would
+              be noise and would erode trust in the sizing tool itself.
+            */}
+            {stats.recommendedKva >= EARTHBOND.minKvaForOffer && (
+              <a
+                href={EARTHBOND.url}
+                target="_blank"
+                rel="sponsored nofollow noopener"
+                data-financing-partner="earthbond"
+                data-system-kva={stats.recommendedKva}
+                className="block w-full rounded-xl border border-emerald-300 bg-gradient-to-br from-emerald-50 to-teal-50 p-3.5 transition hover:border-emerald-400 hover:shadow-md"
+              >
+                <div className="flex items-start gap-2.5">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-700 text-white">
+                    <FileText className="h-4 w-4" aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <span className="text-[11px] font-black uppercase tracking-wider text-emerald-800">
+                        Pay Monthly Instead
+                      </span>
+                      <span className="rounded border border-emerald-300 bg-white px-1.5 py-px text-[10px] font-bold uppercase tracking-wide text-emerald-700">
+                        Partner
+                      </span>
+                    </div>
+                    <p className="mt-1 text-[11px] leading-relaxed text-emerald-900">
+                      At {stats.recommendedKva} kVA this is the size businesses usually finance, not
+                      buy outright. <strong className="font-bold">{EARTHBOND.name}</strong> funds
+                      systems from {EARTHBOND.rangeLabel} on monthly plans.
+                    </p>
+                    <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 underline underline-offset-2">
+                      See if your business qualifies
+                      <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            )}
 
             <div className="grid grid-cols-2 gap-2 text-xs">
               <a

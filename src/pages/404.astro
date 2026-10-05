@@ -1,0 +1,171 @@
+---
+/**
+ * 404 page.
+ *
+ * Audit reference (5 Oct 2026): the site previously had no 404 at all — the
+ * host's catch-all returned the homepage with HTTP 200 for every unknown path,
+ * INCLUDING static assets. That is a soft-404 pattern which wastes crawl budget
+ * and hides broken images.
+ *
+ * Building this file emits `dist/404.html`. Cloudflare Pages serves it
+ * automatically with a real 404 status. If you are on Workers Static Assets,
+ * you must ALSO set `not_found_handling = "404-page"` — see DEPLOYMENT-NOTES.md.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import locations from '../data/locations.json';
+import solarPackages from '../data/solar-packages.json';
+
+const topLocations = locations.slice(0, 6);
+const topPackages = solarPackages.slice(0, 4);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Page not found',
+  description: 'The page you requested could not be found on IbadanSolarHub.com.ng',
+  url: 'https://ibadansolarhub.com.ng/404/',
+};
+---
+
+<BaseLayout
+  title="Page Not Found (404)"
+  description="That page does not exist. Use the links below to find solar calculators, equipment prices, city hubs and installer quotes."
+  schema={schema}
+>
+  <section class="bg-slate-900 text-white py-16 lg:py-20 border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="inline-flex items-center gap-2 px-3 py-1 bg-red-500/15 text-red-300 border border-red-500/30 rounded-full text-xs font-bold uppercase tracking-wider">
+        Error 404
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black mt-4 tracking-tight">
+        That page isn't here
+      </h1>
+      <p class="mt-4 text-sm sm:text-base text-slate-300 max-w-xl mx-auto">
+        The link may be old, mistyped, or the page may have moved. Nothing is broken —
+        here's where to go instead.
+      </p>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href="/"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-solar-500 hover:bg-solar-400 text-slate-950 font-bold px-6 py-3 rounded-xl shadow-md transition"
+        >
+          Back to Homepage
+        </a>
+        <a
+          href="/calculator"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-xl border border-white/20 transition"
+        >
+          Size My Solar System
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      {/* Most useful destinations */}
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h2 class="text-base font-bold text-slate-900">Most Useful Pages</h2>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          <li>
+            <a href="/calculator" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+              <span class="text-solar-500 font-black" aria-hidden="true">→</span>
+              Solar Load &amp; Cost Calculator
+            </a>
+          </li>
+          <li>
+            <a href="/equipment" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+              <span class="text-solar-500 font-black" aria-hidden="true">→</span>
+              Equipment Price Index
+            </a>
+          </li>
+          <li>
+            <a href="/research" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+              <span class="text-solar-500 font-black" aria-hidden="true">→</span>
+              Research &amp; Data Hub
+            </a>
+          </li>
+          <li>
+            <a href="/products" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+              <span class="text-solar-500 font-black" aria-hidden="true">→</span>
+              Solar Blueprints &amp; BOQ Tools
+            </a>
+          </li>
+          <li>
+            <a href="/quote" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+              <span class="text-solar-500 font-black" aria-hidden="true">→</span>
+              Request Installer Quotes
+            </a>
+          </li>
+          <li>
+            <a href="/solar-financing" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+              <span class="text-solar-500 font-black" aria-hidden="true">→</span>
+              Solar Financing for Businesses
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* City hubs */}
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h2 class="text-base font-bold text-slate-900">Browse by City</h2>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          {topLocations.map((loc) => (
+            <li>
+              <a
+                href={`/locations/${loc.slug}`}
+                class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition"
+              >
+                <span class="text-solar-500 font-black" aria-hidden="true">→</span>
+                {loc.name}, {loc.city}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="/locations" class="flex items-center gap-2 text-solar-700 font-bold hover:underline transition">
+              View all city hubs &rarr;
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Packages */}
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h2 class="text-base font-bold text-slate-900">Ready-Made Packages</h2>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          {topPackages.map((pkg) => (
+            <li>
+              <a
+                href={`/packages/${pkg.slug}`}
+                class="flex items-start gap-2 text-slate-700 hover:text-solar-600 font-medium transition"
+              >
+                <span class="text-solar-500 font-black mt-px" aria-hidden="true">→</span>
+                <span>
+                  <span class="block">{pkg.capacity}</span>
+                  <span class="block text-xs text-slate-500">{pkg.name}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="/packages" class="flex items-center gap-2 text-solar-700 font-bold hover:underline transition">
+              View all packages &rarr;
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="mt-10 rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center">
+      <p class="text-sm text-amber-900">
+        Looking for something specific?
+        <a href="/locations" class="font-bold underline underline-offset-2 hover:text-amber-950">Check the city hubs</a>
+        or
+        <a href="/research" class="font-bold underline underline-offset-2 hover:text-amber-950">browse the research library</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

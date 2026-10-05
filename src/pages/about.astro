@@ -1,0 +1,213 @@
+---
+/**
+ * /about — E-E-A-T page.
+ *
+ * Audit reference: /about previously returned the homepage with HTTP 200 because
+ * no such page existed. Affiliate networks and ad networks require a reachable
+ * About + Contact, and Google weighs these heavily on YMYL topics like
+ * electrical installation advice.
+ *
+ * ⚠️ The narrative sections below are written from what is genuinely verifiable
+ * about how this site works. Anything personal (credentials, years of
+ * experience, team, registration) is marked TODO and LEFT BLANK on purpose —
+ * do not publish invented credentials.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, BUSINESS, WHATSAPP_DISPLAY } from '../config/site';
+
+const pageUrl = `${SITE.url}/about/`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE.url}/#organization`,
+      name: BUSINESS.legalName,
+      url: SITE.url,
+      description:
+        'Nigerian solar sizing, equipment price comparison and installer referral service.',
+      areaServed: { '@type': 'Country', name: 'Nigeria' },
+      ...(BUSINESS.addressLine
+        ? {
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: BUSINESS.addressLine,
+              addressLocality: BUSINESS.addressLocality,
+              addressRegion: BUSINESS.addressRegion,
+              addressCountry: 'NG',
+            },
+          }
+        : {}),
+      ...(BUSINESS.registrationNumber ? { identifier: BUSINESS.registrationNumber } : {}),
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        telephone: `+${SITE.country === 'NG' ? '234' : ''}8027127331`,
+        areaServed: 'NG',
+        availableLanguage: ['en'],
+      },
+    },
+    {
+      '@type': 'AboutPage',
+      '@id': `${pageUrl}#aboutpage`,
+      url: pageUrl,
+      name: 'About IbadanSolarHub',
+      inLanguage: 'en-NG',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="About IbadanSolarHub — Nigeria's Solar Sizing & Price Data Hub"
+  description="Who runs IbadanSolarHub, how our solar sizing calculator works, where our Nigerian equipment price ranges come from, and how we make money."
+  schema={schema}
+>
+  <section class="bg-slate-900 text-white py-14 border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight">About IbadanSolarHub</h1>
+      <p class="mt-4 text-sm sm:text-base text-slate-300 max-w-2xl">
+        We size solar systems for Nigerian homes and businesses, publish what equipment
+        actually costs in Naira, and connect people with installers we would use ourselves.
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-10">
+
+    {/* What we actually do */}
+    <section>
+      <h2 class="text-2xl font-black text-slate-900">What We Do</h2>
+      <div class="mt-5 space-y-4 text-sm text-slate-600 leading-relaxed">
+        <p>
+          Nigeria's solar market has a pricing transparency problem and an oversizing problem.
+          Buyers are routinely quoted systems sized on guesswork, and equipment prices vary by
+          hundreds of thousands of Naira between two vendors on the same street.
+        </p>
+        <p>
+          IbadanSolarHub exists to fix both. We publish a free load calculator that sizes your
+          inverter, battery bank and solar array from your actual appliances, we track what
+          equipment genuinely sells for across Nigerian retailers and markets, and we only refer
+          installers whose work we can inspect.
+        </p>
+      </div>
+    </section>
+
+    {/* How the calculator works — this is our real differentiator */}
+    <section>
+      <h2 class="text-2xl font-black text-slate-900">How Our Sizing Calculator Works</h2>
+      <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+        We publish our methodology because a sizing tool you cannot audit is worthless. The
+        calculator uses these rules, applied to the appliances and run hours you enter:
+      </p>
+      <ul class="mt-5 space-y-3 text-sm text-slate-600">
+        <li class="flex items-start gap-3">
+          <span class="text-solar-500 font-black mt-px" aria-hidden="true">→</span>
+          <span><strong class="text-slate-900">Daily energy:</strong> appliance watts × quantity × hours per day, summed across your load.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-solar-500 font-black mt-px" aria-hidden="true">→</span>
+          <span><strong class="text-slate-900">Battery bank:</strong> 65% of daily energy is assumed to be carried by the battery (overnight + evening), then divided by 80% depth of discharge with a 20% reserve for lithium — or 50% depth of discharge for tubular lead-acid.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-solar-500 font-black mt-px" aria-hidden="true">→</span>
+          <span><strong class="text-slate-900">Solar array:</strong> daily energy × 1.25 for system losses, divided by 4.8 peak sun hours — deliberately conservative against Nigeria's 5.0–5.4 average.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-solar-500 font-black mt-px" aria-hidden="true">→</span>
+          <span><strong class="text-slate-900">Inverter — two constraints, we take the larger:</strong> steady running load plus 30% headroom, <em>and</em> peak motor starting surge against the inverter's surge rating. Motor inrush is the single most common cause of inverters tripping when a pump or air conditioner starts, and most sizing tools ignore it entirely.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-solar-500 font-black mt-px" aria-hidden="true">→</span>
+          <span><strong class="text-slate-900">System voltage:</strong> 12V up to 1.2kVA, 24V to 3.5kVA, 48V from 5kVA upward — matching standard Nigerian installation practice.</span>
+        </li>
+      </ul>
+    </section>
+
+    {/* Where prices come from */}
+    <section>
+      <h2 class="text-2xl font-black text-slate-900">Where Our Price Ranges Come From</h2>
+      <div class="mt-5 space-y-4 text-sm text-slate-600 leading-relaxed">
+        <p>
+          Equipment prices are tracked across major Nigerian online retailers and verified
+          distributor networks. Turnkey installation ranges reflect the brackets installers
+          actually quote across our city hubs.
+        </p>
+        <p class="rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-900">
+          <strong>An honest caveat:</strong> the Naira moves fast. Treat every figure on this
+          site as a benchmark to sanity-check a quote against, never as a fixed price. Use the
+          calculator to confirm a quote is in the right ballpark — then get three quotes in
+          writing before you commit to anything.
+        </p>
+      </div>
+    </section>
+
+    {/* How we make money — full transparency */}
+    <section>
+      <h2 class="text-2xl font-black text-slate-900">How We Make Money</h2>
+      <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+        Being upfront about this matters, because it is the reason you should trust the rest of
+        the page. We earn from:
+      </p>
+      <ul class="mt-5 space-y-3 text-sm text-slate-600">
+        <li class="flex items-start gap-3">
+          <span class="text-solar-500 font-black mt-px" aria-hidden="true">1</span>
+          <span><strong class="text-slate-900">Affiliate commissions</strong> from retailers and financing partners when you click through and buy or sign up. This costs you nothing extra — you pay the same price either way.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-solar-500 font-black mt-px" aria-hidden="true">2</span>
+          <span><strong class="text-slate-900">Digital products</strong> — our own sizing spreadsheets and buyer's guides, sold on Selar.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-solar-500 font-black mt-px" aria-hidden="true">3</span>
+          <span><strong class="text-slate-900">Installer referrals</strong> — partner installers pay us for qualified leads from this site.</span>
+        </li>
+      </ul>
+      <p class="mt-5 text-sm text-slate-600 leading-relaxed">
+        We do not accept payment to write a favourable review of a product, and equipment
+        recommendations are based on specification and Nigerian field experience, not commission
+        rates. Read our
+        <a href="/affiliate-disclosure" class="font-semibold text-solar-700 underline underline-offset-2">full affiliate disclosure</a>.
+      </p>
+    </section>
+
+    {/*
+      TODO — OWNER TO COMPLETE.
+      The section below is intentionally empty. Author credentials are the single
+      biggest E-E-A-T signal on a YMYL site like this one, and inventing them would
+      both mislead readers and risk a Google trust problem. Fill this in with real
+      detail: who you are, your electrical/solar background, how long you have been
+      installing or specifying systems in Nigeria, and any relevant certification.
+    */}
+    <section class="rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 p-6">
+      <h2 class="text-lg font-black text-slate-900">Who Writes This</h2>
+      <p class="mt-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
+        Placeholder — to be completed by the site owner
+      </p>
+      <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+        This section should name the person or team behind the sizing methodology and the
+        price research, with their solar or electrical engineering background. It is currently
+        unpublished because we would rather show nothing than fabricate credentials.
+        <strong class="text-slate-700"> Add your real details in <code class="rounded bg-slate-200 px-1 py-px text-[11px]">src/pages/about.astro</code>.</strong>
+      </p>
+    </section>
+
+    <section class="rounded-2xl bg-slate-900 p-8 text-center text-white">
+      <h2 class="text-xl font-black">Questions, Corrections or Partnerships?</h2>
+      <p class="mt-2 text-sm text-slate-300">
+        If you have spotted an error in our figures, we want to know. Reach us on WhatsApp at
+        {' '}<strong class="text-white">{WHATSAPP_DISPLAY}</strong>.
+      </p>
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="/contact" class="w-full sm:w-auto inline-flex items-center justify-center bg-solar-500 hover:bg-solar-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition">
+          Contact Us
+        </a>
+        <a href="/calculator" class="w-full sm:w-auto inline-flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 font-bold px-6 py-3 rounded-xl transition">
+          Try the Calculator
+        </a>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

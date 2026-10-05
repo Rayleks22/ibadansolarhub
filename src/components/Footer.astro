@@ -31,7 +31,12 @@
 
       {/* Locations Column */}
       <div>
-        <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Popular Locations</h4>
+        {/*
+          Headings changed from h4 to h2. The page outline was h1 → h3 → h4,
+          skipping a level, which axe flagged as a heading-order violation.
+          These are top-level sections of the footer, so h2 is also more correct.
+        */}
+        <h2 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Popular Locations</h2>
         <ul class="space-y-2 text-xs">
           <li><a href="/locations/bodija-ibadan" class="hover:text-solar-400 transition">Bodija, Ibadan</a></li>
           <li><a href="/locations/oluyole-ibadan" class="hover:text-solar-400 transition">Oluyole Estate, Ibadan</a></li>
@@ -46,7 +51,7 @@
 
       {/* Solar Packages Column */}
       <div>
-        <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Sizing Packages</h4>
+        <h2 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Sizing Packages</h2>
         <ul class="space-y-2 text-xs">
           <li><a href="/packages/mini-remote-worker-1kva" class="hover:text-solar-400 transition">1.2kVA Remote Work Kit</a></li>
           <li><a href="/packages/essential-home-2-5kva" class="hover:text-solar-400 transition">2.5kVA Essential Home</a></li>
@@ -59,7 +64,7 @@
 
       {/* Digital Products & Monetization */}
       <div>
-        <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Research & Intelligence</h4>
+        <h2 class="text-white font-bold text-xs uppercase tracking-wider mb-3">Research & Intelligence</h2>
         <ul class="space-y-2 text-xs">
           <li><a href="/research" class="text-solar-400 font-bold hover:underline">📚 Research & Data Hub</a></li>
           <li><a href="/band-a-tariff-vs-solar-index" class="hover:text-solar-400 transition">Band A Payback Index (2026)</a></li>
@@ -69,23 +74,27 @@
           <li><a href="/nigeria-lcoe-solar-vs-fuel-cost-index" class="hover:text-solar-400 transition">Nigeria LCOE Cost per kWh</a></li>
           <li><a href="/harmattan-monsoon-solar-derating-study" class="hover:text-solar-400 transition">Harmattan & Cloud Derating Study</a></li>
           <li><a href="/products" class="hover:text-solar-400 transition">Digital Publications</a></li>
-          <li><a href="/affiliate-disclosure" class="hover:text-solar-400 transition">Affiliate Disclosure</a></li>
+          <li><a href="/solar-financing" class="hover:text-solar-400 transition">Solar Financing (Pay Monthly)</a></li>
         </ul>
       </div>
 
     </div>
 
     {/* Affiliate & Disclaimer Banner */}
-    <div class="mt-12 pt-6 border-t border-slate-900 text-xs text-slate-500 leading-relaxed">
+    <div class="mt-12 pt-6 border-t border-slate-900 text-xs text-slate-400 leading-relaxed">
       <p>
-        <strong class="text-slate-400">Affiliate Disclosure:</strong> IbadanSolarHub.com.ng participates in various affiliate marketing programs (including Jumia KOL, Konga Affiliate Program, and direct solar distributor networks in Nigeria). We may earn commissions when you click links and make purchases at no extra cost to you. Equipment prices in Nigerian Naira (₦) are subject to FX fluctuations and distributor availability.
+        <strong class="text-slate-400">Affiliate Disclosure:</strong> IbadanSolarHub.com.ng participates in affiliate marketing programs, including the Jumia KOL programme, the Konga affiliate programme, <a href="/solar-financing" class="text-slate-300 underline hover:text-solar-400">Earthbond solar financing</a>, and direct solar distributor networks in Nigeria. We may earn commissions when you click links and make purchases or sign up, at no extra cost to you. Equipment prices in Nigerian Naira (₦) are subject to FX fluctuations and distributor availability.
       </p>
-      <div class="mt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500">
+      <div class="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
         <p>&copy; {new Date().getFullYear()} IbadanSolarHub.com.ng. All rights reserved. Built for Nigeria's renewable energy revolution.</p>
-        <div class="flex items-center gap-4">
-          <a href="/affiliate-disclosure" class="hover:underline">Affiliate Terms</a>
+        <nav aria-label="Footer legal and company links" class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+          <a href="/about" class="hover:underline">About</a>
+          <a href="/contact" class="hover:underline">Contact</a>
+          <a href="/affiliate-disclosure" class="hover:underline">Affiliate Disclosure</a>
+          <a href="/privacy" class="hover:underline">Privacy</a>
+          <a href="/terms" class="hover:underline">Terms</a>
           <a href="/quote" class="hover:underline">Join Installer Network</a>
-        </div>
+        </nav>
       </div>
     </div>
 

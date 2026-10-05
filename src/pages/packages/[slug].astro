@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../../components/AdSlot.astro';
+import FinancingOffer from '../../components/FinancingOffer.astro';
 import solarPackages from '../../data/solar-packages.json';
+import { waLink } from '../../lib/whatsapp';
+import { EARTHBOND } from '../../config/site';
 
 export async function getStaticPaths() {
   return solarPackages.map((pkg) => ({
@@ -11,6 +14,15 @@ export async function getStaticPaths() {
 }
 
 const { pkg } = Astro.props;
+
+/**
+ * Parse the leading kVA figure from the capacity string so we can decide
+ * whether financing is contextually relevant.
+ *   "5kVA / 48V (5000W)"  → 5
+ *   "1.2kVA / 12V"        → 1.2
+ *   "3.5kVA / 24V or 48V" → 3.5
+ */
+const pkgKva = parseFloat((pkg.capacity.match(/[\d.]+/) ?? ['0'])[0]);
 
 const schema = {
   "@context": "https://schema.org",
@@ -26,9 +38,9 @@ const schema = {
   }
 };
 
-const whatsappUrl = `https://wa.me/2348000000000?text=${encodeURIComponent(
+const whatsappUrl = waLink(
   `Hello IbadanSolarHub! I am interested in the ${pkg.name} (${pkg.capacity}) setup. Please connect me with verified installers for an inspection and quote.`
-)}`;
+);
 ---
 
 <BaseLayout
@@ -62,7 +74,7 @@ const whatsappUrl = `https://wa.me/2348000000000?text=${encodeURIComponent(
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-md transition"
+            class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-md transition"
           >
             Request Quotation & Site Inspection
           </a>
@@ -86,13 +98,13 @@ const whatsappUrl = `https://wa.me/2348000000000?text=${encodeURIComponent(
         {/* Cost & Daily Output Card */}
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
-            <span class="text-xs font-semibold text-slate-400 uppercase">Estimated Turnkey Cost (Nigeria)</span>
+            <span class="text-xs font-semibold text-slate-500 uppercase">Estimated Turnkey Cost (Nigeria)</span>
             <div class="text-2xl font-black text-slate-900 mt-1">{pkg.estimatedCost}</div>
             <p class="text-xs text-slate-500 mt-2">Includes inverter, lithium storage, solar panels, and labor.</p>
           </div>
 
           <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
-            <span class="text-xs font-semibold text-slate-400 uppercase">Expected Daily Solar Generation</span>
+            <span class="text-xs font-semibold text-slate-500 uppercase">Expected Daily Solar Generation</span>
             <div class="text-2xl font-black text-solar-600 mt-1">{pkg.dailyOutputKwh}</div>
             <p class="text-xs text-slate-500 mt-2">Calculated under standard Nigerian solar radiation.</p>
           </div>
@@ -184,10 +196,12 @@ const whatsappUrl = `https://wa.me/2348000000000?text=${encodeURIComponent(
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-xs shadow-md transition"
+            class="w-full inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-4 rounded-xl text-xs shadow-md transition"
           >
             Chat with Verified Installer on WhatsApp
           </a>
+
+          <FinancingOffer kva={pkgKva} variant="package" />
 
           <div class="pt-4 border-t border-slate-100">
             <h4 class="text-xs font-bold text-slate-900 mb-2">Want the Full Sizing Spreadsheet?</h4>

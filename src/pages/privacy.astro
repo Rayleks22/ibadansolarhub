@@ -1,0 +1,213 @@
+---
+/**
+ * /privacy — Nigeria Data Protection Act / NDPR-aware privacy policy.
+ *
+ * ⚠️ IMPORTANT — READ BEFORE PUBLISHING
+ * This policy is written to accurately describe what the site ACTUALLY does as
+ * of 5 Oct 2026, based on a full review of the codebase. It is a good-faith,
+ * technically accurate draft, NOT legal advice. Have it reviewed before you rely
+ * on it, and UPDATE IT whenever you add analytics, ads, or a new integration.
+ *
+ * Two sections will become inaccurate the moment you install anything:
+ *   • "Analytics" — currently none are installed
+ *   • "Cookies"   — currently the site sets no first-party cookies
+ * Both are flagged inline below.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, BUSINESS } from '../config/site';
+
+const pageUrl = `${SITE.url}/privacy/`;
+const lastUpdated = '5 October 2026';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: 'Privacy Policy',
+  dateModified: '2026-10-05',
+  inLanguage: 'en-NG',
+};
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="How IbadanSolarHub collects, uses and protects your personal data, in line with the Nigeria Data Protection Act."
+  schema={schema}
+>
+  <section class="bg-slate-900 text-white py-12 border-b border-slate-800">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-black tracking-tight">Privacy Policy</h1>
+      <p class="mt-3 text-sm text-slate-400">Last updated: {lastUpdated}</p>
+    </div>
+  </section>
+
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-8 text-sm text-slate-600 leading-relaxed">
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">The Short Version</h2>
+      <p class="mt-3">
+        We collect only what you type into our quote form, we use it to connect you with a solar
+        installer, and we do not sell your data to anyone. There is no tracking pixel on this
+        site and no account to create.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">Who We Are</h2>
+      <p class="mt-3">
+        {BUSINESS.legalName} operates {SITE.name}. For any privacy question, or to exercise any
+        right described below, contact us at
+        <a href={`mailto:${SITE.email}`} class="font-semibold text-solar-700 underline underline-offset-2">{SITE.email}</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">What We Collect</h2>
+
+      <h3 class="mt-4 font-bold text-slate-900">Information you give us</h3>
+      <p class="mt-2">
+        When you submit the quote request form we collect: your name, your phone/WhatsApp number,
+        your city or neighbourhood, your property type, the system size you are interested in,
+        and any appliances or notes you type in. That is the whole list — there are no hidden
+        fields.
+      </p>
+
+      <h3 class="mt-4 font-bold text-slate-900">Information collected automatically</h3>
+      <p class="mt-2">
+        Our host (Cloudflare) processes standard technical request data — IP address, browser
+        type, and pages requested — to serve the site and protect it from abuse and denial-of-service
+        attacks. This is ordinary web server logging.
+      </p>
+
+      {/*
+        ⚠️ UPDATE THIS SECTION WHEN YOU INSTALL ANALYTICS.
+        As of the date above there is genuinely no analytics on the site.
+      */}
+      <div class="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
+        <p class="font-bold text-amber-900">Analytics: none currently installed</p>
+        <p class="mt-1 text-amber-900">
+          As of the date of this policy, this site does not run Google Analytics, Meta Pixel,
+          or any other visitor-tracking service. If that changes, this section must be updated
+          before the tracking goes live, and consent handling added where required.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">How Your Information Is Used</h2>
+      <ul class="mt-3 space-y-2">
+        <li class="flex items-start gap-2"><span class="font-black text-solar-500" aria-hidden="true">→</span><span>To match you with a solar installer in your area and pass your requirements to them so they can prepare a quote.</span></li>
+        <li class="flex items-start gap-2"><span class="font-black text-solar-500" aria-hidden="true">→</span><span>To contact you about your enquiry.</span></li>
+        <li class="flex items-start gap-2"><span class="font-black text-solar-500" aria-hidden="true">→</span><span>To keep a record of enquiries so we can follow up if an installer does not respond.</span></li>
+      </ul>
+      <p class="mt-3">
+        We do not sell, rent or trade your personal information. We do not send marketing
+        messages to numbers collected through the quote form.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">Where Your Data Goes</h2>
+      <p class="mt-3">
+        This matters more than most privacy policies admit, so here is exactly where a quote
+        form submission travels:
+      </p>
+      <ul class="mt-3 space-y-2">
+        <li class="flex items-start gap-2"><span class="font-black text-solar-500" aria-hidden="true">→</span><span><strong class="text-slate-900">WhatsApp (Meta):</strong> the form opens WhatsApp with your details pre-filled. If you press send, that message is delivered through WhatsApp and is subject to Meta's own privacy terms.</span></li>
+        <li class="flex items-start gap-2"><span class="font-black text-solar-500" aria-hidden="true">→</span><span><strong class="text-slate-900">Our own lead record:</strong> a copy of your submission may be stored on Cloudflare infrastructure so we have a record of your enquiry.</span></li>
+        <li class="flex items-start gap-2"><span class="font-black text-solar-500" aria-hidden="true">→</span><span><strong class="text-slate-900">Your matched installer:</strong> we share your requirements with the installer who will quote you. They use it only to prepare and follow up that quote.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">Third-Party Links</h2>
+      <p class="mt-3">
+        We link out to retailers (Jumia, Konga), financing partners (Earthbond), and our digital
+        products store (Selar). Some of these are affiliate links. Once you leave our site, the
+        destination's own privacy policy and cookie policy apply — we have no control over what
+        they collect. We recommend reading theirs before purchasing.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">External Services We Load</h2>
+      <p class="mt-3">
+        Our pages load fonts from Google Fonts. This means your browser makes a request directly
+        to Google servers, which discloses your IP address to Google. We are working on
+        self-hosting these fonts to remove that third-party request entirely.
+      </p>
+    </section>
+
+    {/*
+      ⚠️ UPDATE THIS SECTION WHEN YOU ADD COOKIES OR ANALYTICS.
+    */}
+    <section>
+      <h2 class="text-xl font-black text-slate-900">Cookies</h2>
+      <p class="mt-3">
+        This site does not set first-party cookies for advertising or tracking, and we do not
+        run a cookie banner because we are not currently doing anything that requires consent.
+        Our host may set a strictly-necessary security cookie to distinguish human visitors from
+        bots. If we add analytics or advertising later, we will add a consent mechanism and
+        update this policy first.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">How Long We Keep Your Data</h2>
+      <p class="mt-3">
+        Quote enquiries are kept for as long as needed to handle your request and any follow-up,
+        and then archived or deleted. You can ask us to delete your enquiry at any time.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">Your Rights</h2>
+      <p class="mt-3">
+        Under the Nigeria Data Protection Act you have the right to access the personal data we
+        hold about you, to have it corrected if inaccurate, to have it deleted, to object to or
+        restrict processing, and to request a copy in a portable format. To exercise any of
+        these, email
+        <a href={`mailto:${SITE.email}`} class="font-semibold text-solar-700 underline underline-offset-2">{SITE.email}</a>
+        and we will respond within 30 days.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">Security</h2>
+      <p class="mt-3">
+        The site is served over HTTPS with HTTP Strict Transport Security enabled. Form
+        submissions are transmitted over encrypted connections. No system is perfectly secure,
+        but we collect as little as possible specifically so that a breach would expose as
+        little as possible.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">Children</h2>
+      <p class="mt-3">
+        This site is intended for adults arranging solar installations. We do not knowingly
+        collect data from anyone under 18.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-black text-slate-900">Changes to This Policy</h2>
+      <p class="mt-3">
+        If we change how we handle your data we will update this page and revise the date at the
+        top. Material changes affecting data we already hold will be communicated to affected
+        individuals directly.
+      </p>
+    </section>
+
+    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+      <p class="text-xs text-slate-500 leading-relaxed">
+        <strong class="text-slate-700">Note for the site owner:</strong> this policy accurately
+        reflects the codebase as reviewed. It is not a substitute for legal advice. Have it
+        reviewed by a Nigerian lawyer, and re-check the Analytics, Cookies and Third-Party
+        sections whenever you add a new integration.
+      </p>
+    </div>
+
+  </div>
+</BaseLayout>

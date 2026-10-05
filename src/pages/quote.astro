@@ -1,6 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FinancingOffer from '../components/FinancingOffer.astro';
 import locations from '../data/locations.json';
+import { waLink } from '../lib/whatsapp';
+import { WHATSAPP_NUMBER, LEAD_ENDPOINT, HONEYPOT_FIELD, SITE } from '../config/site';
+
+const installerApplyUrl = waLink(
+  'Hello IbadanSolarHub! I am a solar installer and would like to join your verified network.'
+);
 ---
 
 <BaseLayout
@@ -21,54 +28,73 @@ import locations from '../data/locations.json';
 
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-      
+
       {/* Form Container */}
       <div class="md:col-span-8 bg-white rounded-2xl p-8 border border-slate-200 shadow-sm">
         <h2 class="text-2xl font-black text-slate-900">Tell Us About Your Project</h2>
         <p class="text-xs text-slate-500 mt-1">Takes less than 60 seconds. Our partner installers respond within 24 hours.</p>
 
-        <form id="quote-form" class="mt-6 space-y-4 text-xs sm:text-sm">
+        <form
+          id="quote-form"
+          class="mt-6 space-y-4 text-xs sm:text-sm"
+          novalidate
+          data-whatsapp={WHATSAPP_NUMBER}
+          data-endpoint={LEAD_ENDPOINT}
+        >
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Your Full Name</label>
+            <label for="q-name" class="block font-semibold text-slate-700 mb-1">Your Full Name</label>
             <input
               type="text"
               id="q-name"
+              name="name"
               required
+              autocomplete="name"
               placeholder="e.g. Adebayo Adeleke"
+              aria-describedby="q-name-error"
               class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
             />
+            <p id="q-name-error" class="hidden mt-1 text-xs font-medium text-red-600" role="alert"></p>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">WhatsApp / Phone Number</label>
+              <label for="q-phone" class="block font-semibold text-slate-700 mb-1">WhatsApp / Phone Number</label>
               <input
                 type="tel"
                 id="q-phone"
+                name="phone"
                 required
+                autocomplete="tel"
+                inputmode="tel"
                 placeholder="e.g. 0801 234 5678"
+                aria-describedby="q-phone-error q-phone-help"
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
               />
+              <p id="q-phone-help" class="mt-1 text-[11px] text-slate-500">Nigerian number, e.g. 0801 234 5678</p>
+              <p id="q-phone-error" class="hidden mt-1 text-xs font-medium text-red-600" role="alert"></p>
             </div>
 
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">City / Neighborhood</label>
+              <label for="q-location" class="block font-semibold text-slate-700 mb-1">City / Neighborhood</label>
               <select
                 id="q-location"
+                name="location"
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
               >
                 {locations.map(loc => (
                   <option value={`${loc.name}, ${loc.city}`}>{loc.name}, {loc.city} ({loc.state})</option>
                 ))}
+                <option value="Other / Outside listed areas">Other / Outside listed areas</option>
               </select>
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">Property Type</label>
+              <label for="q-property" class="block font-semibold text-slate-700 mb-1">Property Type</label>
               <select
                 id="q-property"
+                name="property"
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
               >
                 <option value="Self-contain / 1-Bed Flat">Self-contain / 1-Bed Flat</option>
@@ -80,12 +106,13 @@ import locations from '../data/locations.json';
             </div>
 
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">Target Solar System</label>
+              <label for="q-system" class="block font-semibold text-slate-700 mb-1">Target Solar System</label>
               <select
                 id="q-system"
+                name="system"
                 class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
               >
-                <option value="1.2kVA Starter & Remote Work">1.2kVA Starter & Remote Work</option>
+                <option value="1.2kVA Starter & Remote Work">1.2kVA Starter &amp; Remote Work</option>
                 <option value="2.5kVA Essential Home">2.5kVA Essential Home</option>
                 <option value="3.5kVA Comfort System">3.5kVA Comfort System</option>
                 <option value="5kVA Whole-Home with AC">5kVA Whole-Home with AC</option>
@@ -96,57 +123,91 @@ import locations from '../data/locations.json';
           </div>
 
           <div>
-            <label class="block font-semibold text-slate-700 mb-1">Key Appliances to Power</label>
+            <label for="q-notes" class="block font-semibold text-slate-700 mb-1">Key Appliances to Power</label>
             <textarea
               id="q-notes"
+              name="notes"
               rows="3"
               placeholder="e.g. 1 inverter AC, 1 fridge, 4 fans, 2 laptops, TV, and lights"
               class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 focus:ring-2 focus:ring-solar-500 focus:outline-none"
             ></textarea>
           </div>
 
+          {/*
+            Honeypot: invisible to humans, irresistible to bots.
+            Any submission with this filled in is silently discarded.
+          */}
+          <div aria-hidden="true" class="absolute left-[-9999px] h-0 w-0 overflow-hidden">
+            <label for={HONEYPOT_FIELD}>Do not fill this in</label>
+            <input type="text" id={HONEYPOT_FIELD} name={HONEYPOT_FIELD} tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="form_loaded_at" id="form-loaded-at" value="" />
+          <input type="hidden" name="page_url" value={Astro.url.href} />
+
           <button
-            type="button"
+            type="submit"
             id="submit-whatsapp-btn"
-            class="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition text-sm"
+            class="w-full inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            <span>Send Request via WhatsApp Instantly</span>
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <span id="submit-label">Send Request via WhatsApp Instantly</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
+
+          <p
+            id="form-status"
+            class="hidden text-xs font-semibold rounded-lg p-3"
+            role="status"
+            aria-live="polite"
+          ></p>
+
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            We send your details to a verified installer in your area. Your number is used
+            only to contact you about this request.
+          </p>
         </form>
       </div>
 
       {/* Trust & Installer Network Side */}
       <div class="md:col-span-4 space-y-6">
         <div class="bg-slate-900 text-white rounded-2xl p-6 border border-slate-800 shadow-sm space-y-4">
-          <h3 class="text-base font-bold text-white">Why Use IbadanSolarHub?</h3>
+          <h2 class="text-base font-bold text-white">Why Use IbadanSolarHub?</h2>
           <ul class="space-y-3 text-xs text-slate-300">
             <li class="flex items-start gap-2">
-              <span class="text-solar-400 font-bold">✓</span>
+              <span class="text-solar-400 font-bold" aria-hidden="true">✓</span>
               <span><strong>Vetted Engineers:</strong> Certified technicians with proven portfolio and authentic warranty handling.</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="text-solar-400 font-bold">✓</span>
+              <span class="text-solar-400 font-bold" aria-hidden="true">✓</span>
               <span><strong>Anti-Counterfeit:</strong> Guaranteed genuine Tier-1 lithium batteries and pure sine wave inverters.</span>
             </li>
             <li class="flex items-start gap-2">
-              <span class="text-solar-400 font-bold">✓</span>
+              <span class="text-solar-400 font-bold" aria-hidden="true">✓</span>
               <span><strong>100% Free:</strong> No brokerage markups or hidden fees charged to homeowners.</span>
             </li>
           </ul>
         </div>
 
+        {/* Contextual financing — revealed by the inline script for 5kVA+ selections */}
+        <div id="financing-slot" class="hidden">
+          <FinancingOffer
+            kva={10}
+            variant="package"
+            context="Planning a 5kVA or larger system? You may not need to pay for it all at once."
+          />
+        </div>
+
         <div class="bg-amber-50 rounded-2xl p-6 border border-amber-200 space-y-3">
           <span class="text-[10px] font-bold uppercase tracking-wider text-solar-800">For Solar Engineers</span>
-          <h3 class="text-sm font-bold text-slate-900">Are You an Installer?</h3>
+          <h2 class="text-sm font-bold text-slate-900">Are You an Installer?</h2>
           <p class="text-xs text-slate-600">
             Join our verified installer directory in Ibadan, Lagos, Ogun, Abuja, or Port Harcourt and receive steady high-intent installation leads.
           </p>
           <a
-            href="https://wa.me/2348000000000?text=Hello%20IbadanSolarHub!%20I%20am%20a%20solar%20installer%20and%20would%20like%20to%20join%20your%20verified%20network."
+            href={installerApplyUrl}
             target="_blank"
+            rel="noopener noreferrer"
             class="inline-block text-xs font-bold text-solar-800 hover:underline"
           >
             Apply to Join Verified Network &rarr;
@@ -158,29 +219,161 @@ import locations from '../data/locations.json';
   </div>
 
   <script is:inline>
-    const btn = document.getElementById('submit-whatsapp-btn');
-    if (btn) {
-      btn.addEventListener('click', () => {
-        const name = document.getElementById('q-name').value || 'Customer';
-        const phone = document.getElementById('q-phone').value || 'Not provided';
-        const loc = document.getElementById('q-location').value;
-        const prop = document.getElementById('q-property').value;
-        const sys = document.getElementById('q-system').value;
-        const notes = document.getElementById('q-notes').value || 'Standard household load';
+    (() => {
+      const form = document.getElementById('quote-form');
+      if (!form) return;
 
-        const text = encodeURIComponent(
-          `Hello IbadanSolarHub! I would like to request solar quotes from verified installers.\n\n` +
-          `👤 Name: ${name}\n` +
-          `📞 Phone/WhatsApp: ${phone}\n` +
-          `📍 Location: ${loc}\n` +
-          `🏠 Property: ${prop}\n` +
-          `⚙️ Target System: ${sys}\n` +
-          `💡 Appliances/Notes: ${notes}\n\n` +
-          `Please connect me with certified installers in my area.`
+      const WHATSAPP = form.dataset.whatsapp || '';
+      const ENDPOINT = form.dataset.endpoint || '';
+      const loadedAt = document.getElementById('form-loaded-at');
+      if (loadedAt) loadedAt.value = String(Date.now());
+
+      const btn = document.getElementById('submit-whatsapp-btn');
+      const label = document.getElementById('submit-label');
+      const status = document.getElementById('form-status');
+
+      const fields = {
+        name: document.getElementById('q-name'),
+        phone: document.getElementById('q-phone'),
+        location: document.getElementById('q-location'),
+        property: document.getElementById('q-property'),
+        system: document.getElementById('q-system'),
+        notes: document.getElementById('q-notes'),
+      };
+
+      function showStatus(message, kind) {
+        if (!status) return;
+        status.textContent = message;
+        status.className =
+          'text-xs font-semibold rounded-lg p-3 ' +
+          (kind === 'error'
+            ? 'bg-red-50 text-red-700 border border-red-200'
+            : 'bg-emerald-50 text-emerald-800 border border-emerald-200');
+      }
+
+      function setError(field, message) {
+        const input = fields[field];
+        const holder = document.getElementById('q-' + field + '-error');
+        if (input) input.setAttribute('aria-invalid', message ? 'true' : 'false');
+        if (holder) {
+          holder.textContent = message || '';
+          holder.classList.toggle('hidden', !message);
+        }
+      }
+
+      /**
+       * Accepts Nigerian formats: 0801 234 5678, 08012345678, +2348012345678,
+       * 2348012345678. Strips formatting, then requires a valid NG mobile prefix.
+       */
+      function normaliseNgPhone(raw) {
+        let digits = (raw || '').replace(/[^\d+]/g, '');
+        if (digits.startsWith('+')) digits = digits.slice(1);
+        if (digits.startsWith('0')) digits = '234' + digits.slice(1);
+        return /^234(70|80|81|90|91)\d{8}$/.test(digits) ? digits : null;
+      }
+
+      function validate() {
+        let ok = true;
+        Object.keys(fields).forEach((k) => setError(k, ''));
+
+        if (!fields.name.value.trim() || fields.name.value.trim().length < 2) {
+          setError('name', 'Please enter your name.');
+          ok = false;
+        }
+
+        if (!normaliseNgPhone(fields.phone.value)) {
+          setError('phone', 'Enter a valid Nigerian number, e.g. 0801 234 5678.');
+          ok = false;
+        }
+
+        return ok;
+      }
+
+      // Show the financing block only for 5kVA+ interest.
+      const financingSlot = document.getElementById('financing-slot');
+      if (financingSlot) {
+        const sync = () => {
+          const v = fields.system.value;
+          const big = v.startsWith('5kVA') || v.startsWith('10kVA');
+          financingSlot.classList.toggle('hidden', !big);
+        };
+        fields.system.addEventListener('change', sync);
+        sync();
+      }
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (!validate()) {
+          showStatus('Please correct the highlighted fields and try again.', 'error');
+          return;
+        }
+
+        // Honeypot: if filled, pretend success and send nothing.
+        const honeypot = form.querySelector('[name="company_website_url"]');
+        if (honeypot && honeypot.value) {
+          showStatus('Thank you — your request has been received.', 'success');
+          if (button) button.disabled = true;
+          return;
+        }
+
+        const phone = normaliseNgPhone(fields.phone.value);
+        const payload = {
+          name: fields.name.value.trim(),
+          phone,
+          location: fields.location.value,
+          property: fields.property.value,
+          system: fields.system.value,
+          notes: fields.notes.value.trim(),
+          pageUrl: window.location.href,
+          submittedAt: new Date().toISOString(),
+        };
+
+        const text =
+          'Hello IbadanSolarHub! I would like to request solar quotes from verified installers.\n\n' +
+          '👤 Name: ' + payload.name + '\n' +
+          '📞 Phone/WhatsApp: ' + payload.phone + '\n' +
+          '📍 Location: ' + payload.location + '\n' +
+          '🏠 Property: ' + payload.property + '\n' +
+          '⚙️ Target System: ' + payload.system + '\n' +
+          '💡 Appliances/Notes: ' + (payload.notes || 'Standard household load') + '\n\n' +
+          'Please connect me with certified installers in my area.';
+
+        const waUrl = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(text);
+
+        /*
+          IMPORTANT ORDER: open WhatsApp synchronously inside the user gesture,
+          BEFORE any await. Awaiting first would lose the gesture and let popup
+          blockers kill the tab.
+        */
+        const win = window.open(waUrl, '_blank');
+        if (!win) {
+          // Popup blocked — fall back to same-tab navigation rather than failing.
+          window.location.href = waUrl;
+        }
+
+        // Fire-and-forget durable copy. Never blocks or breaks the WhatsApp flow.
+        if (ENDPOINT) {
+          try {
+            fetch(ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+              keepalive: true,
+            }).catch(() => {});
+          } catch (e) {
+            /* silent — WhatsApp already opened */
+          }
+        }
+
+        showStatus(
+          'WhatsApp is opening with your details pre-filled. Press send there and we will match you with installers.',
+          'success'
         );
 
-        window.open(`https://wa.me/2348000000000?text=${text}`, '_blank');
+        if (btn) btn.disabled = true;
+        if (label) label.textContent = 'Request Sent';
       });
-    }
+    })();
   </script>
 </BaseLayout>

@@ -1,0 +1,18 @@
+# Cloudflare Worker — IbadanSolarHub lead capture
+#
+# Deploy:  cd worker && npx wrangler deploy
+# Secrets: npx wrangler secret put ADMIN_TOKEN
+# KV:      npx wrangler kv namespace create LEADS   → paste the id below
+
+name = "ibadansolarhub-leads"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# Optional. Leave commented to send nothing. Set to your email/WhatsApp
+# notification webhook if you want a ping on every new lead.
+# [vars]
+# NOTIFY_WEBHOOK = ""
+
+[[kv_namespaces]]
+binding = "LEADS"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
