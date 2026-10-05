@@ -1,4 +1,5 @@
 ---
+import { SITE } from '../config/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -26,16 +27,59 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div>
         <h2 class="text-xl font-bold text-slate-900">2. Affiliate Relationships</h2>
         <p>
-          IbadanSolarHub.com.ng participates in various affiliate marketing programs designed to provide a means for websites to earn advertising fees by linking to retail partners. These include, but are not limited to:
+          We believe you should be able to tell, at a glance, which links on this site earn us money
+          and which do not. Here is the complete and current list.
         </p>
-        <ul class="list-disc pl-5 space-y-1">
-          <li><strong>Jumia KOL / Affiliate Program</strong> (Jumia Nigeria)</li>
-          <li><strong>Konga Affiliate Program</strong></li>
-          <li>Direct verified Nigerian solar distributor partner programs</li>
-          <li>International equipment suppliers</li>
-        </ul>
-        <p class="mt-2">
-          When you click on links pointing to these retailers and complete a qualifying purchase, we may receive a small affiliate commission at <strong>absolutely zero additional cost to you</strong>. In fact, our negotiated partnerships frequently provide exclusive discounts for our community.
+
+        <div class="mt-4 space-y-3">
+          <div class="rounded-xl border border-emerald-200 bg-emerald-50/60 p-4">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-800 mb-1">
+              Links that may earn us a commission
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-sm">
+              <li>
+                <strong>Earthbond</strong> — solar financing for businesses. If you apply through our
+                referral link we may receive a referral fee. Their rates and terms are theirs, not ours,
+                and we do not influence them.
+              </li>
+              <li>
+                <strong>Selar</strong> — our own digital guides and toolkits. This is our own product;
+                you are buying directly from us.
+              </li>
+            </ul>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">
+              Links that do not earn us anything
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-sm">
+              <li>
+                <strong>Jumia and Konga price links.</strong> These are ordinary search links, provided
+                so you can check current market prices yourself. We are <em>not</em> enrolled in an
+                affiliate programme with either retailer, and we receive nothing when you click them.
+              </li>
+              <li>
+                <strong>Every other outbound link</strong> — manufacturer datasheets, standards bodies,
+                research and news sources. Included because they support the analysis.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="mt-4">
+          Where a link does earn us a commission it costs you nothing extra, and we never let it change
+          what we recommend. If a cheaper or better-suited product exists, we say so — including when
+          that means recommending something we earn nothing from. If we ever join an affiliate programme
+          for a retailer listed above, this page will be updated to say so before any link is changed.
+        </p>
+
+        <p class="mt-4 text-sm text-slate-500">
+          This page reflects the live state of the site, and you can verify it yourself: third-party
+          affiliate links (Earthbond) are marked <code class="text-xs">rel="sponsored nofollow noopener"</code>,
+          and non-earning outbound retailer links are marked <code class="text-xs">rel="nofollow noopener"</code>.
+          Right-click any link and inspect it. Links to our own products on Selar are not affiliate links,
+          so they are not marked as such.
         </p>
       </div>
 
@@ -56,7 +100,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div>
         <h2 class="text-xl font-bold text-slate-900">5. Contact Us</h2>
         <p>
-          If you have any questions or feedback regarding our affiliate relationships or disclosures, please contact us at <a href="mailto:info@ibadansolarhub.com.ng" class="text-solar-600 font-bold hover:underline">info@ibadansolarhub.com.ng</a>.
+          If you have any questions or feedback regarding our affiliate relationships or disclosures, please contact us at <a href={`mailto:${SITE.email}`} class="text-solar-700 font-bold hover:underline">{SITE.email}</a>.
         </p>
       </div>
 

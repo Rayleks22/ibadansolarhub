@@ -61,7 +61,7 @@ const schema = {
               {loc.name}
             </a>
           ))}
-          <a href="/locations" class="px-3 py-1.5 bg-solar-500/20 text-solar-300 border border-solar-500/40 rounded-lg hover:bg-solar-500 hover:text-slate-950 font-bold transition">
+          <a href="/locations" class="inline-flex items-center min-h-11 px-3 bg-solar-500/20 text-solar-300 border border-solar-500/40 rounded-lg hover:bg-solar-500 hover:text-slate-950 font-bold transition">
             View All Cities &rarr;
           </a>
         </div>
@@ -83,7 +83,7 @@ const schema = {
       </div>
       <a 
         href="/band-a-tariff-vs-solar-index"
-        class="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-950 hover:bg-slate-900 text-white text-xs font-bold rounded-xl shadow transition whitespace-nowrap self-stretch sm:self-auto justify-center"
+        class="inline-flex items-center gap-1.5 min-h-11 px-4 bg-slate-950 hover:bg-slate-900 text-white text-xs font-bold rounded-xl shadow transition whitespace-nowrap self-stretch sm:self-auto justify-center"
       >
         <span>Read Cost Breakdown</span>
         <span>&rarr;</span>
@@ -110,7 +110,7 @@ const schema = {
           <h2 class="text-3xl font-black text-slate-900 mt-1">Popular Nigerian Solar Packages</h2>
           <p class="text-sm text-slate-500 mt-1">Engineered specifically for Nigerian appliances, power grids, and climate conditions.</p>
         </div>
-        <a href="/packages" class="text-sm font-bold text-solar-700 hover:text-solar-800 flex items-center gap-1">
+        <a href="/packages" class="inline-flex items-center gap-1 min-h-11 text-sm font-bold text-solar-700 hover:text-solar-800">
           Explore all 5 packages &rarr;
         </a>
       </div>
@@ -144,7 +144,7 @@ const schema = {
             <div class="mt-6 pt-6 border-t border-slate-200">
               <a
                 href={`/packages/${pkg.slug}`}
-                class="w-full inline-flex items-center justify-center py-2.5 px-4 bg-slate-900 hover:bg-solar-500 hover:text-slate-950 text-white text-xs font-bold rounded-xl transition"
+                class="w-full inline-flex items-center justify-center min-h-11 px-4 bg-slate-900 hover:bg-solar-500 hover:text-solar-950 text-white text-xs font-bold rounded-xl transition"
               >
                 View Full Bill of Quantities & Specs
               </a>
@@ -187,9 +187,9 @@ const schema = {
                 <span class="text-xs text-slate-500 block mt-0.5">Author: {prod.author}</span>
                 <p class="text-xs text-slate-600 mt-2 line-clamp-3 leading-relaxed">{prod.description}</p>
 
-                <div class="mt-4 flex items-baseline gap-2">
-                  <span class="text-2xl font-black text-emerald-600">₦{prod.priceNgn.toLocaleString()}</span>
-                  <span class="text-xs text-slate-500 line-through">₦{prod.originalPriceNgn.toLocaleString()}</span>
+                <div class="mt-4">
+                  <span class="text-2xl font-black text-emerald-600">US${prod.priceUsd.toFixed(2)}</span>
+                  <span class="block text-[11px] text-slate-500 mt-0.5">Charged in USD by Selar</span>
                 </div>
               </div>
             </div>
@@ -199,7 +199,7 @@ const schema = {
                 href={prod.checkoutUrl}
                 target="_blank"
                 rel="noopener"
-                class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs shadow transition"
+                class="w-full inline-flex items-center justify-center gap-2 min-h-11 px-4 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs shadow transition"
               >
                 Get Instant Access on Selar &rarr;
               </a>
@@ -218,7 +218,7 @@ const schema = {
         <h2 class="text-3xl font-black text-slate-900 mt-1">Verified Equipment Price Index</h2>
         <p class="text-sm text-slate-500 mt-1">Compare prices across Jumia, Konga, and verified distributors in Lagos and Ibadan.</p>
       </div>
-      <a href="/equipment" class="text-sm font-bold text-solar-700 hover:text-solar-800 flex items-center gap-1">
+      <a href="/equipment" class="inline-flex items-center gap-1 min-h-11 text-sm font-bold text-solar-700 hover:text-solar-800">
         Browse complete equipment catalog &rarr;
       </a>
     </div>

@@ -5,8 +5,6 @@
     "author": "Ibadan Solar Hub",
     "publisher": "Independent Energy Intelligence",
     "format": "Instant Digital Download (PDF + EPUB + Excel Suite)",
-    "priceNgn": 5000,
-    "originalPriceNgn": 15000,
     "checkoutUrl": "https://selar.com/34ew22cs83",
     "coverImage": "/images/power-without-the-panic-cover.jpg",
     "badge": "⭐ Best Seller & Complete Solar Suite",
@@ -19,7 +17,8 @@
       "Bonus Tool 3: 3-Way Solar Quote Scorecard & Component Price Auditor (PDF)",
       "The Battery Truth Test: Spot fake lithium batteries made from recycled phone/EV cells in 30 seconds",
       "Business & Home Blueprints: Exact sizing for flats, duplexes, cold rooms, tailors, hotels, clinics & farms"
-    ]
+    ],
+    "priceUsd": 3.69
   },
   {
     "id": "solar-complete-toolkit-bundle",
@@ -27,11 +26,9 @@
     "author": "Ibadan Solar Hub",
     "publisher": "Engineering & Vetting Suite",
     "format": "Digital Toolkit Bundle (Excel + PDF)",
-    "priceNgn": 2000,
-    "originalPriceNgn": 5000,
     "checkoutUrl": "https://selar.com/5sd25u8229",
     "coverImage": "/images/solar-toolkit-bundle-cover.jpg",
-    "badge": "🔥 4-in-1 Toolkit Suite (Save 60%)",
+    "badge": "🔥 4-in-1 Toolkit Suite",
     "testimonial": "\"The installer vetting checklist and quote scorecard saved me from paying ₦450k for refurbished batteries.\" — Emeka K., Abuja",
     "description": "Get all 4 essential calculators, ROI simulators, and engineering inspection checklists used by smart homeowners and businesses to audit solar quotes and size their systems accurately.",
     "highlights": [
@@ -39,6 +36,7 @@
       "Tool 2: Solar vs Generator ROI & Monthly Fuel Payback Simulator (Excel .xlsx)",
       "Tool 3: Printable 3-Page Solar Installer Vetting & Site Inspection Checklist (PDF)",
       "Tool 4: 3-Way Solar Quote Scorecard & Component Price Auditor (PDF)"
-    ]
+    ],
+    "priceUsd": 3.0
   }
 ]

@@ -92,5 +92,29 @@ export const EARTHBOND = {
  */
 export const LEAD_ENDPOINT = '';
 
+/**
+ * ── ANALYTICS ────────────────────────────────────────────────────────────────
+ * The audit found zero analytics installed, so there is no way to know which
+ * pages earn traffic or whether the WhatsApp CTAs convert.
+ *
+ * Leave ga4Id empty and NOTHING is loaded — no script, no cookie, no request.
+ * Set it and the tag plus all conversion events switch on.
+ *
+ * Recommended events now wired: whatsapp_click, financing_click,
+ * affiliate_click, product_click, quote_submit, calculator_used.
+ *
+ * Prefer cookieless (better fit for this performance profile)? Use
+ * customScriptSrc + customDomain for Plausible or Umami instead — both are
+ * a fraction of GA4's weight and need no consent banner.
+ */
+export const ANALYTICS = {
+  /** GA4 Measurement ID, e.g. 'G-XXXXXXXXXX'. Create at analytics.google.com */
+  ga4Id: '',
+  /** Alternative: full script URL, e.g. 'https://plausible.io/js/script.js' */
+  customScriptSrc: '',
+  /** Domain for the cookieless script, e.g. 'ibadansolarhub.com.ng' */
+  customDomain: 'ibadansolarhub.com.ng',
+} as const;
+
 /** Honeypot field name — bots fill it, humans never see it. */
 export const HONEYPOT_FIELD = 'company_website_url';

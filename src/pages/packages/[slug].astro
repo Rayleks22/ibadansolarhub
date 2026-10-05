@@ -1,4 +1,8 @@
 ---
+import digitalProducts from '../../data/digital-products.json';
+
+const toolkitProduct = digitalProducts.find(p => p.id === 'solar-complete-toolkit-bundle');
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../../components/AdSlot.astro';
 import FinancingOffer from '../../components/FinancingOffer.astro';
@@ -212,7 +216,7 @@ const whatsappUrl = waLink(
               href="/products"
               class="w-full inline-flex items-center justify-center py-2 px-3 bg-solar-50 hover:bg-solar-100 text-solar-900 border border-solar-200 rounded-lg text-xs font-bold transition"
             >
-              Get BOQ Spreadsheet (₦3,000) &rarr;
+              Get the BOQ Calculator Toolkit (US${toolkitProduct ? toolkitProduct.priceUsd.toFixed(2) : '3.00'}) &rarr;
             </a>
           </div>
         </div>

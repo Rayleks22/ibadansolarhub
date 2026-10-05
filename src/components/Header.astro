@@ -55,7 +55,7 @@ const currentPath = Astro.url.pathname;
       <div class="flex items-center gap-3">
         <a 
           href="/quote" 
-          class="inline-flex items-center gap-2 bg-solar-500 hover:bg-solar-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs md:text-sm shadow-md transition transform active:scale-95"
+          class="inline-flex items-center gap-2 min-h-11 bg-solar-500 hover:bg-solar-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs md:text-sm shadow-md transition transform active:scale-95"
         >
           <span>Get Free Quotes</span>
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -69,10 +69,10 @@ const currentPath = Astro.url.pathname;
 
   {/* Mobile Nav Strip */}
   <div class="md:hidden flex items-center justify-around border-t border-slate-800/80 bg-slate-950/80 px-2 py-2 text-[11px] font-medium text-slate-300 overflow-x-auto">
-    <a href="/locations" class="px-2 py-1 hover:text-solar-400">Locations</a>
-    <a href="/calculator" class="px-2 py-1 hover:text-solar-400 text-solar-400 font-bold">Calculator</a>
-    <a href="/packages" class="px-2 py-1 hover:text-solar-400">Packages</a>
-    <a href="/equipment" class="px-2 py-1 hover:text-solar-400">Prices</a>
-    <a href="/products" class="px-2 py-1 hover:text-solar-400">Ebooks</a>
+    <a href="/locations" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Locations</a>
+    <a href="/calculator" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400 text-solar-400 font-bold">Calculator</a>
+    <a href="/packages" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Packages</a>
+    <a href="/equipment" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Prices</a>
+    <a href="/products" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Ebooks</a>
   </div>
 </header>

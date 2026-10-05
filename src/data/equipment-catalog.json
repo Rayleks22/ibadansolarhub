@@ -23,9 +23,24 @@
       "Requires professional BMS configuration to prevent communication faults"
     ],
     "affiliateLinks": [
-      { "name": "Check Price on Jumia Nigeria", "url": "https://kol.jumia.com/s/solar-felicity-5kwh", "retailer": "Jumia" },
-      { "name": "Check Price on Konga", "url": "https://www.konga.com/search?search=felicity+lithium+battery", "retailer": "Konga" },
-      { "name": "Order from Verified Solar Hub Vendor", "url": "/quote", "retailer": "Direct Verified Vendor" }
+      {
+        "name": "Check Price on Jumia Nigeria",
+        "url": "https://www.jumia.com.ng/catalog/?q=felicity+solar+lithium+battery",
+        "retailer": "Jumia",
+        "affiliated": false
+      },
+      {
+        "name": "Check Price on Konga",
+        "url": "https://www.konga.com/search?search=felicity+lithium+battery",
+        "retailer": "Konga",
+        "affiliated": false
+      },
+      {
+        "name": "Order from Verified Solar Hub Vendor",
+        "url": "/quote",
+        "retailer": "Direct Verified Vendor",
+        "affiliated": false
+      }
     ]
   },
   {
@@ -52,9 +67,24 @@
       "Requires caution with grid surge voltages on poor DISCO lines"
     ],
     "affiliateLinks": [
-      { "name": "Check Price on Jumia Nigeria", "url": "https://kol.jumia.com/s/growatt-5000es", "retailer": "Jumia" },
-      { "name": "Check Price on Konga", "url": "https://www.konga.com/search?search=growatt+5000es", "retailer": "Konga" },
-      { "name": "Order from Verified Solar Hub Vendor", "url": "/quote", "retailer": "Direct Verified Vendor" }
+      {
+        "name": "Check Price on Jumia Nigeria",
+        "url": "https://www.jumia.com.ng/catalog/?q=growatt+5000es+inverter",
+        "retailer": "Jumia",
+        "affiliated": false
+      },
+      {
+        "name": "Check Price on Konga",
+        "url": "https://www.konga.com/search?search=growatt+5000es",
+        "retailer": "Konga",
+        "affiliated": false
+      },
+      {
+        "name": "Order from Verified Solar Hub Vendor",
+        "url": "/quote",
+        "retailer": "Direct Verified Vendor",
+        "affiliated": false
+      }
     ]
   },
   {
@@ -80,8 +110,18 @@
       "Large dimensions (approx 2.27m x 1.13m) require sturdy roof mounting rails"
     ],
     "affiliateLinks": [
-      { "name": "Check Price on Jumia Nigeria", "url": "https://kol.jumia.com/s/canadian-solar-550w", "retailer": "Jumia" },
-      { "name": "Order Bundle from Local Solar Hub", "url": "/quote", "retailer": "Direct Verified Vendor" }
+      {
+        "name": "Check Price on Jumia Nigeria",
+        "url": "https://www.jumia.com.ng/catalog/?q=canadian+solar+550w+panel",
+        "retailer": "Jumia",
+        "affiliated": false
+      },
+      {
+        "name": "Order Bundle from Local Solar Hub",
+        "url": "/quote",
+        "retailer": "Direct Verified Vendor",
+        "affiliated": false
+      }
     ]
   },
   {
@@ -107,8 +147,18 @@
       "Takes 8-10 hours to recharge to 100% capacity"
     ],
     "affiliateLinks": [
-      { "name": "Check Price on Jumia Nigeria", "url": "https://kol.jumia.com/s/luminous-220ah", "retailer": "Jumia" },
-      { "name": "Check Price on Konga", "url": "https://www.konga.com/search?search=luminous+220ah", "retailer": "Konga" }
+      {
+        "name": "Check Price on Jumia Nigeria",
+        "url": "https://www.jumia.com.ng/catalog/?q=luminous+tubular+battery+220ah",
+        "retailer": "Jumia",
+        "affiliated": false
+      },
+      {
+        "name": "Check Price on Konga",
+        "url": "https://www.konga.com/search?search=luminous+220ah",
+        "retailer": "Konga",
+        "affiliated": false
+      }
     ]
   }
 ]

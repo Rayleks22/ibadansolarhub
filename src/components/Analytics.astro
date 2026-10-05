@@ -1,0 +1,159 @@
+---
+/**
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ANALYTICS — config-gated, no third-party script until you switch it on.
+ * ─────────────────────────────────────────────────────────────────────────────
+ * The audit found ZERO analytics on the site. Without it you cannot know which
+ * pages earn traffic, which calculator settings people pick, or whether the
+ * WhatsApp CTAs actually convert — you would be optimising blind.
+ *
+ * This component ships with everything wired EXCEPT the account ID, because
+ * only you can create that. Until you paste an ID into src/config/site.ts this
+ * renders nothing at all and adds zero bytes of JS.
+ *
+ * ── TO TURN IT ON ────────────────────────────────────────────────────────────
+ * 1. Create a GA4 property at analytics.google.com
+ * 2. Copy the Measurement ID (looks like G-XXXXXXXXXX)
+ * 3. Set ANALYTICS.ga4Id in src/config/site.ts
+ * 4. Rebuild — the tag appears and events start flowing
+ *
+ * Prefer something lighter? Plausible/Umami work too — set `customScriptSrc`
+ * and `customDomain` instead. Both are cookieless and much smaller than GA4,
+ * which suits a site with this performance profile.
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+import { ANALYTICS } from '../config/site';
+
+const { ga4Id, customScriptSrc, customDomain } = ANALYTICS;
+const enabled = Boolean(ga4Id || customScriptSrc);
+---
+
+{enabled && ga4Id && (
+  <>
+    <script
+      is:inline
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}
+    ></script>
+    <script is:inline define:vars={{ ga4Id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      /* send_page_view:false — we fire page views manually so SPA-style
+         interactions and the conversion events below stay in sync. */
+      gtag('config', ga4Id, { send_page_view: true, anonymize_ip: true });
+    </script>
+  </>
+)}
+
+{enabled && customScriptSrc && (
+  <script
+    is:inline
+    defer
+    data-domain={customDomain}
+    src={customScriptSrc}
+  ></script>
+)}
+
+{enabled && (
+  <script is:inline>
+    /*
+      CONVERSION TRACKING
+      ───────────────────────────────────────────────────────────────────────
+      Implemented as one delegated listener on the document rather than
+      sprinkling tracking calls through components. That means it survives
+      component refactors, and it works for links added later without touching
+      them individually.
+
+      Events fired:
+        whatsapp_click    — a lead CTA. Tagged with which page/placement.
+        financing_click   — Earthbond referral (affiliate revenue signal).
+        affiliate_click   — any other outbound partner link.
+        product_click     — Selar digital product.
+        quote_submit      — quote form submitted successfully.
+        quote_validation_failed — form rejected. Tells you the UI is too strict.
+        calculator_used   — someone changed a calculator input (engagement).
+    */
+    (function () {
+      if (!window.gtag) return;
+
+      var fired = false;
+
+      function track(name, params) {
+        try { window.gtag('event', name, params || {}); } catch (e) {}
+      }
+
+      /* Debounce so dragging a slider does not fire 40 events. */
+      var calcTimer = null;
+      function calcUsed() {
+        clearTimeout(calcTimer);
+        calcTimer = setTimeout(function () {
+          if (fired) return;
+          fired = true;
+          track('calculator_used', { event_category: 'engagement' });
+        }, 2500);
+      }
+
+      document.addEventListener('click', function (event) {
+        var el = event.target && event.target.closest ? event.target.closest('a,button') : null;
+        if (!el) return;
+        var href = el.getAttribute('href') || '';
+
+        /* WhatsApp lead CTAs — the primary conversion on this site. */
+        if (href.indexOf('wa.me/') !== -1 || href.indexOf('api.whatsapp.com') !== -1) {
+          var placement = el.closest('astro-island') ? 'calculator'
+            : el.closest('form') ? 'quote_form'
+            : el.closest('footer') ? 'footer'
+            : el.closest('header') ? 'header'
+            : 'content';
+          track('whatsapp_click', {
+            event_category: 'lead',
+            placement: placement,
+            page_path: window.location.pathname,
+          });
+          return;
+        }
+
+        /* Earthbond financing referral. */
+        if (href.indexOf('earthbond.co') !== -1) {
+          track('financing_click', {
+            event_category: 'affiliate',
+            partner: 'earthbond',
+            system_kva: el.getAttribute('data-system-kva') || 'unspecified',
+            page_path: window.location.pathname,
+          });
+          return;
+        }
+
+        /* Digital products. */
+        if (href.indexOf('selar.com') !== -1) {
+          track('product_click', { event_category: 'revenue', retailer: 'selar' });
+          return;
+        }
+
+        /* Any other outbound partner link (Jumia, Konga, etc). */
+        if (href.indexOf('http') === 0 && href.indexOf(window.location.host) === -1) {
+          track('affiliate_click', {
+            event_category: 'affiliate',
+            retailer: el.getAttribute('data-retailer') || new URL(href).hostname,
+            page_path: window.location.pathname,
+          });
+        }
+      }, true);
+
+      /* Calculator engagement — any count/hour/city/cable interaction. */
+      document.addEventListener('input', function (event) {
+        var el = event.target;
+        if (!el || !el.closest) return;
+        if (el.closest('astro-island') && (el.type === 'range' || el.tagName === 'SELECT')) calcUsed();
+      }, true);
+      document.addEventListener('change', function (event) {
+        var el = event.target;
+        if (el && el.tagName === 'SELECT' && el.id === 'calc-city') calcUsed();
+      }, true);
+
+      /* Exposed so the quote form can report its own outcome. */
+      window.ibadanSolarHubTrack = track;
+    })();
+  </script>
+)}

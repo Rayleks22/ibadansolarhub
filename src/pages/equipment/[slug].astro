@@ -144,7 +144,11 @@ const schema = {
               <a
                 href={link.url}
                 target={link.url.startsWith('http') ? '_blank' : '_self'}
-                rel={link.url.startsWith('http') ? 'sponsored nofollow noopener' : ''}
+                rel={
+                  !link.url.startsWith('http') ? ''
+                    : link.affiliated ? 'sponsored nofollow noopener'
+                    : 'nofollow noopener'
+                }
                 class="w-full inline-flex items-center justify-between p-3 rounded-xl border border-slate-200 hover:border-solar-500 bg-slate-50 hover:bg-solar-50 transition group"
               >
                 <div class="text-left">

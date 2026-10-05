@@ -413,7 +413,7 @@ const schema = {
               <span class="px-2.5 py-1 bg-solar-500/20 text-solar-400 border border-solar-500/30 text-xs font-bold rounded-lg">
                 📘 Flagship Guide & Tools
               </span>
-              <span class="text-lg font-black text-solar-400">₦5,000</span>
+              <span class="text-lg font-black text-solar-400">US${bookProduct.priceUsd.toFixed(2)}</span>
             </div>
             <h3 class="text-lg font-bold mb-2">Power Without The Panic</h3>
             <p class="text-xs text-slate-300 leading-relaxed mb-4">
@@ -421,7 +421,7 @@ const schema = {
             </p>
           </div>
           <a
-            href={bookProduct ? bookProduct.selarUrl : "https://selar.com/34ew22cs83"}
+            href={bookProduct ? bookProduct.checkoutUrl : "https://selar.com/34ew22cs83"}
             target="_blank"
             class="w-full py-3 bg-solar-500 hover:bg-solar-600 text-slate-950 font-bold rounded-xl text-center text-xs sm:text-sm transition shadow-lg shadow-solar-500/20"
           >
@@ -436,7 +436,7 @@ const schema = {
               <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-lg">
                 🛠️ 4-in-1 Excel Toolkit
               </span>
-              <span class="text-lg font-black text-slate-900">₦2,000</span>
+              <span class="text-lg font-black text-slate-900">US${toolkitProduct.priceUsd.toFixed(2)}</span>
             </div>
             <h3 class="text-lg font-bold text-slate-900 mb-2">The Complete Nigerian Solar Toolkit Bundle</h3>
             <p class="text-xs text-slate-600 leading-relaxed mb-4">
@@ -444,11 +444,11 @@ const schema = {
             </p>
           </div>
           <a
-            href={toolkitProduct ? toolkitProduct.selarUrl : "https://selar.com/5sd25u8229"}
+            href={toolkitProduct ? toolkitProduct.checkoutUrl : "https://selar.com/5sd25u8229"}
             target="_blank"
             class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-center text-xs sm:text-sm transition"
           >
-            Download Toolkit (₦2,000) &rarr;
+            Download Toolkit (US${toolkitProduct.priceUsd.toFixed(2)}) &rarr;
           </a>
         </div>
       </div>
@@ -506,11 +506,11 @@ const schema = {
         </div>
         <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
           <a
-            href={toolkitProduct ? toolkitProduct.selarUrl : "https://selar.com/5sd25u8229"}
+            href={toolkitProduct ? toolkitProduct.checkoutUrl : "https://selar.com/5sd25u8229"}
             target="_blank"
             class="px-6 py-3 bg-solar-500 hover:bg-solar-600 text-slate-950 font-bold rounded-xl text-center text-sm transition shadow-lg shadow-solar-500/20 whitespace-nowrap"
           >
-            Get Toolkit Bundle (₦2,000)
+            Get Toolkit Bundle (US${toolkitProduct.priceUsd.toFixed(2)})
           </a>
           <a
             href="/calculator"

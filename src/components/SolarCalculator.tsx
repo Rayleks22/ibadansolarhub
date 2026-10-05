@@ -5,6 +5,14 @@ import {
   Copy, Check, Printer
 } from 'lucide-react';
 import { WHATSAPP_NUMBER, EARTHBOND } from '../config/site';
+import {
+  MARKETS,
+  getMarket,
+  ARRAY_DERATING_FACTOR,
+  PANEL_WATTS,
+  COPPER_RESISTIVITY,
+  MAX_VOLTAGE_DROP_PCT,
+} from '../config/markets';
 
 /**
  * ─────────────────────────────────────────────────────────────────────────────
@@ -31,6 +39,47 @@ const INVERTER_EFFICIENCY = 0.9; // DC→AC conversion loss, so DC draw > AC loa
  * in Nigeria. Used to size the battery bank against surge, not just capacity.
  */
 const BMS_SIZES = [100, 150, 200, 250, 300];
+
+/**
+ * Copper cable — two independent constraints, and the cable must satisfy BOTH:
+ *
+ *   1. VOLTAGE DROP — too much drop wastes power as heat and can brown-out the
+ *      inverter on surge. Governs on LONG runs.
+ *
+ *   2. AMPACITY — the cable's current-carrying capacity. Exceed it and the
+ *      insulation overheats, which is a fire risk, not just an efficiency
+ *      problem. Governs on SHORT runs with high current.
+ *
+ * Voltage drop alone produces dangerously thin cable on short, high-current
+ * battery runs: a 48V bank at ~92A over 1.5m "only" needs ~5mm² for 2% drop,
+ * but 5mm² carrying 92A will cook. Ampacity is the binding constraint there.
+ *
+ * Ampacity figures are approximate PVC-insulated copper in free air, and are
+ * intentionally conservative. Real ratings vary with installation method,
+ * bundling and ambient temperature.
+ */
+const CABLE_SPECS: Array<{ mm2: number; amps: number }> = [
+  { mm2: 2.5, amps: 24 },
+  { mm2: 4, amps: 32 },
+  { mm2: 6, amps: 41 },
+  { mm2: 10, amps: 57 },
+  { mm2: 16, amps: 76 },
+  { mm2: 25, amps: 101 },
+  { mm2: 35, amps: 125 },
+  { mm2: 50, amps: 151 },
+  { mm2: 70, amps: 192 },
+  { mm2: 95, amps: 232 },
+];
+
+/**
+ * Practical floor for battery circuits. Matches the minimum this site already
+ * publishes in its vetting rules ("16mm² / 25mm² pure copper battery cables").
+ * Short battery runs can pass the maths at 4–6mm², but undersized DC battery
+ * cable is a common and dangerous shortcut, so we never recommend below this.
+ */
+const MIN_BATTERY_CABLE_MM2 = 16;
+/** Common practical floor for array string cable. */
+const MIN_ARRAY_CABLE_MM2 = 4;
 
 interface Appliance {
   id: string;
@@ -83,6 +132,19 @@ export default function SolarCalculator() {
   });
 
   const [selectedCity, setSelectedCity] = useState('Ibadan');
+  /**
+   * Cable runs, in metres, one-way.
+   *
+   * These are SEPARATE because the two runs are physically different lengths:
+   *   • Array → controller: panels are on the roof, the controller is indoors.
+   *     Typically 5–30m, and the one the user actually needs to measure.
+   *   • Battery → inverter: these sit next to each other by design. 1.5m
+   *     default. Running a battery 15m from its inverter would need ~188mm²
+   *     of copper — not a cable anyone installs, but a sign the battery is in
+   *     the wrong place. The UI says so.
+   */
+  const [arrayRunMetres, setArrayRunMetres] = useState(15);
+  const [batteryRunMetres, setBatteryRunMetres] = useState(1.5);
   const [copied, setCopied] = useState(false);
 
   const updateCount = (id: string, delta: number) => {
@@ -126,7 +188,9 @@ export default function SolarCalculator() {
       ac_1_5hp: 6,
       pump: 1,
     });
-    setSelectedCity('Ibadan (Bodija, Oluyole, Jericho, Akobo)');
+    setSelectedCity('Ibadan');
+    setArrayRunMetres(15);
+    setBatteryRunMetres(1.5);
   };
 
   const handleCopySpecs = () => {
@@ -144,12 +208,16 @@ export default function SolarCalculator() {
 
 ⚙️ SYSTEM HARDWARE SPECIFICATIONS:
 • Inverter: ${stats.recommendedKva} kVA Pure Sine Wave (${stats.systemVoltage})
-• Battery Bank: ${stats.recommendedLithiumKwh} kWh LiFePO4 Lithium (or ${stats.recommendedTubularAh}Ah Tubular)
-• Solar Panels: ${stats.panels550WNeeded}x 550W Tier-1 Mono PERC (${stats.panels550WNeeded * 550}W Array)
-• Turnkey Benchmark: ${stats.costRange} (Includes BOS, Cables & Install)
+• Battery Bank: ${stats.recommendedLithiumKwh} kWh LiFePO4 Lithium (or ${stats.recommendedTubularAh}Ah Tubular at ${nominalVolts}V)
+• Solar Panels: ${stats.panels550WNeeded}x 550W Tier-1 Mono PERC (${stats.panels550WNeeded * PANEL_WATTS}W Array)
+• Array Basis: ${stats.peakSunHours} peak sun hours/day (${stats.pshBasis}) × ${stats.arrayDeratingFactor} derating
+• Min Battery Cable: ${stats.batteryCableSpec} mm² copper (${stats.batteryRunMetres}m run, ~${stats.batteryCurrent}A surge)
+• Min Array Cable: ${stats.arrayCableSpec} mm² copper (${stats.arrayRunMetres}m run, ${stats.seriesCount}S string at ${stats.arrayStringVoltage}V)
+• All DC cable sized for ≤${MAX_VOLTAGE_DROP_PCT}% voltage drop, 100% pure copper
+• Turnkey Benchmark: ${stats.costRange} (regional ×${stats.costMultiplier} applied: ${stats.costReason})
 
 🛡️ VETTING MANDATES BEFORE HIRING AN INSTALLER:
-1. Ensure pure copper battery cables (min 16mm² - 25mm²)
+1. Pure copper cables at or above the sizes computed above
 2. Require DC Surge Protection Device (SPD) + DC Breaker
 3. Verify Lithium battery cycle life rating (min. 4,000 cycles at 80% DoD)
 4. Confirm the inverter's surge rating covers your ${stats.peakSurgeWatts}W starting load
@@ -240,7 +308,8 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
             <div class="meta">Nigeria Solar Sizing Authority • Engineering Benchmark</div>
           </div>
           <div class="meta" style="text-align: right;">
-            <div><strong>Location Target:</strong> ${selectedCity}</div>
+            <div><strong>Location Target:</strong> ${stats.marketLabel}</div>
+            <div><strong>Peak Sun Hours:</strong> ${stats.peakSunHours}/day (${stats.arrayDeratingFactor}× derating)</div>
             <div><strong>Date:</strong> ${new Date().toLocaleDateString('en-GB')}</div>
           </div>
         </div>
@@ -255,17 +324,22 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
           <div class="spec-card">
             <div class="spec-label">Battery Storage Capacity</div>
             <div class="spec-val">${stats.recommendedLithiumKwh} kWh LiFePO4 Lithium</div>
-            <div class="spec-sub">Or Tubular Equivalent: ${stats.recommendedTubularAh}Ah (50% DoD)</div>
+            <div class="spec-sub">Or Tubular Equivalent: ${stats.recommendedTubularAh}Ah at ${nominalVolts}V (${stats.tubularUnitsInSeries} x 12V in series, 50% DoD)</div>
           </div>
           <div class="spec-card">
             <div class="spec-label">Solar PV Array</div>
             <div class="spec-val">${stats.panels550WNeeded}x 550W Tier-1 Panels</div>
-            <div class="spec-sub">Total Array: ${stats.panels550WNeeded * 550}W (Calculated for 4.8 Peak Sun Hours)</div>
+            <div class="spec-sub">Total Array: ${stats.panels550WNeeded * PANEL_WATTS}W — sized at ${stats.peakSunHours} peak sun hours/day with a ${stats.arrayDeratingFactor}× derating factor for Nigerian heat, harmattan dust and monsoon cloud</div>
           </div>
           <div class="spec-card">
             <div class="spec-label">Estimated Turnkey Budget</div>
             <div class="spec-val" style="color: #047857;">${stats.costRange}</div>
-            <div class="spec-sub">Includes BOS, Cables, Protection & Workmanship</div>
+            <div class="spec-sub">Includes BOS, Cables, Protection & Workmanship. Regional adjustment ×${stats.costMultiplier} applied (${stats.costReason}).</div>
+          </div>
+          <div class="spec-card">
+            <div class="spec-label">Minimum DC Cable Sizes</div>
+            <div class="spec-val">${stats.batteryCableSpec} mm² / ${stats.arrayCableSpec} mm²</div>
+            <div class="spec-sub">Battery→inverter over ${stats.batteryRunMetres}m at ~${stats.batteryCurrent}A surge, and Array→controller over ${stats.arrayRunMetres}m. Sized for max ${MAX_VOLTAGE_DROP_PCT}% voltage drop in 100% pure copper.</div>
           </div>
           <div class="spec-card">
             <div class="spec-label">Peak Starting Surge</div>
@@ -306,7 +380,7 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
           </div>
           <div class="vetting-rules">
             1. <strong>DC Surge Protective Device (SPD):</strong> Installer MUST install a dedicated DC SPD and DC circuit breaker between solar array and MPPT.<br>
-            2. <strong>Cable Gauge:</strong> Minimum 16mm² / 25mm² 100% pure copper battery cables with heavy-duty pressed lugs.<br>
+            2. <strong>Cable Gauge:</strong> Minimum <strong>${stats.batteryCableSpec} mm²</strong> battery cable and <strong>${stats.arrayCableSpec} mm²</strong> array cable, 100% pure copper with heavy-duty pressed lugs — sized for this specific installation — ${stats.batteryRunMetres}m battery run at ~${stats.batteryCurrent}A surge, ${stats.arrayRunMetres}m array run.<br>
             3. <strong>Cycle Rating:</strong> Lithium batteries must carry written manufacturer warranty for ≥ 4,000 cycles at 80% DoD.<br>
             4. <strong>Inverter Surge Rating:</strong> Must cover the ${stats.peakSurgeWatts}W starting load, not just the ${stats.continuousWatts}W running load.<br>
             5. <strong>Battery BMS Discharge Rating:</strong> Must sustain ~${stats.peakDcCurrent}A momentarily (specify ${stats.recommendedBmsAmps}A+ continuous), or the BMS will cut out when a motor starts.
@@ -425,12 +499,114 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
     const dailyKwh = totalDailyWattHours / 1000;
     const nightEnergyNeededKwh = dailyKwh * 0.65;
     const recommendedLithiumKwh = Math.max(1.28, Math.round((nightEnergyNeededKwh / 0.8) * 10) / 10);
-    const recommendedTubularAh = Math.round((nightEnergyNeededKwh * 1000) / (24 * 0.5));
+    /*
+      Tubular Ah was hardcoded to 24V regardless of the selected system voltage.
+      That over-sized the recommendation 2x on every 48V system — the most common
+      configuration on this site. Ah must be derived from the ACTUAL bank voltage.
+    */
+    const recommendedTubularAh =
+      Math.round((nightEnergyNeededKwh * 1000) / (nominalVolts * 0.5) / 10) * 10;
+    /** Tubular batteries are sold as 12V blocks; this is how many in series. */
+    const tubularUnitsInSeries = Math.max(1, Math.round(nominalVolts / 12));
 
-    // Solar PV Array Sizing (avg 5.0 peak sun hours in Nigeria)
-    const dailySolarGenerationTarget = totalDailyWattHours * 1.25;
-    const requiredSolarArrayWatts = Math.max(600, Math.round(dailySolarGenerationTarget / 4.8));
-    const panels550WNeeded = Math.max(2, Math.ceil(requiredSolarArrayWatts / 550));
+    /*
+      ── SOLAR ARRAY SIZING ───────────────────────────────────────────────────
+      Two corrections against the original formula:
+
+      1. PEAK SUN HOURS are now per-market, taken from src/data/locations.json.
+         The old code divided by a flat 4.8 for the whole country even though
+         your own data ranges from 4.9 (Port Harcourt) to 5.8 (Abuja).
+
+      2. DERATING is now ARRAY_DERATING_FACTOR = 1.30, matching the figure your
+         own harmattan/monsoon study publishes. The old code used 1.25 — the
+         bottom of your own recommended 1.25–1.30 range.
+
+      Required array = daily energy × derating ÷ peak sun hours.
+      Because the derating aggregate already covers thermal + harmattan +
+      monsoon losses, there is deliberately no extra seasonal multiplier here.
+    */
+    const market = getMarket(selectedCity);
+    const peakSunHours = market.peakSunHours;
+    const dailySolarGenerationTarget = totalDailyWattHours * ARRAY_DERATING_FACTOR;
+    const requiredSolarArrayWatts = Math.max(600, Math.round(dailySolarGenerationTarget / peakSunHours));
+    const panels550WNeeded = Math.max(2, Math.ceil(requiredSolarArrayWatts / PANEL_WATTS));
+
+    /*
+      ── CABLE VOLTAGE DROP ───────────────────────────────────────────────────
+      The site already tells buyers to insist on "16mm²–25mm² pure copper".
+      Now that figure is COMPUTED from their actual current and measured run, so
+      it can be checked against an installer's quote rather than taken on trust.
+
+      Vdrop = (2 × L × I × ρ) / A   for a two-way DC run.
+      Solved for A at MAX_VOLTAGE_DROP_PCT gives the minimum conductor size.
+
+      Standard sizes round UP to the next cable actually stocked in Nigeria.
+    */
+    /** Minimum size to hit MAX_VOLTAGE_DROP_PCT over a two-way run. */
+    const sizeForVoltageDrop = (lengthM: number, amps: number, volts: number) =>
+      (2 * lengthM * amps * COPPER_RESISTIVITY) / (volts * (MAX_VOLTAGE_DROP_PCT / 100));
+
+    /** Minimum size to carry the current without overheating. */
+    const sizeForAmpacity = (amps: number) =>
+      CABLE_SPECS.find((c) => c.amps >= amps)?.mm2 ?? CABLE_SPECS[CABLE_SPECS.length - 1];
+
+    /**
+     * The cable that satisfies the voltage drop target, the current-carrying
+     * requirement, and the practical minimum — whichever is largest. Reports
+     * which constraint was binding so the user can see the reasoning.
+     */
+    const sizeCable = (
+      lengthM: number,
+      amps: number,
+      volts: number,
+      practicalMin: number,
+    ) => {
+      const byDrop = sizeForVoltageDrop(lengthM, amps, volts);
+      const byAmps = sizeForAmpacity(amps);
+      const required = Math.max(byDrop, byAmps, practicalMin);
+      const spec = CABLE_SPECS.find((c) => c.mm2 >= required) ?? CABLE_SPECS[CABLE_SPECS.length - 1];
+      const driver =
+        byAmps >= byDrop && byAmps > practicalMin
+          ? 'current capacity'
+          : byDrop > practicalMin
+            ? 'voltage drop'
+            : 'practical minimum';
+      return { spec: spec.mm2, byDrop, byAmps, driver };
+    };
+
+    /* Battery → inverter: worst case is the surge current, not the running load. */
+    const batteryCurrent = peakSurgeWatts / nominalVolts / INVERTER_EFFICIENCY;
+    const batteryCable = sizeCable(
+      Math.max(0.5, batteryRunMetres), batteryCurrent, nominalVolts, MIN_BATTERY_CABLE_MM2,
+    );
+    const batteryCableSpec = batteryCable.spec;
+
+    /*
+      Array → controller. Current depends on how the panels are wired in series,
+      and installers use series to keep current (and therefore cable size) DOWN.
+
+      We deliberately assume the CONSERVATIVE case: only 2 panels in series
+      (Vmp ≈ 83V). Nearly every real installation runs more in series than that,
+      which lowers the current and therefore reduces the cable needed — so this
+      figure is a safe upper bound, not an under-estimate.
+
+      Assuming a higher series count would need the actual MPPT input-voltage
+      rating (145V and 450V units behave very differently), which we don't have.
+      The UI tells the user to confirm the real string layout with their installer.
+    */
+    const seriesCount = panels550WNeeded >= 2 ? 2 : 1;
+    const PANEL_VMP = 41.5;
+    const arrayStringVoltage = PANEL_VMP * seriesCount;
+    const arrayCurrent = requiredSolarArrayWatts / arrayStringVoltage;
+    const arrayCable = sizeCable(
+      Math.max(1, arrayRunMetres), arrayCurrent, arrayStringVoltage, MIN_ARRAY_CABLE_MM2,
+    );
+    const arrayCableSpec = arrayCable.spec;
+
+    /* Flag the case where the battery is simply too far from the inverter. */
+    const batteryRunTooLong = batteryRunMetres > 4;
+
+    const round10k = (v: number) => Math.round(v / 10000) * 10000;
 
     let minCost = 0;
     let maxCost = 0;
@@ -454,6 +630,14 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
       maxCost = 15000000;
     }
 
+    /*
+      Regional adjustment. Modest by design — see the caveat in
+      src/config/markets.ts. The UI prints the multiplier so a buyer can see
+      exactly what was applied rather than being handed an unexplained number.
+    */
+    minCost = round10k(minCost * market.costMultiplier);
+    maxCost = round10k(maxCost * market.costMultiplier);
+
     const formatNaira = (val: number) => {
       return '₦' + val.toLocaleString('en-NG');
     };
@@ -465,6 +649,7 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
       systemVoltage,
       recommendedLithiumKwh,
       recommendedTubularAh,
+      tubularUnitsInSeries,
       requiredSolarArrayWatts,
       panels550WNeeded,
       costRange: `${formatNaira(minCost)} – ${formatNaira(maxCost)}`,
@@ -475,8 +660,26 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
       recommendedBmsAmps,
       bmsUndersized,
       nominalVolts,
+      /* Market + array + cable detail, surfaced in the UI and the printed BOQ */
+      marketLabel: market.label,
+      peakSunHours,
+      pshBasis: market.pshBasis,
+      costMultiplier: market.costMultiplier,
+      costReason: market.costReason,
+      arrayDeratingFactor: ARRAY_DERATING_FACTOR,
+      batteryCableSpec,
+      batteryCableDriver: batteryCable.driver,
+      arrayCableSpec,
+      arrayCableDriver: arrayCable.driver,
+      arrayStringVoltage,
+      seriesCount,
+      arrayRunMetres,
+      batteryRunMetres,
+      batteryRunTooLong,
+      batteryCurrent: Math.round(batteryCurrent),
+      arrayCurrent: Math.round(arrayCurrent * 10) / 10,
     };
-  }, [counts, hours]);
+  }, [counts, hours, selectedCity, arrayRunMetres, batteryRunMetres]);
 
   const whatsappUrl = useMemo(() => {
     const text = encodeURIComponent(
@@ -486,6 +689,7 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
       `⚙️ Recommended Inverter: ${stats.recommendedKva}kVA (${stats.systemVoltage})\n` +
       `🔋 Lithium Battery: ${stats.recommendedLithiumKwh} kWh\n` +
       `☀️ Solar Panels: ${stats.panels550WNeeded}x 550W Panels (${stats.requiredSolarArrayWatts}W)\n` +
+      `📉 Peak Starting Surge: ${stats.peakSurgeWatts}W (~${stats.peakDcCurrent}A at ${stats.nominalVolts}V)\n` +
       `💰 Budget Estimate: ${stats.costRange}\n\n` +
       `Please connect me with verified solar installers in ${selectedCity} for an inspection and precise quotation.`
     );
@@ -507,7 +711,7 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
           </div>
           <button 
             onClick={resetAll}
-            className="self-start md:self-auto inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-700/60 hover:bg-slate-700 text-xs font-medium rounded-lg text-slate-200 transition"
+            className="self-start md:self-auto inline-flex items-center justify-center gap-1.5 min-h-11 px-3 bg-slate-700/60 hover:bg-slate-700 text-xs font-medium rounded-lg text-slate-200 transition"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Reset Default
           </button>
@@ -599,7 +803,7 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
 
           <div className="pt-2">
             <label htmlFor="calc-city" className="block text-xs font-semibold text-slate-700 mb-1.5">
-              Select Your City / Market for Location-Specific Pricing:
+              Select Your City / Market:
             </label>
             <select
               id="calc-city"
@@ -607,14 +811,84 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
               onChange={(e) => setSelectedCity(e.target.value)}
               className="w-full h-11 bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl px-2.5 py-2.5 focus:ring-2 focus:ring-solar-500 focus:outline-none"
             >
-              <option value="Ibadan (Bodija, Oluyole, Jericho, Akobo)">Ibadan (Bodija, Oluyole, Jericho, Akobo, etc.)</option>
-              <option value="Lagos (Lekki, Ikeja, Ajah, Surulere)">Lagos (Lekki, Ikeja, Ajah, Surulere, etc.)</option>
-              <option value="Ogun (Abeokuta, Mowe-Ibafo, Ota)">Ogun (Abeokuta, Mowe-Ibafo, Ota, Sagamu)</option>
-              <option value="Abuja (Maitama, Gwarinpa, Wuse 2, Jabi)">Abuja FCT (Maitama, Gwarinpa, Wuse 2, Jabi)</option>
-              <option value="Port Harcourt (GRA, Peter Odili)">Port Harcourt (GRA, Peter Odili, Trans-Amadi)</option>
-              <option value="Other South-West (Osogbo, Akure, Ado-Ekiti)">Other South-West (Osogbo, Akure, Ado-Ekiti)</option>
-              <option value="Other Major City (Benin, Warri, Enugu)">Other Major City (Benin, Warri, Enugu)</option>
+              {MARKETS.map((m) => (
+                <option key={m.key} value={m.key}>
+                  {m.label}
+                </option>
+              ))}
             </select>
+            <p className="mt-1.5 text-[11px] leading-relaxed text-slate-500">
+              Affects peak sun hours ({stats.peakSunHours} PSH) and a
+              {' '}×{stats.costMultiplier} regional cost adjustment ({stats.costReason}).
+            </p>
+
+            {/*
+              Cable run input. Turns the site's existing "16mm²–25mm² pure copper"
+              advice into a computed number the buyer can check a quote against.
+            */}
+            {/* ── Cable runs ── two separate measurements, because they are
+                genuinely different distances: panels are on the roof, the
+                controller indoors, and the battery sits beside the inverter. ── */}
+            <div className="mt-4 space-y-4 rounded-xl border border-slate-200 bg-slate-50/60 p-3.5">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-600">
+                Cable Runs (measure these)
+              </div>
+
+              <div>
+                <label htmlFor="calc-array-run" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Panels → controller:
+                </label>
+                <div className="flex items-center gap-3">
+                  <input
+                    id="calc-array-run"
+                    type="range"
+                    min="1"
+                    max="80"
+                    value={arrayRunMetres}
+                    aria-label="One-way cable distance from solar panels to the charge controller, in metres"
+                    aria-valuetext={`${arrayRunMetres} metres`}
+                    onChange={(e) => setArrayRunMetres(parseInt(e.target.value))}
+                    className="h-11 flex-1 accent-solar-600 cursor-pointer"
+                  />
+                  <span className="w-14 text-right text-xs font-semibold text-slate-800" aria-hidden="true">
+                    {arrayRunMetres} m
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="calc-battery-run" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Battery → inverter:
+                </label>
+                <div className="flex items-center gap-3">
+                  <input
+                    id="calc-battery-run"
+                    type="range"
+                    min="0.5"
+                    max="8"
+                    step="0.5"
+                    value={batteryRunMetres}
+                    aria-label="One-way cable distance from the battery bank to the inverter, in metres"
+                    aria-valuetext={`${batteryRunMetres} metres`}
+                    onChange={(e) => setBatteryRunMetres(parseFloat(e.target.value))}
+                    className="h-11 flex-1 accent-solar-600 cursor-pointer"
+                  />
+                  <span className="w-14 text-right text-xs font-semibold text-slate-800" aria-hidden="true">
+                    {batteryRunMetres} m
+                  </span>
+                </div>
+                {stats.batteryRunTooLong ? (
+                  <p className="mt-1 text-[11px] font-semibold leading-relaxed text-amber-700">
+                    ⚠ Over 4m is unusual. Battery cable size grows fast with distance — at 15m you
+                    would need ~188mm² of copper. Move the battery next to the inverter instead.
+                  </p>
+                ) : (
+                  <p className="mt-1 text-[11px] leading-relaxed text-slate-500">
+                    Keep these adjacent — that is standard practice and keeps cable size sane.
+                  </p>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -675,7 +949,20 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
                   <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Recommended Battery Bank</div>
                   <div className="text-2xl font-black text-slate-900 mt-0.5">{stats.recommendedLithiumKwh} kWh Lithium (LiFePO4)</div>
                   <div className="text-xs text-slate-600 mt-1">
-                    Or Tubular Equivalent: <span className="font-semibold text-slate-800">{stats.recommendedTubularAh}Ah</span> (approx {Math.ceil(stats.recommendedTubularAh / 220)}x 220Ah batteries)
+                    Or Tubular Equivalent:{' '}
+                    <span className="font-semibold text-slate-800">
+                      {stats.recommendedTubularAh}Ah at {stats.nominalVolts}V
+                    </span>{' '}
+                    — {stats.tubularUnitsInSeries === 1
+                      ? <>a single 12V unit rated {stats.recommendedTubularAh}Ah or more</>
+                      : <>{stats.tubularUnitsInSeries} × 12V units wired <em>in series</em>, each
+                          rated {stats.recommendedTubularAh}Ah or more</>}.
+                    {stats.recommendedTubularAh > 220 && (
+                      <span className="block mt-0.5 text-[11px] text-amber-700">
+                        220Ah is the common stock size in Nigeria. You would need to step up to the next
+                        available size, or accept slightly less overnight backup.
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
@@ -743,7 +1030,33 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
                 </div>
               </div>
               <div className="mt-3 pt-2.5 border-t border-slate-100 text-xs text-slate-500">
-                ☀️ Based on Nigerian average peak sunshine (5.0 - 5.4 sun hours/day).
+                ☀️ Based on <strong className="text-slate-700">{stats.peakSunHours} peak sun hours/day</strong> for
+                your market ({stats.pshBasis}), with a{' '}
+                <strong className="text-slate-700">×{stats.arrayDeratingFactor}</strong> derating factor for
+                Nigerian heat, harmattan dust and monsoon cloud — matching our published derating study.
+              </div>
+
+              {/* Cable sizing — computed, not asserted */}
+              <div className="mt-2 rounded-lg bg-slate-50 border border-slate-200 p-2.5">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                  Minimum cable size for your measured runs
+                </div>
+                <div className="mt-1.5 flex items-center justify-between text-xs">
+                  <span className="text-slate-600">Battery → inverter ({stats.batteryCurrent}A DC):</span>
+                  <span className="text-right">
+                    <strong className="text-slate-900">{stats.batteryCableSpec} mm² copper</strong>
+                    <span className="block text-[10px] text-slate-500">limited by {stats.batteryCableDriver}</span>
+                  </span>
+                </div>
+                <div className="mt-1 flex items-center justify-between text-xs">
+                  <span className="text-slate-600">Array → controller ({stats.seriesCount}S at {stats.arrayStringVoltage}V):</span>
+                  <strong className="text-slate-900">{stats.arrayCableSpec} mm² copper</strong>
+                </div>
+                <p className="mt-1.5 text-[11px] leading-relaxed text-slate-500">
+                  Sized to satisfy <strong className="font-semibold text-slate-600">both</strong> a maximum {MAX_VOLTAGE_DROP_PCT}% voltage drop
+                  <em> and</em> the cable&apos;s current-carrying capacity, plus a practical minimum for battery circuits.
+                  If an installer proposes thinner cable than this, ask which constraint they think does not apply.
+                </p>
               </div>
             </div>
 
@@ -763,7 +1076,7 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <button
                 onClick={handleCopySpecs}
-                className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 px-3 rounded-xl shadow-sm transition text-xs"
+                className="inline-flex items-center justify-center gap-2 min-h-11 bg-slate-900 hover:bg-slate-800 text-white font-medium px-3 rounded-xl shadow-sm transition text-xs"
               >
                 {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4 text-solar-400" />}
                 <span>{copied ? 'Copied to Clipboard!' : 'Copy WhatsApp Specs'}</span>
@@ -771,7 +1084,7 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
 
               <button
                 onClick={handlePrintBoQ}
-                className="inline-flex items-center justify-center gap-2 bg-solar-500 hover:bg-solar-400 text-slate-950 font-bold py-2.5 px-3 rounded-xl shadow-sm transition text-xs"
+                className="inline-flex items-center justify-center gap-2 min-h-11 bg-solar-500 hover:bg-solar-400 text-slate-950 font-bold px-3 rounded-xl shadow-sm transition text-xs"
               >
                 <Printer className="w-4 h-4" />
                 <span>Download / Print BOQ</span>
