@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "build": "node scripts/check-config.mjs && astro build",
+    "preview": "node scripts/preview-server.mjs 4321",
+    "astro": "astro",
+    "check:config": "node scripts/check-config.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",
