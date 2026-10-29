@@ -1145,13 +1145,13 @@ Get verified installer quotes or calculate custom setups: https://ibadansolarhub
 
             <div className="grid grid-cols-2 gap-2 text-xs">
               <a
-                href="/products"
+                href="/products/"
                 className="inline-flex items-center justify-center gap-1.5 p-2.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-lg font-medium transition text-center"
               >
                 <FileText className="w-3.5 h-3.5 text-solar-600" /> Solar Toolkit (₦2k)
               </a>
               <a
-                href="/equipment"
+                href="/equipment/"
                 className="inline-flex items-center justify-center gap-1.5 p-2.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 rounded-lg font-medium transition text-center"
               >
                 <ShoppingCart className="w-3.5 h-3.5 text-blue-600" /> Buy Parts (Jumia/Konga)

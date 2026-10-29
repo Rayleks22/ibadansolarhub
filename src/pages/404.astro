@@ -53,7 +53,7 @@ const schema = {
           Back to Homepage
         </a>
         <a
-          href="/calculator"
+          href="/calculator/"
           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-xl border border-white/20 transition"
         >
           Size My Solar System
@@ -70,37 +70,37 @@ const schema = {
         <h2 class="text-base font-bold text-slate-900">Most Useful Pages</h2>
         <ul class="mt-4 space-y-2.5 text-sm">
           <li>
-            <a href="/calculator" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+            <a href="/calculator/" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
               <span class="text-solar-500 font-black" aria-hidden="true">→</span>
               Solar Load &amp; Cost Calculator
             </a>
           </li>
           <li>
-            <a href="/equipment" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+            <a href="/equipment/" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
               <span class="text-solar-500 font-black" aria-hidden="true">→</span>
               Equipment Price Index
             </a>
           </li>
           <li>
-            <a href="/research" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+            <a href="/research/" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
               <span class="text-solar-500 font-black" aria-hidden="true">→</span>
               Research &amp; Data Hub
             </a>
           </li>
           <li>
-            <a href="/products" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+            <a href="/products/" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
               <span class="text-solar-500 font-black" aria-hidden="true">→</span>
               Solar Blueprints &amp; BOQ Tools
             </a>
           </li>
           <li>
-            <a href="/quote" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+            <a href="/quote/" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
               <span class="text-solar-500 font-black" aria-hidden="true">→</span>
               Request Installer Quotes
             </a>
           </li>
           <li>
-            <a href="/solar-financing" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
+            <a href="/solar-financing/" class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition">
               <span class="text-solar-500 font-black" aria-hidden="true">→</span>
               Solar Financing for Businesses
             </a>
@@ -115,7 +115,7 @@ const schema = {
           {topLocations.map((loc) => (
             <li>
               <a
-                href={`/locations/${loc.slug}`}
+                href={`/locations/${loc.slug}/`}
                 class="flex items-center gap-2 text-slate-700 hover:text-solar-600 font-medium transition"
               >
                 <span class="text-solar-500 font-black" aria-hidden="true">→</span>
@@ -124,7 +124,7 @@ const schema = {
             </li>
           ))}
           <li>
-            <a href="/locations" class="flex items-center gap-2 text-solar-700 font-bold hover:underline transition">
+            <a href="/locations/" class="flex items-center gap-2 text-solar-700 font-bold hover:underline transition">
               View all city hubs &rarr;
             </a>
           </li>
@@ -138,7 +138,7 @@ const schema = {
           {topPackages.map((pkg) => (
             <li>
               <a
-                href={`/packages/${pkg.slug}`}
+                href={`/packages/${pkg.slug}/`}
                 class="flex items-start gap-2 text-slate-700 hover:text-solar-600 font-medium transition"
               >
                 <span class="text-solar-500 font-black mt-px" aria-hidden="true">→</span>
@@ -150,7 +150,7 @@ const schema = {
             </li>
           ))}
           <li>
-            <a href="/packages" class="flex items-center gap-2 text-solar-700 font-bold hover:underline transition">
+            <a href="/packages/" class="flex items-center gap-2 text-solar-700 font-bold hover:underline transition">
               View all packages &rarr;
             </a>
           </li>
@@ -162,9 +162,9 @@ const schema = {
     <div class="mt-10 rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center">
       <p class="text-sm text-amber-900">
         Looking for something specific?
-        <a href="/locations" class="font-bold underline underline-offset-2 hover:text-amber-950">Check the city hubs</a>
+        <a href="/locations/" class="font-bold underline underline-offset-2 hover:text-amber-950">Check the city hubs</a>
         or
-        <a href="/research" class="font-bold underline underline-offset-2 hover:text-amber-950">browse the research library</a>.
+        <a href="/research/" class="font-bold underline underline-offset-2 hover:text-amber-950">browse the research library</a>.
       </p>
     </div>
   </section>

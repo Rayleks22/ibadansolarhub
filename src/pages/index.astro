@@ -55,13 +55,13 @@ const schema = {
           <span class="text-slate-400 font-medium">Browse City Hubs:</span>
           {locations.slice(0, 6).map(loc => (
             <a 
-              href={`/locations/${loc.slug}`}
+              href={`/locations/${loc.slug}/`}
               class="px-3 py-1.5 bg-slate-800 hover:bg-solar-500 hover:text-slate-950 text-slate-200 rounded-lg border border-slate-700 font-medium transition"
             >
               {loc.name}
             </a>
           ))}
-          <a href="/locations" class="inline-flex items-center min-h-11 px-3 bg-solar-500/20 text-solar-300 border border-solar-500/40 rounded-lg hover:bg-solar-500 hover:text-slate-950 font-bold transition">
+          <a href="/locations/" class="inline-flex items-center min-h-11 px-3 bg-solar-500/20 text-solar-300 border border-solar-500/40 rounded-lg hover:bg-solar-500 hover:text-slate-950 font-bold transition">
             View All Cities &rarr;
           </a>
         </div>
@@ -82,7 +82,7 @@ const schema = {
         </div>
       </div>
       <a 
-        href="/band-a-tariff-vs-solar-index"
+        href="/band-a-tariff-vs-solar-index/"
         class="inline-flex items-center gap-1.5 min-h-11 px-4 bg-slate-950 hover:bg-slate-900 text-white text-xs font-bold rounded-xl shadow transition whitespace-nowrap self-stretch sm:self-auto justify-center"
       >
         <span>Read Cost Breakdown</span>
@@ -110,7 +110,7 @@ const schema = {
           <h2 class="text-3xl font-black text-slate-900 mt-1">Popular Nigerian Solar Packages</h2>
           <p class="text-sm text-slate-500 mt-1">Engineered specifically for Nigerian appliances, power grids, and climate conditions.</p>
         </div>
-        <a href="/packages" class="inline-flex items-center gap-1 min-h-11 text-sm font-bold text-solar-700 hover:text-solar-800">
+        <a href="/packages/" class="inline-flex items-center gap-1 min-h-11 text-sm font-bold text-solar-700 hover:text-solar-800">
           Explore all 5 packages &rarr;
         </a>
       </div>
@@ -143,7 +143,7 @@ const schema = {
 
             <div class="mt-6 pt-6 border-t border-slate-200">
               <a
-                href={`/packages/${pkg.slug}`}
+                href={`/packages/${pkg.slug}/`}
                 class="w-full inline-flex items-center justify-center min-h-11 px-4 bg-slate-900 hover:bg-solar-500 hover:text-solar-950 text-white text-xs font-bold rounded-xl transition"
               >
                 View Full Bill of Quantities & Specs
@@ -217,7 +217,7 @@ const schema = {
         <h2 class="text-3xl font-black text-slate-900 mt-1">Verified Equipment Price Index</h2>
         <p class="text-sm text-slate-500 mt-1">Compare prices across Jumia, Konga, and verified distributors in Lagos and Ibadan.</p>
       </div>
-      <a href="/equipment" class="inline-flex items-center gap-1 min-h-11 text-sm font-bold text-solar-700 hover:text-solar-800">
+      <a href="/equipment/" class="inline-flex items-center gap-1 min-h-11 text-sm font-bold text-solar-700 hover:text-solar-800">
         Browse complete equipment catalog &rarr;
       </a>
     </div>
@@ -253,7 +253,7 @@ const schema = {
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {locations.map(loc => (
           <a
-            href={`/locations/${loc.slug}`}
+            href={`/locations/${loc.slug}/`}
             class="p-4 rounded-xl bg-slate-800/80 border border-slate-700/80 hover:border-solar-500 hover:bg-slate-800 transition group"
           >
             <div class="flex items-center justify-between">
@@ -281,7 +281,7 @@ const schema = {
       </p>
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
-          href="/quote"
+          href="/quote/"
           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-900 text-white font-black px-8 py-3.5 rounded-xl shadow-lg transition text-sm"
         >
           <span>Get Free Quotes from Vetted Installers</span>
@@ -290,7 +290,7 @@ const schema = {
           </svg>
         </a>
         <a
-          href="/calculator"
+          href="/calculator/"
           class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white text-slate-950 font-bold px-6 py-3.5 rounded-xl shadow-sm transition text-sm"
         >
           Use Free Load Calculator

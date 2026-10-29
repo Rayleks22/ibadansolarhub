@@ -103,7 +103,7 @@ const installerListingUrl = waLink(
       <div class="flex items-center gap-2 text-xs text-slate-400 mb-4">
         <a href="/" class="hover:text-solar-400">Home</a>
         <span>/</span>
-        <a href="/locations" class="hover:text-solar-400">Locations</a>
+        <a href="/locations/" class="hover:text-solar-400">Locations</a>
         <span>/</span>
         <span class="text-solar-400 font-semibold">{loc.city}</span>
         <span>/</span>
@@ -136,7 +136,7 @@ const installerListingUrl = waLink(
             </a>
 
             <a
-              href="/calculator"
+              href="/calculator/"
               class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 px-5 rounded-xl text-sm border border-slate-700 transition"
             >
               Calculate Your Sizing &rarr;
@@ -316,7 +316,7 @@ const installerListingUrl = waLink(
             We will match your energy requirements with certified, top-rated solar installers in {loc.name}, {loc.city}.
           </p>
 
-          <form action="/quote" method="get" class="mt-5 space-y-3 text-xs">
+          <form action="/quote/" method="get" class="mt-5 space-y-3 text-xs">
             <input type="hidden" name="location" value={`${loc.name}, ${loc.city}`} />
             
             <div>

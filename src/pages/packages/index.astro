@@ -10,7 +10,7 @@ const schema = {
     "@type": "ListItem",
     "position": idx + 1,
     "name": pkg.name,
-    "url": `https://ibadansolarhub.com.ng/packages/${pkg.slug}`
+    "url": `https://ibadansolarhub.com.ng/packages/${pkg.slug}/`
   }))
 };
 ---
@@ -47,7 +47,7 @@ const schema = {
             </div>
 
             <h2 class="text-xl font-bold text-slate-900 mt-2">
-              <a href={`/packages/${pkg.slug}`} class="hover:text-solar-600 transition">
+              <a href={`/packages/${pkg.slug}/`} class="hover:text-solar-600 transition">
                 {pkg.name}
               </a>
             </h2>
@@ -74,7 +74,7 @@ const schema = {
 
           <div class="mt-6 pt-4 border-t border-slate-100">
             <a
-              href={`/packages/${pkg.slug}`}
+              href={`/packages/${pkg.slug}/`}
               class="w-full inline-flex items-center justify-center py-2.5 px-4 bg-slate-900 hover:bg-solar-500 hover:text-slate-950 text-white font-bold text-xs rounded-xl transition"
             >
               View Full Specs & BOQ &rarr;

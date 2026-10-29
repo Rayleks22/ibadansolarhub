@@ -31,22 +31,22 @@ const currentPath = Astro.url.pathname;
 
       {/* Desktop Navigation Links */}
       <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-slate-300">
-        <a href="/locations" class={`hover:text-solar-400 transition ${currentPath.startsWith('/locations') ? 'text-solar-400 font-semibold' : ''}`}>
+        <a href="/locations/" class={`hover:text-solar-400 transition ${currentPath.startsWith('/locations') ? 'text-solar-400 font-semibold' : ''}`}>
           Locations
         </a>
-        <a href="/research" class={`hover:text-solar-400 transition ${currentPath.startsWith('/research') || currentPath.includes('index') ? 'text-solar-400 font-semibold' : ''}`}>
+        <a href="/research/" class={`hover:text-solar-400 transition ${currentPath.startsWith('/research') || currentPath.includes('index') ? 'text-solar-400 font-semibold' : ''}`}>
           Research & Data
         </a>
-        <a href="/calculator" class={`hover:text-solar-400 transition ${currentPath === '/calculator' ? 'text-solar-400 font-semibold' : ''}`}>
+        <a href="/calculator/" class={`hover:text-solar-400 transition ${(currentPath === '/calculator/' || currentPath === '/calculator') ? 'text-solar-400 font-semibold' : ''}`}>
           Solar Calculator
         </a>
-        <a href="/packages" class={`hover:text-solar-400 transition ${currentPath.startsWith('/packages') ? 'text-solar-400 font-semibold' : ''}`}>
+        <a href="/packages/" class={`hover:text-solar-400 transition ${currentPath.startsWith('/packages') ? 'text-solar-400 font-semibold' : ''}`}>
           Packages
         </a>
-        <a href="/equipment" class={`hover:text-solar-400 transition ${currentPath.startsWith('/equipment') ? 'text-solar-400 font-semibold' : ''}`}>
+        <a href="/equipment/" class={`hover:text-solar-400 transition ${currentPath.startsWith('/equipment') ? 'text-solar-400 font-semibold' : ''}`}>
           Prices
         </a>
-        <a href="/products" class={`hover:text-solar-400 transition ${currentPath === '/products' ? 'text-solar-400 font-semibold' : ''}`}>
+        <a href="/products/" class={`hover:text-solar-400 transition ${(currentPath === '/products/' || currentPath === '/products') ? 'text-solar-400 font-semibold' : ''}`}>
           Guides
         </a>
       </nav>
@@ -54,7 +54,7 @@ const currentPath = Astro.url.pathname;
       {/* CTA Button */}
       <div class="flex items-center gap-3">
         <a 
-          href="/quote" 
+          href="/quote/" 
           class="inline-flex items-center gap-2 min-h-11 bg-solar-500 hover:bg-solar-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs md:text-sm shadow-md transition transform active:scale-95"
         >
           <span>Get Free Quotes</span>
@@ -69,10 +69,10 @@ const currentPath = Astro.url.pathname;
 
   {/* Mobile Nav Strip */}
   <div class="md:hidden flex items-center justify-around border-t border-slate-800/80 bg-slate-950/80 px-2 py-2 text-[11px] font-medium text-slate-300 overflow-x-auto">
-    <a href="/locations" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Locations</a>
-    <a href="/calculator" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400 text-solar-400 font-bold">Calculator</a>
-    <a href="/packages" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Packages</a>
-    <a href="/equipment" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Prices</a>
-    <a href="/products" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Ebooks</a>
+    <a href="/locations/" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Locations</a>
+    <a href="/calculator/" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400 text-solar-400 font-bold">Calculator</a>
+    <a href="/packages/" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Packages</a>
+    <a href="/equipment/" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Prices</a>
+    <a href="/products/" class="inline-flex items-center px-2.5 min-h-11 hover:text-solar-400">Ebooks</a>
   </div>
 </header>
